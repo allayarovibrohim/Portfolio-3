@@ -76,8 +76,9 @@ export const buildApp = (container: ServiceContainer = buildContainer()) => {
   app.register(fastifyCsrfProtection, {
     cookieOpts: {
       httpOnly: true,
-      sameSite: env.COOKIE_SAME_SITE,
-      secure: env.COOKIE_SECURE,
+      // Cross-domain ishlashi uchun 'none' va secure true bo'lishi kerak
+      sameSite: env.NODE_ENV === "production" ? "none" : "lax",
+      secure: env.NODE_ENV === "production" ? true : env.COOKIE_SECURE,
       path: "/",
     },
   });

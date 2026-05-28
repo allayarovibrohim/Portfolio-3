@@ -160,6 +160,11 @@ export class AdminService {
   }
 
   async updateSetting(actorUserId: string, key: string, value: unknown, description?: string) {
+    // Muhim: Agar qiymat null yoki undefined bo'lsa, xatolik qaytaramiz (data yo'qolib ketmasligi uchun)
+    if (value === undefined || value === null) {
+      throw new Error(`Setting value for ${key} cannot be empty`);
+    }
+
     const setting = await this.repository.upsertSetting(key, value, description);
     await this.auditService.log({
       actorUserId,

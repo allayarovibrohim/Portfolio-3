@@ -156,7 +156,7 @@ export class AdminRepository {
       suspiciousEvents24h,
       queuedArchives,
       activeSubscriptions,
-      revenueTotal: paidInvoices._sum.amount,
+      revenueTotal: paidInvoices._sum.amount || 0,
       topCountries: Object.entries(countryCounts)
         .sort((left, right) => right[1] - left[1])
         .slice(0, 10)
