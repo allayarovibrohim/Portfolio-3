@@ -49,7 +49,15 @@ export const buildApp = (container: ServiceContainer = buildContainer()) => {
     origin: env.FRONTEND_ORIGIN,
     credentials: true,
   });
-  app.register(fastifyCookie);
+  app.register(fastifyCookie, {
+    secret: env.JWT_ACCESS_SECRET,
+    parseOptions: {
+      path: "/",
+      httpOnly: true,
+      secure: true,
+      sameSite: "none", // Cross-site ishlashi uchun shart
+    },
+  });
   app.register(fastifyHelmet, {
     contentSecurityPolicy: {
       directives: {

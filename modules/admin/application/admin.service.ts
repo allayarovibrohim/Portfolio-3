@@ -160,9 +160,18 @@ export class AdminService {
   }
 
   async updateSetting(actorUserId: string, key: string, value: unknown, description?: string) {
-    // Muhim: Agar qiymat null yoki undefined bo'lsa, xatolik qaytaramiz (data yo'qolib ketmasligi uchun)
+    // Ma'lumotlar butunligini tekshirish
     if (value === undefined || value === null) {
       throw new Error(`Setting value for ${key} cannot be empty`);
+    }
+
+    // Agar kelayotgan qiymat kutilmaganda bo'sh massiv yoki noto'g'ri formatda bo'lsa (destructive update'dan himoya)
+    if (Array.isArray(value) && value.length === 0 && (key.includes("projects") || key.includes("certificates"))) {
+      const existing = await this.repository.listSettings();
+      const currentSetting = existing.find(s => s.key === key);
+      if (currentSetting && (currentSetting.value as any[])?.length > 0) {
+        throw new Error(`Safety lock: Attempting to overwrite existing data with empty list for ${key}`);
+      }
     }
 
     const setting = await this.repository.upsertSetting(key, value, description);
