@@ -1,0 +1,29 @@
+<svg width="960" height="1200" viewBox="0 0 960 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="1200" rx="56" fill="#0A0F1E"/>
+  <rect width="960" height="1200" rx="56" fill="url(#bg)"/>
+  <circle cx="674" cy="240" r="184" fill="url(#halo)"/>
+  <rect x="108" y="148" width="292" height="66" rx="22" fill="rgba(255,255,255,0.08)"/>
+  <text x="146" y="192" fill="#FFCC9A" font-family="Arial, sans-serif" font-size="28" letter-spacing="3">PROFILE FRAME</text>
+  <path d="M488 274C388 274 304 354 304 454V764C304 872 392 960 500 960H564C672 960 760 872 760 764V454C760 354 676 274 576 274H488Z" fill="url(#body)"/>
+  <circle cx="532" cy="404" r="132" fill="#F3D9C3"/>
+  <path d="M406 416C426 320 476 280 532 280C602 280 654 334 660 430C624 388 592 374 526 374C470 374 436 392 406 416Z" fill="#1A1D2D"/>
+  <rect x="456" y="448" width="44" height="16" rx="8" fill="#1E1F28"/>
+  <rect x="560" y="448" width="44" height="16" rx="8" fill="#1E1F28"/>
+  <rect x="500" y="516" width="66" height="22" rx="11" fill="#C98B70"/>
+  <rect x="220" y="990" width="520" height="96" rx="28" fill="rgba(255,255,255,0.06)"/>
+  <text x="266" y="1048" fill="#F6F7FB" font-family="Arial, sans-serif" font-size="34" font-weight="700">Replace With Your Photo</text>
+  <defs>
+    <linearGradient id="bg" x1="84" y1="58" x2="882" y2="1138" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111A30"/>
+      <stop offset="1" stop-color="#090D19"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(674 240) rotate(90) scale(184)">
+      <stop stop-color="#73F2FF"/>
+      <stop offset="1" stop-color="#73F2FF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="body" x1="532" y1="274" x2="532" y2="960" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#3C4865"/>
+      <stop offset="1" stop-color="#181E31"/>
+    </linearGradient>
+  </defs>
+</svg>

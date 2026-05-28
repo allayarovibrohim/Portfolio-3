@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-key="cv-document-title">CV Document</title>
+    <link rel="icon" href="image/5988705.png" type="image/png">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #222222;
+            background-color: #f5f5f5;
+            line-height: 1.35;
+            padding: 15px 0;
+        }
+
+        /* Til o'zgartirish tugmalari paneli */
+        .lang-switcher {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .lang-btn {
+            background-color: #ffffff;
+            border: 2px solid #222222;
+            color: #222222;
+            padding: 6px 16px;
+            font-size: 10pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn:hover {
+            background-color: #e6e6e6;
+        }
+
+        .lang-btn.active {
+            background-color: #222222;
+            color: #ffffff;
+        }
+
+        /* CV sahifasini o'rtaga tekislash konteyneri */
+        .cv-wrapper {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        .cv-container {
+            display: table;
+            width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-collapse: collapse;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .cv-row {
+            display: table-row;
+        }
+
+        /* Chap ustun (Sidebar) */
+        .sidebar {
+            display: table-cell;
+            width: 32%;
+            background-color: #e6e6e6;
+            padding: 22px 15px;
+            vertical-align: top;
+        }
+
+        /* O'ng ustun (Asosiy kontent) */
+        .main-content {
+            display: table-cell;
+            width: 68%;
+            background-color: #ffffff;
+            padding: 22px 25px 35px 25px;
+            vertical-align: top;
+            position: relative;
+        }
+
+        /* Profil rasmi joyi */
+        .avatar-container {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .avatar-placeholder {
+            width: 95px;
+            height: 95px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 0 1px #999999;
+        }
+
+        /* Sarlavhalar */
+        .sidebar-title {
+            font-size: 10.5pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #888888;
+            padding-bottom: 3px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            color: #111111;
+        }
+
+        .sidebar-title:first-of-type {
+            margin-top: 0;
+        }
+
+        /* Aloqa */
+        .contact-item {
+            margin-bottom: 8px;
+            font-size: 9pt;
+            word-break: break-all;
+        }
+
+        .contact-item strong {
+            display: block;
+            color: #444444;
+            font-size: 7.5pt;
+            text-transform: uppercase;
+            margin-bottom: 1px;
+        }
+
+        .contact-item a {
+            color: #222222;
+            text-decoration: none;
+        }
+
+        /* Skill Bar */
+        .skill-container {
+            margin-bottom: 10px;
+        }
+
+        .skill-label {
+            font-size: 9pt;
+            margin-bottom: 3px;
+            font-weight: 600;
+        }
+
+        .skill-label span:first-child {
+            float: left;
+        }
+
+        .skill-label span:last-child {
+            float: right;
+        }
+
+        .clear-fix {
+            clear: both;
+        }
+
+        .skill-bar-bg {
+            background-color: #cccccc;
+            height: 5px;
+            border-radius: 2.5px;
+            width: 100%;
+            margin-top: 2px;
+        }
+
+        .skill-bar-fill {
+            background-color: #111111;
+            height: 100%;
+            border-radius: 2.5px;
+        }
+
+        /* Ro'yxatlar */
+        .sidebar-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .sidebar-list li {
+            margin-bottom: 5px;
+            font-size: 9pt;
+            position: relative;
+            padding-left: 12px;
+        }
+
+        .sidebar-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #444444;
+        }
+
+        /* Yuqori qism */
+        .header-banner {
+            background-color: #222222;
+            color: #ffffff;
+            padding: 22px;
+            margin: -22px -25px 20px -25px;
+        }
+
+        .header-banner h1 {
+            margin: 0 0 3px 0;
+            font-size: 24pt;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+        }
+
+        .header-banner .subtitle {
+            margin: 0;
+            font-size: 12pt;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #cccccc;
+        }
+
+        .main-section {
+            margin-bottom: 18px;
+        }
+
+        .section-header-box {
+            display: table;
+            width: 100%;
+            margin-bottom: 8px;
+        }
+
+        .section-icon-cell {
+            display: table-cell;
+            width: 30px;
+            vertical-align: middle;
+        }
+
+        .section-icon-circle {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background-color: #222222;
+            color: #ffffff;
+            text-align: center;
+            line-height: 22px;
+            font-size: 8pt;
+        }
+
+        .section-title-cell {
+            display: table-cell;
+            vertical-align: middle;
+            padding-left: 5px;
+            border-bottom: 1px solid #dddddd;
+        }
+
+        .main-section-title {
+            font-size: 11.5pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 0;
+            color: #222222;
+            padding-bottom: 3px;
+        }
+
+        .section-body {
+            border-left: 1.5px solid #cccccc;
+            margin-left: 10px;
+            padding-left: 20px;
+        }
+
+        .profile-text {
+            text-align: justify;
+            font-size: 9.5pt;
+            color: #444444;
+        }
+
+        .entry-block {
+            margin-bottom: 10px;
+        }
+
+        .entry-block-2 {
+            margin-bottom: 10px;
+            display: flex;
+        }
+
+        .entry-block:last-child {
+            margin-bottom: 0;
+        }
+
+        .entry-header {
+            display: table;
+            width: 100%;
+            margin-bottom: 2px;
+        }
+
+        .entry-title {
+            display: table-cell;
+            font-weight: bold;
+            font-size: 10.5pt;
+            color: #111111;
+        }
+
+        .entry-date {
+            display: table-cell;
+            text-align: right;
+            font-size: 9pt;
+            font-weight: bold;
+            color: #666666;
+        }
+
+        .entry-subtitle {
+            font-style: italic;
+            color: #555555;
+            margin-bottom: 4px;
+            font-size: 9.5pt;
+        }
+
+        .entry-list {
+            margin: 0;
+            padding-left: 15px;
+        }
+
+        .entry-list li {
+            margin-bottom: 3px;
+            font-size: 9pt;
+            color: #444444;
+        }
+
+        .certificate-image {
+            width: 15vw;
+            border: 1px solid black;
+            border-radius: 10px;
+            box-shadow: 1px 1px 5px 1px gray;
+        }
+
+        /* O'ng tomondagi yuklab olish tugmasi */
+        .download-container {
+            text-align: right;
+            margin-top: 25px;
+        }
+
+        .download-btn {
+            background-color: #222222;
+            color: #ffffff;
+            border: 1px solid #222222;
+            padding: 8px 18px;
+            font-size: 9.5pt;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .download-btn:hover {
+            background-color: #444444;
+            border-color: #444444;
+        }
+
+        .justify-between {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* TILLARNI TANLASH MODAL OYNASI (NEW) */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-box {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 6px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+        }
+
+        .modal-box h3 {
+            font-size: 13pt;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 18px;
+            color: #111111;
+        }
+
+        .modal-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .modal-opt-btn {
+            background-color: #f5f5f5;
+            border: 1px solid #cccccc;
+            color: #222222;
+            padding: 10px;
+            font-size: 10pt;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .modal-opt-btn:hover {
+            background-color: #222222;
+            color: #ffffff;
+            border-color: #222222;
+        }
+
+        .modal-close-btn {
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            background: none;
+            border: none;
+            font-size: 16pt;
+            cursor: pointer;
+            color: #888888;
+        }
+
+        .modal-close-btn:hover {
+            color: #222222;
+        }
+
+        .modal-overlay.show {
+            display: flex;
+            opacity: 1;
+        }
+
+        .cert-modal-img {
+            width: 100%;
+            max-height: 85vh;
+            object-fit: contain;
+            border-radius: 10px;
+        }
+
+        .cert-modal-box {
+            max-width: 900px;
+            width: 90%;
+            padding: 15px;
+
+            transform: scale(0.85);
+            transition: transform 0.25s ease;
+        }
+
+        @media print {
+
+            .lang-switcher,
+            .download-container,
+            .modal-overlay {
+                display: none !important;
+            }
+
+            body {
+                background-color: #ffffff;
+                padding: 0;
+            }
+
+            .cv-container {
+                box-shadow: none;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="switchLang('uz')">UZ</button>
+        <button class="lang-btn" onclick="switchLang('ru')">RU</button>
+        <button class="lang-btn" onclick="switchLang('en')">ENG</button>
+    </div>
+
+    <div class="cv-wrapper">
+        <div class="cv-container">
+            <div class="cv-row">
+
+                <div class="sidebar">
+                    <div class="avatar-container">
+                        <img class="avatar-placeholder" src="image/face.png" alt="">
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h2 class="sidebar-title" data-key="title-contact">Aloqa</h2>
+
+                        <div class="contact-item">
+                            <strong data-key="phone">Telefon:</strong>
+                            <a href="tel:+998502777527">+998 50 277 75 27</a>
+                        </div>
+
+                        <div class="contact-item">
+                            <strong>Email:</strong>
+                            <a href="mailto:allayarovibrohim12@gmail.com">allayarovibrohim12@gmail.com</a>
+                        </div>
+
+                        <div class="contact-item">
+                            <strong>Telegram:</strong>
+                            <a href="https://t.me/allayarovibrohim" target="_blank" rel="noopener noreferrer">@allayarovibrohim</a>
+                        </div>
+
+                        <div class="contact-item">
+                            <strong>GitHub:</strong>
+                            <a href="https://github.com/allayarovibrohim" 
+                                target="_blank" rel="noopener noreferrer">github.com/allayarovibrohim</a>
+                        </div>
+
+                        <div class="contact-item">
+                            <strong>Portfolio:</strong>
+                            <a href="https://lunex-portfolio.netlify.app"
+                                target="_blank">lunex-portfolio.netlify.app</a>
+                        </div>
+
+                        <div class="contact-item">
+                            <strong data-key="address-label">Manzil:</strong>
+                            <span data-key="address-val">Khiva, Khorezm, Uzbekistan</span>
+                        </div>
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h2 class="sidebar-title" data-key="title-skills">Ko'nikmalar</h2>
+
+                        <div class="skill-container">
+                            <div class="skill-label">
+                                <div class="justify-between">
+                                    <span>HTML</span><span>98%</span>
+                                </div>
+                                <div class="clear-fix"></div>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" style="width: 98%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-container">
+                            <div class="skill-label">
+                                <div class="justify-between">
+                                    <span>CSS</span><span>87%</span>
+                                </div>
+                                <div class="clear-fix"></div>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" style="width: 87%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-container">
+                            <div class="skill-label">
+                                <div class="justify-between">
+                                    <span>Bootstrap</span><span>80%</span>
+                                </div>
+                                <div class="clear-fix"></div>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" style="width: 80%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="skill-container">
+                            <div class="skill-label">
+                                <div class="justify-between">
+                                    <span>Tailwind</span><span>75%</span>
+                                </div>
+                                <div class="clear-fix"></div>
+                            </div>
+                            <div class="skill-bar-bg">
+                                <div class="skill-bar-fill" style="width: 75%;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="sidebar-section">
+                        <h2 class="sidebar-title" data-key="title-langs">Tillar</h2>
+                        <ul class="sidebar-list" id="langs-list"></ul>
+                    </div>
+                </div>
+
+                <div class="main-content">
+
+                    <div class="header-banner">
+                        <h1>Ibrohim Allayarov</h1>
+                        <div class="subtitle">Frontend Developer</div>
+                    </div>
+
+                    <div class="main-section">
+                        <div class="section-header-box">
+                            <div class="section-icon-cell">
+                                <div class="section-icon-circle"><i class="bi bi-person-fill"></i></div>
+                            </div>
+                            <div class="section-title-cell">
+                                <h2 class="main-section-title" data-key="title-profile">Profil</h2>
+                            </div>
+                        </div>
+                        <div class="section-body">
+                            <p class="profile-text" data-key="profile-desc"></p>
+                        </div>
+                    </div>
+
+                    <div class="main-section">
+                        <div class="section-header-box">
+                            <div class="section-icon-cell">
+                                <div class="section-icon-circle"><i class="bi bi-briefcase-fill"></i></div>
+                            </div>
+                            <div class="section-title-cell">
+                                <h2 class="main-section-title" data-key="title-experience">Ish Tajribasi</h2>
+                            </div>
+                        </div>
+                        <div class="section-body">
+                            <div class="entry-block">
+                                <div class="entry-header">
+                                    <div class="entry-title" data-key="exp-company">Freelance / Shaxsiy loyihalar</div>
+                                    <div class="entry-date" data-key="exp-period">1 Yillik Tajriba</div>
+                                </div>
+                                <div class="entry-subtitle">Frontend Developer</div>
+                                <ul class="entry-list" id="exp-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="main-section">
+                        <div class="section-header-box">
+                            <div class="section-icon-cell">
+                                <div class="section-icon-circle"><i class="bi bi-folder-fill"></i></div>
+                            </div>
+                            <div class="section-title-cell">
+                                <h2 class="main-section-title" data-key="title-projects">Loyihalar</h2>
+                            </div>
+                        </div>
+                        <div class="section-body">
+                            <div class="entry-block">
+                                <div class="entry-header">
+                                    <div class="entry-title">❄️ Mind Bridge Web Site</div>
+                                    <div class="entry-date">2026</div>
+                                </div>
+                                <div class="entry-subtitle" data-key="proj1-tech">Texnologiyalar: HTML, CSS, JavaScript,
+                                    Three.js</div>
+                                <ul class="entry-list" id="proj1-list"></ul>
+                            </div>
+
+                            <div class="entry-block" style="margin-top: 10px;">
+                                <div class="entry-header">
+                                    <div class="entry-title">🌎 Lingua Bridge Web Site</div>
+                                    <div class="entry-date">2025 - 2026</div>
+                                </div>
+                                <div class="entry-subtitle" data-key="proj2-tech">Texnologiyalar: HTML, Tailwind CSS,
+                                    Bootstrap, JS</div>
+                                <ul class="entry-list" id="proj2-list"></ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="main-section">
+                        <div class="section-header-box">
+                            <div class="section-icon-cell">
+                                <div class="section-icon-circle"><i class="bi bi-mortarboard-fill"></i></div>
+                            </div>
+                            <div class="section-title-cell">
+                                <h2 class="main-section-title" data-key="title-edu">Ta'lim</h2>
+                            </div>
+                        </div>
+                        <div class="section-body">
+                            <div class="entry-block">
+                                <div class="entry-header">
+                                    <div class="entry-title" data-key="edu-school">O'rta ta'lim maktabi</div>
+                                    <div class="entry-date" data-key="edu-date">Hozirgi vaqt</div>
+                                </div>
+                                <div class="entry-subtitle" data-key="edu-loc">Xiva, Xorazm, O'zbekiston</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="main-section">
+                        <div class="section-header-box">
+                            <div class="section-icon-cell">
+                                <div class="section-icon-circle"><i class="bi bi-patch-check-fill"></i></div>
+                            </div>
+                            <div class="section-title-cell">
+                                <h2 class="main-section-title" data-key="title-certs">Sertifikatlar</h2>
+                            </div>
+                        </div>
+                        <div class="section-body">
+                            <div class="entry-block-2">
+                                <div>
+                                    <div class="entry-header">
+                                        <div class="entry-title">ChatGPT for Project Management</div>
+                                    </div>
+                                    <div class="entry-subtitle" data-key="cert1-desc">Loyiha boshqaruvi va Sun'iy
+                                        intellekt
+                                        texnologiyalari integratsiyasi</div>
+                                </div>
+                                <div class="certificate-thumbnail-wrapper">
+                                    <!-- Added a wrapper for better styling if needed -->
+                                    <img class="certificate-image" src="image/Professional Certificate 4.jpg" alt=""
+                                        onclick="openCertModal(this.src)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="download-container">
+            <button class="download-btn" onclick="openDownloadModal()">
+                <span data-key="btn-download">Yuklab olish</span><i class="bi bi-download"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="downloadModal" onclick="closeDownloadModalOutside(event)">
+        <div class="modal-box">
+            <button class="modal-close-btn" onclick="closeDownloadModal()">&times;</button>
+            <h3 id="modal-title">PDF tilini tanlang <br> Выберите язык PDF <br> Select PDF Language</h3>
+            <div class="modal-options">
+                <a href="pdf/CV-uz.pdf" download="Ibrohim_Allayarov_CV_UZ.pdf" class="modal-opt-btn"
+                    onclick="closeDownloadModal()">O'zbek tili</a>
+                <a href="pdf/CV-ru.pdf" download="Ibrohim_Allayarov_CV_RU.pdf" class="modal-opt-btn"
+                    onclick="closeDownloadModal()">Русский язык</a>
+                <a href="pdf/CV-eng.pdf" download="Ibrohim_Allayarov_CV_ENG.pdf" class="modal-opt-btn"
+                    onclick="closeDownloadModal()">English</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            uz: {
+                "title-contact": "Aloqa",
+                "cv-document-title": "CV Hujjati",
+                "phone": "Telefon:",
+                "address-label": "Manzil:",
+                "address-val": "Xiva, Xorazm, O'zbekiston",
+                "title-skills": "Ko'nikmalar",
+                "title-langs": "Tillar",
+                "langs": ["O'zbek tili", "Rus tili", "Arab tili", "Boshqird tili", "Tatar tili"],
+                "title-profile": "Profil",
+                "profile-desc": "Mas'uliyatli va zamonaviy veb-interfeyslarni yaratishda tajribaga ega Frontend dasturchi. Toza UI dizayni, ishlash unumdorligini optimallashtirish va veb-texnologiyalarda doimiy izlanishga ishtiyoqi baland.",
+                "title-experience": "Ish Tajribasi",
+                "exp-company": "Freelance / Shaxsiy loyihalar",
+                "exp-period": "1 Yillik Tajriba",
+                "exp-bullets": [
+                    "Moslashuvchan (Responsive) va zamonaviy web saytlar arxitekturasini yaratish.",
+                    "Landing page interfeyslarini professional darajada mukammal kodlash va dizayn qilish.",
+                    "Shaxsiy portfoliosini hamda turli xil biznesga moslashtirilgan portfolio loyihalarni muvaffaqiyatli ishga tushirish."
+                ],
+                "title-projects": "Loyihalar",
+                "proj1-tech": "Texnologiyalar: HTML, CSS, JavaScript, Three.js",
+                "proj1-bullets": [
+                    "Shaxsiylashtirilgan terapiya orqali o'zgarishlarni kuchaytirish",
+                    "Live Link: <a href='https://mindbridge-website.lovable.app' target='_blank'>🔗 Live Demo</a>"
+                ],
+                "proj2-tech": "Texnologiyalar: HTML, Tailwind CSS, Bootstrap, JS",
+                "proj2-bullets": [
+                    "Yangi tilni o'zlashtiring. Kelajagingizni o'zgartiring.",
+                    "Live Link: <a href='https://wordways-bridge.lovable.app' target='_blank'>🔗 Live Demo</a>"
+                ],
+                "title-edu": "Ta'lim",
+                "edu-school": "O'rta ta'lim maktabi",
+                "edu-date": "Hozirgi vaqt",
+                "edu-loc": "Xiva, Xorazm, O'zbekiston",
+                "title-certs": "Sertifikatlar",
+                "cert1-desc": "Loyiha boshqaruvi va Sun'iy intellekt texnologiyalari integratsiyasi",
+                "btn-download": "Yuklab olish"
+            },
+            ru: {
+                "title-contact": "Контакты",
+                "cv-document-title": "Документ CV",
+                "phone": "Телефон:",
+                "address-label": "Адрес:",
+                "address-val": "Хива, Хорезм, Узбекистан",
+                "title-skills": "Навыки",
+                "title-langs": "Языки",
+                "langs": ["Узбекский язык", "Русский язык", "Арабский язык", "Башкирский язык", "Татарский язык"],
+                "title-profile": "Профиль",
+                "profile-desc": "Frontend-разработчик с опытом создания адаптивных и современных веб-интерфейсов. Увлечен чистым дизайном пользовательского интерфейса, оптимизацией производительности и непрерывным обучением в области веб-технологий.",
+                "title-experience": "Опыт Работы",
+                "exp-company": "Фриланс / Личные проекты",
+                "exp-period": "1 год опыта",
+                "exp-bullets": [
+                    "Создание адаптивной (Responsive) и современной архитектуры веб-сайтов.",
+                    "Профессиональная качественная верстка и дизайн интерфейсов целевых страниц (Landing page).",
+                    "Успешный запуск личного портфолио и различных бизнес-ориентированных веб-проектов."
+                ],
+                "title-projects": "Проекты",
+                "proj1-tech": "Технологии: HTML, CSS, JavaScript, Three.js",
+                "proj1-bullets": [
+                    "Содействие переменам посредством персонализированной терапии",
+                    "Live Link: <a href='https://mindbridge-website.lovable.app' target='_blank'>🔗 Live Demo</a>"
+                ],
+                "proj2-tech": "Технологии: HTML, Tailwind CSS, Bootstrap, JS",
+                "proj2-bullets": [
+                    "Освойте новый язык. Измените свое будущее.",
+                    "Live Link: <a href='https://wordways-bridge.lovable.app' target='_blank'>🔗 Live Demo</a>"
+                ],
+                "title-edu": "Образование",
+                "edu-school": "Средняя общеобразовательная школа",
+                "edu-date": "В настоящее время",
+                "edu-loc": "Хива, Хорезм, Узбекистан",
+                "title-certs": "Сертификаты",
+                "cert1-desc": "Интеграция управления проектами и технологий искусственного интеллекта",
+                "btn-download": "Скачать CV"
+            },
+            en: {
+                "title-contact": "Contact",
+                "cv-document-title": "CV Document",
+                "phone": "Phone:",
+                "address-label": "Address:",
+                "address-val": "Khiva, Khorezm, Uzbekistan",
+                "title-skills": "Skills",
+                "title-langs": "Languages",
+                "langs": ["Uzbek", "Russian", "Arabic", "Bashkir", "Tatar"],
+                "title-profile": "Profile",
+                "profile-desc": "Frontend Developer with experience in building responsive and modern web interfaces. Passionate about clean UI design, performance optimization, and continuous learning in web technologies.",
+                "title-experience": "Work Experience",
+                "exp-company": "Freelance / Personal Projects",
+                "exp-period": "1 Year of Experience",
+                "exp-bullets": [
+                    "Building responsive and modern web application architectures.",
+                    "Professional high-quality coding and interface design for Landing Pages.",
+                    "Successful deployment of personal portfolio and various business-customized web projects."
+                ],
+                "title-projects": "Projects",
+                "proj1-tech": "Technologies: HTML, CSS, JavaScript, Three.js",
+                "proj1-bullets": [
+                    "Empowering change through personalized therapy",
+                    "Live Link: <a href='https://mindbridge-website.lovable.app' target='_blank'>🔗 Live Demo</a>"
+                ],
+                "proj2-tech": "Technologies: HTML, Tailwind CSS, Bootstrap, JS",
+                "proj2-bullets": [
+                    "Master a New Language. Transform Your Future.",
+                    "Live Link: <a href='https://wordways-bridge.lovable.app' target='_blank'>🔗 Live Demo</a>"
+                ],
+                "title-edu": "Education",
+                "edu-school": "Secondary School",
+                "edu-date": "Present",
+                "edu-loc": "Khiva, Khorezm, Uzbekistan",
+                "title-certs": "Certificates",
+                "cert1-desc": "Project management fundamentals and Artificial Intelligence orchestration workflows",
+                "btn-download": "Download CV"
+            }
+        };
+
+        function switchLang(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.innerText.toLowerCase() === lang || (lang === 'en' && btn.innerText === 'ENG')) {
+                    btn.classList.add('active');
+                }
+            });
+
+            const data = translations[lang];
+
+            // Sahifa sarlavhasini tarjima qilish
+            if (data["cv-document-title"]) {
+                document.title = data["cv-document-title"];
+            }
+
+            document.querySelectorAll('[data-key]').forEach(el => {
+                const key = el.getAttribute('data-key');
+                if (data[key]) el.innerText = data[key];
+            });
+            const fillList = (id, items) => {
+                const el = document.getElementById(id);
+                el.innerHTML = '';
+
+                items.forEach(i => {
+                    const li = document.createElement('li');
+
+                    // LINKLAR ISHLASHI UCHUN
+                    li.innerHTML = i;
+
+                    el.appendChild(li);
+                });
+            };
+
+            fillList('langs-list', data.langs);
+            fillList('exp-list', data["exp-bullets"]);
+            fillList('proj1-list', data["proj1-bullets"]);
+            fillList('proj2-list', data["proj2-bullets"]);
+        }
+
+        // MODAL FUNKSIYALARI (NEW)
+        function openDownloadModal() {
+            const modal = document.getElementById('downloadModal');
+            modal.style.display = 'flex'; // Set display to flex first
+            setTimeout(() => {
+                modal.classList.add('show'); // Then add 'show' class for opacity transition
+            }, 10);
+        }
+
+        function closeDownloadModal() {
+            const modal = document.getElementById('downloadModal');
+            modal.classList.remove('show'); // Remove 'show' class to start opacity transition
+            setTimeout(() => {
+                modal.style.display = 'none'; // Hide after transition
+            }, 250); // Match CSS transition duration
+        }
+
+        // Modal tashqarisiga bosilganda yopish
+        function closeDownloadModalOutside(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                closeDownloadModal();
+            }
+        }
+
+        // Certificate Modal (Lightbox)
+        function openCertModal(src) {
+            const modal = document.getElementById('certModal');
+            const img = document.getElementById('certModalImg');
+
+            img.src = src;
+            modal.style.display = 'flex';
+
+            setTimeout(() => {
+                modal.classList.add('show');
+            }, 10);
+        }
+
+        function closeCertModal() {
+            const modal = document.getElementById('certModal');
+
+            modal.classList.remove('show');
+
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 250);
+        }
+
+        function closeCertModalOutside(event) {
+            if (event.target.id === 'certModal') {
+                closeCertModal();
+            }
+        }   
+
+        // Dastlabki yuklanish (UZ default)
+        switchLang('uz');
+    </script>
+
+    <div class="modal-overlay" id="certModal" onclick="closeCertModalOutside(event)">
+        <div class="modal-box cert-modal-box">
+            <button class="modal-close-btn" onclick="closeCertModal()">&times;</button>
+            <img id="certModalImg" class="cert-modal-img">
+        </div>
+    </div>
+
+</body>
+
+</html>

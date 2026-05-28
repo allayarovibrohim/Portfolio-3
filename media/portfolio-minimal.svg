@@ -1,0 +1,15 @@
+<svg width="1200" height="840" viewBox="0 0 1200 840" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="840" rx="48" fill="#F4EFE6"/>
+  <rect x="88" y="92" width="1024" height="656" rx="36" fill="#FBF8F3"/>
+  <rect x="132" y="138" width="420" height="26" rx="13" fill="#C6A889"/>
+  <text x="132" y="228" fill="#1D1B18" font-family="Georgia, serif" font-size="88" font-weight="700">Ibrohim</text>
+  <text x="136" y="282" fill="#6A645B" font-family="Arial, sans-serif" font-size="28">Young IT student from Khiva, Uzbekistan</text>
+  <rect x="134" y="336" width="150" height="48" rx="24" fill="#1D1B18"/>
+  <text x="174" y="367" fill="#FFF8EF" font-family="Arial, sans-serif" font-size="22">About</text>
+  <rect x="672" y="150" width="326" height="438" rx="28" fill="#E8DED0"/>
+  <rect x="702" y="180" width="266" height="378" rx="22" fill="#CDB7A0"/>
+  <rect x="130" y="454" width="438" height="208" rx="28" fill="#EFE7DB"/>
+  <rect x="616" y="620" width="420" height="54" rx="18" fill="#E1D4C3"/>
+  <text x="140" y="506" fill="#1D1B18" font-family="Arial, sans-serif" font-size="34" font-weight="700">Minimal profile layout</text>
+  <text x="140" y="556" fill="#6A645B" font-family="Arial, sans-serif" font-size="24">Soft editorial composition / warm neutrals / clean personal introduction</text>
+</svg>

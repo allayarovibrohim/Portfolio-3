@@ -1,0 +1,35 @@
+<svg width="1200" height="840" viewBox="0 0 1200 840" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="840" rx="48" fill="#07101D"/>
+  <rect width="1200" height="840" rx="48" fill="url(#bg)"/>
+  <circle cx="850" cy="182" r="150" fill="url(#core)" opacity="0.95"/>
+  <circle cx="850" cy="182" r="214" stroke="#2DE6FF" stroke-opacity="0.28"/>
+  <circle cx="850" cy="182" r="266" stroke="#F7B36E" stroke-opacity="0.14"/>
+  <rect x="88" y="96" width="360" height="228" rx="30" fill="#101A2A" stroke="#1D2E44"/>
+  <text x="126" y="154" fill="#74F0FF" font-family="Arial, sans-serif" font-size="28" letter-spacing="3">ORBIT OS</text>
+  <text x="126" y="208" fill="#F4F8FF" font-family="Arial, sans-serif" font-size="64" font-weight="700">Mission Console</text>
+  <text x="126" y="254" fill="#A2B6D0" font-family="Arial, sans-serif" font-size="26">Telemetry / command feed / readiness layer</text>
+  <rect x="88" y="374" width="312" height="200" rx="26" fill="#111C2B"/>
+  <rect x="430" y="374" width="292" height="200" rx="26" fill="#111C2B"/>
+  <rect x="752" y="374" width="360" height="200" rx="26" fill="#111C2B"/>
+  <rect x="88" y="610" width="1024" height="128" rx="26" fill="#0D1625"/>
+  <rect x="132" y="420" width="224" height="14" rx="7" fill="#1E3046"/>
+  <rect x="132" y="458" width="164" height="58" rx="16" fill="#74F0FF" fill-opacity="0.18"/>
+  <rect x="470" y="420" width="200" height="14" rx="7" fill="#1E3046"/>
+  <rect x="470" y="456" width="204" height="18" rx="9" fill="#F7B36E" fill-opacity="0.82"/>
+  <rect x="470" y="492" width="168" height="18" rx="9" fill="#74F0FF" fill-opacity="0.82"/>
+  <rect x="798" y="420" width="266" height="14" rx="7" fill="#1E3046"/>
+  <rect x="798" y="458" width="266" height="18" rx="9" fill="#74F0FF" fill-opacity="0.82"/>
+  <rect x="798" y="494" width="192" height="18" rx="9" fill="#F7B36E" fill-opacity="0.82"/>
+  <text x="138" y="682" fill="#7D90A9" font-family="Arial, sans-serif" font-size="24">command feed: launch corridor stable / weather mesh clear / power reserve rising</text>
+  <defs>
+    <linearGradient id="bg" x1="68" y1="54" x2="1118" y2="822" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0A1626"/>
+      <stop offset="1" stop-color="#060B14"/>
+    </linearGradient>
+    <radialGradient id="core" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(850 182) rotate(90) scale(150)">
+      <stop stop-color="#E8F6FF"/>
+      <stop offset="0.34" stop-color="#74F0FF"/>
+      <stop offset="1" stop-color="#74F0FF" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

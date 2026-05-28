@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="56" x2="1080" y2="742" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1c1630" />
+      <stop offset="1" stop-color="#0c0c1a" />
+    </linearGradient>
+    <linearGradient id="line" x1="90" y1="98" x2="1108" y2="710" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ff8abf" />
+      <stop offset="1" stop-color="#ffbc73" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)" />
+  <circle cx="244" cy="626" r="192" fill="#ff8abf" fill-opacity=".12" />
+  <circle cx="980" cy="154" r="146" fill="#ffbc73" fill-opacity=".12" />
+  <rect x="42" y="42" width="1116" height="716" rx="42" fill="#151226" fill-opacity=".82" stroke="url(#line)" stroke-opacity=".36" stroke-width="2" />
+  <rect x="86" y="94" width="1028" height="612" rx="28" fill="#ffffff" fill-opacity=".04" stroke="#ffffff" stroke-opacity=".12" />
+  <text x="110" y="208" fill="#f4f7ff" font-family="Segoe UI, Arial, sans-serif" font-size="26" letter-spacing="7">CERTIFICATE</text>
+  <text x="110" y="288" fill="#ffffff" font-family="Georgia, Times New Roman, serif" font-size="54">ChatGPT for</text>
+  <text x="110" y="356" fill="#ffffff" font-family="Georgia, Times New Roman, serif" font-size="54">Project Management</text>
+  <text x="110" y="438" fill="#c8d2ea" font-family="Segoe UI, Arial, sans-serif" font-size="28">Vanderbilt University</text>
+  <text x="110" y="486" fill="#97a4c2" font-family="Segoe UI, Arial, sans-serif" font-size="22" letter-spacing="3">ISSUED VIA COURSERA</text>
+  <rect x="850" y="172" width="224" height="224" rx="40" fill="#ffffff" fill-opacity=".05" stroke="#ffffff" stroke-opacity=".16" />
+  <rect x="902" y="224" width="120" height="24" rx="12" fill="#ff8abf" />
+  <rect x="902" y="278" width="152" height="24" rx="12" fill="#ffbc73" />
+  <rect x="902" y="332" width="96" height="24" rx="12" fill="#ffffff" fill-opacity=".56" />
+  <rect x="110" y="566" width="370" height="72" rx="22" fill="#ffffff" fill-opacity=".06" stroke="#ffffff" stroke-opacity=".14" />
+  <text x="146" y="611" fill="#ff8abf" font-family="Segoe UI, Arial, sans-serif" font-size="24">AI support for planning and delivery</text>
+</svg>

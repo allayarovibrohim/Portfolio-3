@@ -1,0 +1,33 @@
+<svg width="1200" height="840" viewBox="0 0 1200 840" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="840" rx="48" fill="#0D1020"/>
+  <rect width="1200" height="840" rx="48" fill="url(#bg)"/>
+  <circle cx="290" cy="220" r="210" fill="url(#sun)" opacity="0.8"/>
+  <rect x="92" y="560" width="1016" height="164" rx="28" fill="#111728"/>
+  <rect x="202" y="284" width="796" height="326" rx="36" fill="#EEE2D8"/>
+  <rect x="250" y="246" width="700" height="54" rx="20" fill="#D7B49B"/>
+  <rect x="276" y="332" width="116" height="238" rx="18" fill="#CFA787"/>
+  <rect x="424" y="332" width="116" height="238" rx="18" fill="#CFA787"/>
+  <rect x="572" y="332" width="116" height="238" rx="18" fill="#CFA787"/>
+  <rect x="720" y="332" width="116" height="238" rx="18" fill="#CFA787"/>
+  <rect x="868" y="332" width="82" height="238" rx="18" fill="#CFA787"/>
+  <rect x="112" y="108" width="292" height="160" rx="30" fill="#0F1424" fill-opacity="0.72" stroke="rgba(255,255,255,0.08)"/>
+  <text x="152" y="164" fill="#FFCA9D" font-family="Arial, sans-serif" font-size="30" letter-spacing="3">AETHER RESIDENCY</text>
+  <text x="152" y="210" fill="#F2EFE9" font-family="Arial, sans-serif" font-size="58" font-weight="700">Luxury Arrival</text>
+  <text x="152" y="246" fill="#BFC3D6" font-family="Arial, sans-serif" font-size="26">Editorial booking experience / residence preview / concierge flow</text>
+  <rect x="796" y="134" width="252" height="178" rx="28" fill="#F5E8DB" fill-opacity="0.92"/>
+  <rect x="822" y="170" width="200" height="18" rx="9" fill="#D7B49B"/>
+  <rect x="822" y="206" width="148" height="14" rx="7" fill="#C4B1A2"/>
+  <rect x="822" y="236" width="112" height="14" rx="7" fill="#C4B1A2"/>
+  <rect x="822" y="266" width="176" height="20" rx="10" fill="#12192A"/>
+  <defs>
+    <linearGradient id="bg" x1="84" y1="36" x2="1032" y2="812" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1A1A2B"/>
+      <stop offset="0.46" stop-color="#101528"/>
+      <stop offset="1" stop-color="#0A0D18"/>
+    </linearGradient>
+    <radialGradient id="sun" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(290 220) rotate(90) scale(210)">
+      <stop stop-color="#FFCC9A"/>
+      <stop offset="1" stop-color="#FFCC9A" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

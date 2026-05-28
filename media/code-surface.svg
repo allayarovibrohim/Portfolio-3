@@ -1,0 +1,25 @@
+<svg width="1200" height="840" viewBox="0 0 1200 840" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="840" rx="48" fill="#060811"/>
+  <rect width="1200" height="840" rx="48" fill="url(#bg)"/>
+  <g filter="url(#blur)">
+    <rect x="180" y="164" width="840" height="512" rx="34" fill="#08111F"/>
+    <rect x="242" y="236" width="410" height="14" rx="7" fill="#73F2FF"/>
+    <rect x="242" y="282" width="530" height="14" rx="7" fill="#FF8ABF"/>
+    <rect x="242" y="328" width="474" height="14" rx="7" fill="#FFB86B"/>
+    <rect x="242" y="374" width="612" height="14" rx="7" fill="#B498FF"/>
+    <rect x="242" y="420" width="360" height="14" rx="7" fill="#73F2FF"/>
+    <rect x="242" y="466" width="556" height="14" rx="7" fill="#FF8ABF"/>
+    <rect x="242" y="512" width="432" height="14" rx="7" fill="#FFB86B"/>
+  </g>
+  <text x="238" y="132" fill="#E4ECFF" font-family="Arial, sans-serif" font-size="40" font-weight="700">Code Surface</text>
+  <text x="238" y="742" fill="#A8B4CE" font-family="Arial, sans-serif" font-size="26">Use for code screenshots, project previews, or cinematic dev imagery.</text>
+  <defs>
+    <linearGradient id="bg" x1="80" y1="50" x2="1100" y2="790" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0D1325"/>
+      <stop offset="1" stop-color="#060912"/>
+    </linearGradient>
+    <filter id="blur" x="120" y="104" width="960" height="632" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+  </defs>
+</svg>

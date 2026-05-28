@@ -1,0 +1,74 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="140" y1="80" x2="1080" y2="820" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#242424"/>
+      <stop offset="1" stop-color="#0F0F0F"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="900" rx="56" fill="url(#bg)"/>
+  <rect x="188" y="126" width="824" height="824" rx="36" fill="#8A6448"/>
+  <rect x="220" y="158" width="760" height="760" rx="22" fill="#B98E6A"/>
+
+  <g>
+    <rect x="220" y="158" width="95" height="95" fill="#D5B08A"/>
+    <rect x="315" y="158" width="95" height="95" fill="#B07B56"/>
+    <rect x="410" y="158" width="95" height="95" fill="#D5B08A"/>
+    <rect x="505" y="158" width="95" height="95" fill="#B07B56"/>
+    <rect x="600" y="158" width="95" height="95" fill="#D5B08A"/>
+    <rect x="695" y="158" width="95" height="95" fill="#B07B56"/>
+    <rect x="790" y="158" width="95" height="95" fill="#D5B08A"/>
+    <rect x="885" y="158" width="95" height="95" fill="#B07B56"/>
+
+    <rect x="220" y="253" width="95" height="95" fill="#B07B56"/>
+    <rect x="315" y="253" width="95" height="95" fill="#D5B08A"/>
+    <rect x="410" y="253" width="95" height="95" fill="#B07B56"/>
+    <rect x="505" y="253" width="95" height="95" fill="#D5B08A"/>
+    <rect x="600" y="253" width="95" height="95" fill="#B07B56"/>
+    <rect x="695" y="253" width="95" height="95" fill="#D5B08A"/>
+    <rect x="790" y="253" width="95" height="95" fill="#B07B56"/>
+    <rect x="885" y="253" width="95" height="95" fill="#D5B08A"/>
+
+    <rect x="220" y="348" width="95" height="95" fill="#D5B08A"/>
+    <rect x="315" y="348" width="95" height="95" fill="#B07B56"/>
+    <rect x="410" y="348" width="95" height="95" fill="#D5B08A"/>
+    <rect x="505" y="348" width="95" height="95" fill="#B07B56"/>
+    <rect x="600" y="348" width="95" height="95" fill="#D5B08A"/>
+    <rect x="695" y="348" width="95" height="95" fill="#B07B56"/>
+    <rect x="790" y="348" width="95" height="95" fill="#D5B08A"/>
+    <rect x="885" y="348" width="95" height="95" fill="#B07B56"/>
+
+    <rect x="220" y="443" width="95" height="95" fill="#B07B56"/>
+    <rect x="315" y="443" width="95" height="95" fill="#D5B08A"/>
+    <rect x="410" y="443" width="95" height="95" fill="#B07B56"/>
+    <rect x="505" y="443" width="95" height="95" fill="#D5B08A"/>
+    <rect x="600" y="443" width="95" height="95" fill="#B07B56"/>
+    <rect x="695" y="443" width="95" height="95" fill="#D5B08A"/>
+    <rect x="790" y="443" width="95" height="95" fill="#B07B56"/>
+    <rect x="885" y="443" width="95" height="95" fill="#D5B08A"/>
+  </g>
+
+  <g fill="#F1F1F1">
+    <circle cx="457" cy="680" r="34"/>
+    <circle cx="552" cy="680" r="34"/>
+    <circle cx="647" cy="680" r="34"/>
+    <circle cx="742" cy="680" r="34"/>
+  </g>
+
+  <g fill="#1E1E1E">
+    <circle cx="505" cy="300" r="34"/>
+    <circle cx="600" cy="300" r="34"/>
+    <circle cx="695" cy="300" r="34"/>
+    <circle cx="790" cy="300" r="34"/>
+  </g>
+
+  <path d="M802 584C802 540.922 836.922 506 880 506V506C923.078 506 958 540.922 958 584V648H802V584Z" fill="#171717"/>
+  <path d="M850 458H910V530H850V458Z" fill="#F1F1F1"/>
+  <path d="M868 430H892V474H868V430Z" fill="#F1F1F1"/>
+  <rect x="850" y="648" width="60" height="28" rx="8" fill="#171717"/>
+
+  <rect x="96" y="104" width="252" height="64" rx="32" fill="white" fill-opacity="0.18"/>
+  <text x="222" y="146" text-anchor="middle" fill="#F3E6D9" font-size="28" font-family="Arial, Helvetica, sans-serif" font-weight="700">LUNEX LAB</text>
+  <text x="102" y="764" fill="#F5E8DC" font-size="88" font-family="Arial, Helvetica, sans-serif" font-weight="700">Royal Duel</text>
+  <text x="102" y="820" fill="#D4B89C" font-size="30" font-family="Arial, Helvetica, sans-serif">Interactive chess board with autoplay and perspective control.</text>
+</svg>

@@ -1,0 +1,46 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="600" y1="40" x2="600" y2="860" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#BBD691"/>
+      <stop offset="1" stop-color="#FEF1E1"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="900" rx="56" fill="url(#bg)"/>
+
+  <path d="M0 532C170 472 306 472 472 530C642 590 788 590 962 528C1052 496 1128 484 1200 492V900H0V532Z" fill="#95C629"/>
+  <path d="M0 618C170 570 334 576 510 628C694 684 858 686 1044 622C1096 604 1148 594 1200 594V900H0V618Z" fill="#659F1C"/>
+
+  <rect x="188" y="506" width="128" height="394" fill="#111111"/>
+  <rect x="640" y="430" width="182" height="470" fill="#111111"/>
+  <rect x="708" y="430" width="20" height="20" fill="#E83A28"/>
+
+  <g transform="translate(315 502) rotate(-63)">
+    <rect x="0" y="0" width="12" height="286" rx="6" fill="#111111"/>
+  </g>
+
+  <g transform="translate(560 500)">
+    <rect x="-24" y="-74" width="48" height="88" rx="16" fill="#111111"/>
+    <circle cx="-10" cy="24" r="9" fill="#111111"/>
+    <circle cx="10" cy="24" r="9" fill="#111111"/>
+    <circle cx="11" cy="-38" r="8" fill="white"/>
+    <rect x="-28" y="-42" width="56" height="12" fill="#E83A28"/>
+    <path d="M-28 -46L-48 -56L-40 -26Z" fill="#E83A28"/>
+    <path d="M-22 -20L-38 -2L-12 -10Z" fill="#E83A28"/>
+  </g>
+
+  <g opacity="0.9">
+    <path d="M156 634V598" stroke="#7D833C" stroke-width="6" stroke-linecap="round"/>
+    <path d="M138 600L156 564L174 600H138Z" fill="#8FAC34"/>
+    <path d="M1008 680V644" stroke="#7D833C" stroke-width="6" stroke-linecap="round"/>
+    <path d="M990 646L1008 610L1026 646H990Z" fill="#98B333"/>
+  </g>
+
+  <rect x="110" y="104" width="252" height="64" rx="32" fill="white" fill-opacity="0.48"/>
+  <text x="236" y="145" text-anchor="middle" fill="#24330E" font-size="28" font-family="Arial, Helvetica, sans-serif" font-weight="700">LUNEX LAB</text>
+
+  <text x="104" y="754" fill="#233013" font-size="88" font-family="Arial, Helvetica, sans-serif" font-weight="700">Stick Hero</text>
+  <text x="104" y="812" fill="#365117" font-size="30" font-family="Arial, Helvetica, sans-serif">
+    Hold, drop, and cross the gap with perfect timing.
+  </text>
+</svg>

@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Frontend Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <div class="logo">DEV</div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home" onclick="closeMenu()">Home</a></li>
+            <li><a href="#about" onclick="closeMenu()">About</a></li>
+            <li><a href="#certificates" onclick="closeMenu()">Certificate</a></li>
+            <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+            <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+            <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+        </ul>
+        <div class="nav-auth-btns" id="authBtnContainer">
+            <button class="btn-auth-trigger" onclick="openAuthModal()">Kirish</button>
+        </div>
+        <div class="nav-user-profile hidden" id="userProfileContainer">
+            <div class="user-menu-wrapper">
+                <div class="user-avatar" id="userAvatar" onclick="toggleUserMenu()"></div>
+                <div class="user-dropdown" id="userDropdown">
+                    <div class="dropdown-header" onclick="toggleDropdownSection('profileEdit')">Profil <i class="bi bi-chevron-down"></i></div>
+                    <div class="dropdown-section profile-edit hidden-section" id="profileEdit">
+                        <div class="section-inner">
+                            <label class="avatar-upload">
+                                <i class="bi bi-camera"></i> Rasm yuklash
+                                <input type="file" id="avatarInput" hidden accept="image/*" onchange="handleAvatarUpload(event)">
+                            </label>
+                            <button class="btn-remove-avatar hidden" id="removeAvatarBtn" onclick="removeAvatar()">Rasmni olib tashlash</button>
+                            <input type="text" id="editFirstName" placeholder="Ism" oninput="saveNameChanges()">
+                            <input type="text" id="editLastName" placeholder="Familiya" oninput="saveNameChanges()">
+                        </div>
+                    </div>
+                    
+                    <div class="dropdown-header" onclick="toggleDropdownSection('themeSettings')">Settings <i class="bi bi-chevron-down"></i></div>
+                    <div class="dropdown-section themes hidden-section" id="themeSettings">
+                        <div class="section-inner">
+                            <button class="theme-btn" onclick="setTheme('light')">☀️ Light</button>
+                            <button class="theme-btn" onclick="setTheme('dark')">🌙 Dark</button>
+                            <button class="theme-btn" onclick="setTheme('system')">💻 System</button>
+                            <button class="theme-btn neon" onclick="setTheme('neon')">⚡ Neon</button>
+                        </div>
+                    </div>
+
+                    <hr class="dropdown-hr">
+                    
+                    <button class="btn-logout-red" onclick="handleLogout()">Log out →</button>
+                </div>
+            </div>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu" onclick="toggleMenu()">
+            <span></span><span></span><span></span>
+        </button>
+    </nav>
+
+    <!-- HERO -->
+    <section id="home">
+        <div class="hero-bg">
+            <div class="orb orb1"></div>
+            <div class="orb orb2"></div>
+            <div class="orb orb3"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="dot"></span>
+                Available for work
+            </div>
+            <h1 class="hero-name">Salom, Men <span id="heroName">Allayarov Ibrohim</span></h1>
+            <p class="hero-title">Frontend Developer • UI Enthusiast • Creative Coder</p>
+            <p class="hero-desc">Zamonaviy va chiroyli veb saytlar yarataman. Foydalanuvchi tajribasiga alohida e'tibor
+                beraman.</p>
+            <div class="hero-btns">
+                <a href="#projects" class="btn btn-primary">Loyihalarimni ko'rish</a>
+                <a href="#contact" class="btn btn-outline">Bog'lanish</a>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+        <div class="container">
+            <div class="section-label">01 — About</div>
+            <h2 class="section-title">Men <span>haqimda</span></h2>
+            <div class="divider"></div>
+            <div class="about-grid">
+                <div class="about-visual">
+
+                    <div class="about-img-frame">
+                        <div class="about-img-inner">
+                            <img src="image/profile.jpg" alt="">
+                        </div>
+                    </div>
+
+                    <!-- CV BUTTON -->
+                    <a class="cv-btn" href="cv.html">
+                        <i class="bi bi-download"></i>
+                        CV Yuklab Olish
+                    </a>
+
+                    <div class="about-stats">
+                        <div class="stat-box">
+                            <div class="stat-num" id="statProjects">0</div>
+                            <div class="stat-label">Loyihalar</div>
+                        </div>
+
+                        <div class="stat-box">
+                            <div class="stat-num" id="statExp">0</div>
+                            <div class="stat-label">Yil tajriba</div>
+                        </div>
+
+                        <div class="stat-box">
+                            <div class="stat-num" id="statCerts">0</div>
+                            <div class="stat-label">Sertifikatlar</div>
+                        </div>
+
+                        <div class="stat-box">
+                            <div class="stat-num" id="statClients">0</div>
+                            <div class="stat-label">Mijozlar</div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="about-text">
+                    <h3>Frontend Developer 👋</h3>
+                    <p>Men zamonaviy texnologiyalardan foydalanib, foydalanuvchilar uchun qulay va estetik jihatdan
+                        chiroyli veb saytlar yarataman.</p>
+                    <p>HTML, CSS, TailwindCSS va Bootstrap kabi texnologiyalarda kuchli bilimga egaman. Har bir loyihaga
+                        alohida yondashuv bilan qarayman.</p>
+                    <p>Hozirda maktabda o'qish bilan birga zamonaviy frontend texnologiyalarini chuqur o'rganib kelyapman. 
+                        Maqsadim — foydalanuvchilar uchun nafaqat chiroyli, balki real muammolarni hal qiladigan raqamli mahsulotlar yaratishdir. Doimiy izlanish va yangi bilimlar olishga ishtiyoqim baland.</p>
+                    <p style="background-color: #e0f2fe; padding: 15px; border-radius: 12px; font-style: italic; border-left: 5px solid #3b82f6; color: #1e40af; margin-top: 20px;">
+                        <i style="font-size: 30px;" class="bi bi-quote"></i> <br> <i>Men kelajakda dunyo miqyosidagi yirik loyihalarda qatnashadigan professional dasturchi bo'lishni va innovatsion raqamli yechimlar yaratishni maqsad qilganman.</i></p>
+                    <div class="about-info">
+                        <div class="info-item">
+                            <span class="info-key">Ism</span>
+                            <span class="info-val" id="aboutName">Your Name</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-key">Email</span>
+                            <span class="info-val" id="aboutEmail">email@example.com</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-key">Shahar</span>
+                            <span class="info-val" id="aboutCity">Toshkent, O'zbekiston</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-key">Status</span>
+                            <span class="info-val" style="color:#22C55E">● Ishlashga tayyor</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CERTIFICATES -->
+    <section id="certificates">
+        <div class="container">
+            <div class="section-label">02 — Certificates</div>
+            <h2 class="section-title">Mening <span>Sertifikatlarim</span></h2>
+            <div class="divider"></div>
+            <div class="certs-grid" id="certsGrid">
+                <!-- 5 certificate cards -->
+            </div>
+        </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+        <div class="container">
+            <div class="section-label">03 — Projects</div>
+            <h2 class="section-title">Mening <span>Loyihalarim</span></h2>
+            <div class="divider"></div>
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Projects injected by JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- TYPING GAME -->
+    <section id="typing-section" style="padding:4rem 2rem">
+        <div class="container">
+            <div class="section-label">04 — Mini Game</div>
+            <h2 class="section-title">Yozish <span>Tezligi</span></h2>
+            <div class="divider"></div>
+            <div id="typing-game">
+                <div class="game-header">
+                    <div>
+                        <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:600">⌨️ Stamina Typing
+                            Test</div>
+                        <div style="font-size:0.8rem;color:var(--muted);margin-top:2px">Quyidagi matnni imkon qadar tez
+                            yozing</div>
+                    </div>
+                    <div class="game-stats">
+                        <div class="game-stat">
+                            <div class="game-stat-val" id="wpmVal">0</div>
+                            <div class="game-stat-label">WPM</div>
+                        </div>
+                        <div class="game-stat">
+                            <div class="game-stat-val" id="accVal">100%</div>
+                            <div class="game-stat-label">Aniqlik</div>
+                        </div>
+                        <div class="game-stat">
+                            <div class="game-stat-val" id="timeVal">60</div>
+                            <div class="game-stat-label">Vaqt</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-text-area" id="gameText"></div>
+                <input class="game-input" id="gameInput" placeholder="Bu yerga yozishni boshlang..." autocomplete="off"
+                    autocorrect="off" autocapitalize="off" spellcheck="false">
+                <div class="game-result" id="gameResult">
+                    <div style="font-size:0.9rem;color:var(--muted);margin-bottom:0.5rem">Yakuniy natija</div>
+                    <div class="result-wpm" id="finalWpm">0 WPM</div>
+                    <div style="font-size:0.9rem;color:var(--muted);margin-top:0.5rem" id="finalAcc"></div>
+                    <button onclick="resetGame()"
+                        style="margin-top:1rem;padding:0.6rem 1.5rem;border-radius:10px;background:var(--grad);border:none;color:#fff;cursor:pointer;font-size:0.9rem;font-family:'DM Sans',sans-serif">Qayta
+                        urinish ↺</button>
+                </div>
+                <div class="keyboard" id="keyboard"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" style="background:var(--bg2)">
+        <div class="container">
+            <div class="section-label">05 — Skills</div>
+            <h2 class="section-title">Mening <span>Ko'nikmalarim</span></h2>
+            <div class="divider"></div>
+            <div class="skills-grid" id="skillsGrid"></div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="container">
+            <div class="section-label">06 — Contact</div>
+            <h2 class="section-title">Bog'<span>lanish</span></h2>
+            <div class="divider"></div>
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h3>Gaplashaylik! 💬</h3>
+                    <p>Yangi loyiha, hamkorlik yoki shunchaki salom aytmoqchimisiz? Xabar yuboring!</p>
+                    <div class="contact-links">
+                        <a href="mailto:email@example.com" class="contact-link">
+                            <div class="cl-icon email"><i class="bi bi-envelope-fill"></i></div>
+                            <div class="cl-text">
+                                <small>Email</small>
+                                <span id="contactEmail">allayarovibrohim12@gmail.com</span>
+                            </div>
+                        </a>
+                        <a href="https://t.me/allayarovibrohim" target="_blank" rel="noopener noreferrer" class="contact-link">
+                            <div class="cl-icon telegram"><i class="bi bi-telegram"></i></div>
+                            <div class="cl-text">
+                                <small>Telegram</small>
+                                <span id="contactTelegram">allayarovibrohim</span>
+                            </div>
+                        </a>
+                        <a href="https://github.com/allayarovibrohim" target="_blank" rel="noopener noreferrer" class="contact-link">
+                            <div class="cl-icon github"><i class="bi bi-github"></i></div>
+                            <div class="cl-text">
+                                <small>GitHub</small>
+                                <span id="contactGithub">allayarovibrohim</span>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Ism</label>
+                            <input type="text" id="cfName" placeholder="Ismingiz">
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="cfEmail" placeholder="email@example.com">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Mavzu</label>
+                        <input type="text" id="cfSubject" placeholder="Nima haqida?">
+                    </div>
+                    <div class="form-group">
+                        <label>Xabar</label>
+                        <textarea id="cfMsg" placeholder="Xabaringizni yozing..."></textarea>
+                    </div>
+                    <button class="btn-send" onclick="sendMessage()">Yuborish →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-logo" id="footerName">DEV</div>
+        <p>© 2025 — Barcha huquqlar himoyalangan</p>
+    </footer>
+
+    <!-- LIGHTBOX -->
+    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+        <button class="lb-close" onclick="closeLightbox()">✕</button>
+        <img id="lbImg" src="" alt="Certificate">
+    </div>
+
+    <!-- AUTH MODAL (SIGN IN / SIGN UP) -->
+    <div class="auth-modal-overlay" id="authModal" onclick="closeAuthModalOutside(event)">
+        <div class="auth-modal-box">
+            <button class="auth-close-btn" onclick="closeAuthModal()">&times;</button>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="tabLogin" onclick="switchAuthMode('login')">Kirish</button>
+                <button class="auth-tab" id="tabRegister" onclick="switchAuthMode('register')">Ro'yxatdan o'tish</button>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" class="auth-form" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Email yoki Foydalanuvchi nomi</label>
+                    <input type="text" id="loginIdentifier" placeholder="example@mail.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Parol</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-send">Kirish →</button>
+            </form>
+
+            <!-- Register Form -->
+            <form id="registerForm" class="auth-form hidden" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label>To'liq ism</label>
+                    <input type="text" id="regName" placeholder="Ibrohim Allayarov" required>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="regEmail" placeholder="example@mail.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Parol yaratish</label>
+                    <input type="password" id="regPassword" placeholder="Kamida 8 ta belgi" required>
+                </div>
+                <button type="submit" class="btn-send">Hisob yaratish →</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // ============ DEFAULT DATA — O'ZINGIZNING MA'LUMOTLARINGIZNI KIRITING ============
+        const DATA = {
+            name: "Ibrohim Allayarov",
+            email: "allayarovibrohim12@gmail.com",
+            city: "Khiva, Khorezm, Uzbekistan",
+            telegram: "allayarovibrohim",
+            github: "allayarovibrohim",
+            stats: { projects: 4, exp: 1, certs: 5, clients: 3 },
+
+            // Sertifikatlaringiz — img: certificate rasmini qo'ying, link: Coursera/boshqa havolasi
+            certificates: [
+                { platform: "Coursera", title: "AWS Genrative AI", date: "2026", img: "media/certificates/aws-generative-ai-bedrock.jpg", link: "https://www.coursera.org/account/accomplishments/specialization/certificate/GSCW2N4VUIDJ" },
+                { platform: "Coursera", title: "ChatGPT for Project Managament", date: "2026", img: "media/certificates/chatgpt-project-management.jpg", link: "https://www.coursera.org/account/accomplishments/specialization/certificate/C3LVZTLEX52X" },
+                { platform: "Coursera", title: "Generative AI for Educators", date: "2026", img: "media/certificates/generative-ai-for-educators.jpg", link: "https://www.coursera.org/account/accomplishments/specialization/certificate/FNHV1QO3H07A" },
+                { platform: "Coursera", title: "Google AI Essentials", date: "2026", img: "media/certificates/google-ai-essentials.jpg", link: "https://www.coursera.org/account/accomplishments/specialization/certificate/E9WSN9SL5QDN" },
+                { platform: "Coursera", title: "Generative AI Automation", date: "2026", img: "media/certificates/generative-ai-automation.jpg", link: "https://www.coursera.org/account/accomplishments/specialization/certificate/H05P8K94MFX8" },
+            ],
+
+            // Loyihalaringiz — link: sayt havolasi
+            projects: [
+                { title: "Mind Bridge", desc: "Shaxsiylashtirilgan terapiya orqali o'zgarishlarni kuchaytirish", tags: ["HTML", "CSS", "JS"], link: "https://mindbridge-website.lovable.app", img: "image/mindbridge.png", grad: "linear-gradient(135deg,#7C3AED33,#06B6D433)" },
+                { title: "Lingua Bridge", desc: "Yangi tilni o'zlashtiring. Kelajagingizni o'zgartiring.", tags: ["TailwindCSS", "JS"], link: "https://wordways-bridge.lovable.app", img: "image/linguabridge.png", grad: "linear-gradient(135deg,#F59E0B33,#EF444433)" },
+                { title: "Typing WPM Test", desc: "Yozish tezligini o'lchaydigan o'yin. WPM, xato va klaviatura ko'rsatiladi.", tags: ["JS", "Game"], link: "#typing-section", img: "image/typing.png", grad: "linear-gradient(135deg,#06B6D433,#7C3AED33)" },
+                { title: "Tetris", desc: "Internetdan topgan qiziqarli o'yin loyihasi.", tags: ["HTML", "CSS", "JS"], link: "tetris.html", img: "image/tetris.png", grad: "linear-gradient(135deg,#22C55E33,#06B6D433)" },
+            ],
+
+            // Ko'nikmalaringiz (Skills)
+            skills: [
+                { name: "HTML", pct: 98, img: "image/html.png" },
+                { name: "CSS", pct: 87, img: "image/css.png" },
+                { name: "TailwindCSS", pct: 80, img: "image/tailwindcss.png" },
+                { name: "Bootstrap", pct: 85, img: "image/bootstrap.png" },
+                { name: "JavaScript", pct: 60, img: "image/js.png" }, // Adjusted JS percentage
+                { name: "GitHub", pct: 70, img: "image/github.png" }, // Adjusted GitHub percentage
+            ]
+        };
+        // ====================================================================
+
+        let currentPortfolioData = {}; // Scope xatosini tuzatish uchun global e'lon qilamiz
+
+        function renderPortfolio() {
+            // Load data from localStorage, merge with default DATA
+            const savedData = JSON.parse(localStorage.getItem('portfolio_content')) || {};
+            currentPortfolioData = { ...DATA, ...savedData };
+            // Ensure nested objects/arrays are also merged or initialized if missing
+            currentPortfolioData.stats = { ...DATA.stats, ...(currentPortfolioData.stats || {}) };
+            currentPortfolioData.certificates = currentPortfolioData.certificates || [];
+            currentPortfolioData.projects = currentPortfolioData.projects || [];
+            currentPortfolioData.skills = currentPortfolioData.skills || [];
+
+            document.getElementById('heroName').textContent = currentPortfolioData.name;
+            document.getElementById('aboutName').textContent = currentPortfolioData.name;
+            document.getElementById('aboutEmail').textContent = currentPortfolioData.email;
+            document.getElementById('aboutCity').textContent = currentPortfolioData.city;
+            document.getElementById('contactEmail').textContent = currentPortfolioData.email;
+            document.getElementById('footerName').textContent = currentPortfolioData.name;
+            document.querySelector('.logo').textContent = currentPortfolioData.name.split(' ')[0].toUpperCase();
+
+            document.querySelector('a[href^="mailto"]').href = `mailto:${currentPortfolioData.email}`;
+            document.querySelector('a[href*="t.me"]').href = `https://t.me/${currentPortfolioData.telegram}`;
+            document.querySelector('a[href*="github.com"]').href = `https://github.com/${currentPortfolioData.github}`;
+            document.getElementById('contactTelegram').textContent = currentPortfolioData.telegram;
+            document.getElementById('contactGithub').textContent = currentPortfolioData.github;
+
+            renderCertificates();
+            renderProjects();
+            renderSkills();
+        }
+
+        // Animate counters
+        function animateCount(el, target, suffix = '') {
+            let start = 0, dur = 1500, step = 16;
+            const inc = target / (dur / step);
+            const t = setInterval(() => {
+                start = Math.min(start + inc, target);
+                if(el) el.textContent = Math.floor(start) + (suffix || '');
+                if (start >= target) clearInterval(t);
+            }, step);
+        }
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    animateCount(document.getElementById('statProjects'), currentPortfolioData.stats.projects);
+                    animateCount(document.getElementById('statExp'), currentPortfolioData.stats.exp, '+');
+                    animateCount(document.getElementById('statCerts'), currentPortfolioData.stats.certs);
+                    animateCount(document.getElementById('statClients'), currentPortfolioData.stats.clients, '+');
+                    observer.disconnect();
+                }
+            });
+        }, { threshold: 0.3 });
+        observer.observe(document.getElementById('about'));
+
+        // Certificates
+        function renderCertificates() {
+            const certsGrid = document.getElementById('certsGrid');
+            certsGrid.innerHTML = '';
+            currentPortfolioData.certificates.forEach((c, i) => {
+                certsGrid.innerHTML += `
+  <div class="cert-card">
+    <div class="cert-img">
+      ${c.img ? `<img src="${c.img}" alt="${c.title.replace(/"/g, '&quot;')}">` : `<div class="cert-img-placeholder">🏆</div>`}
+      <div class="cert-overlay">
+        <button class="cert-action view" onclick="handleCertClick(event, ${i})" title="Ko'rish">👁</button>
+        <a class="cert-action link" href="${c.link}" target="_blank" title="Havola" style="transform:rotate(45deg);display:inline-flex;align-items:center;justify-content:center;text-decoration:none">🔗</a>
+      </div>
+    </div>
+    <div class="cert-body">
+      <div class="cert-platform">${c.platform}</div>
+      <div class="cert-title">${c.title}</div>
+      <div class="cert-date">📅 ${c.date}</div>
+    </div>
+  </div>`;
+            });
+        }
+
+        function handleCertClick(e, index) {
+            const c = currentPortfolioData.certificates[index];
+            openLightbox(e, c.img || '', c.title);
+        }
+
+        // Projects
+        function renderProjects() {
+            const projGrid = document.getElementById('projectsGrid');
+            projGrid.innerHTML = '';
+            currentPortfolioData.projects.forEach(p => {
+                projGrid.innerHTML += `
+  <a class="proj-card" href="${p.link}" ${p.link.startsWith('http') ? 'target="_blank"' : ''}>
+    <div class="proj-thumb">
+      <div class="proj-thumb-gradient" style="background:${p.grad}"></div>
+      <div class="proj-thumb-content">
+    ${p.img
+                    ? `<img src="${p.img}" alt="${p.title.replace(/"/g, '&quot;')}" class="project-image">`
+                    : `<div class="proj-thumb-icon">${p.emoji}</div>`}
+</div>
+    </div>
+    <div class="proj-body">
+      <div class="proj-tags">${p.tags.map(t => `<span class="proj-tag">${t}</span>`).join('')}</div>
+      <div class="proj-title">${p.title}</div>
+      <div class="proj-desc">${p.desc || ''}</div>
+      <div class="proj-link-icon">Ko'rish →</div>
+    </div>
+  </a>`;
+            });
+        }
+
+        // Skills
+        function renderSkills() {
+            const skillsGrid = document.getElementById('skillsGrid');
+            skillsGrid.innerHTML = '';
+            currentPortfolioData.skills.forEach(s => {
+                skillsGrid.innerHTML += `
+  <div class="skill-card">
+    <div class="skill-icon">${s.img ? `<img src="${s.img}" alt="${s.name}" class="skill-image">` : s.icon}</div>
+    <div class="skill-top">
+      <span class="skill-name">${s.name}</span>
+      <span class="skill-pct">${s.pct}%</span>
+    </div>
+    <div class="skill-bar-bg"><div class="skill-bar" data-pct="${s.pct}"></div></div>
+  </div>`;
+        });
+
+            const skillObs = new IntersectionObserver(entries => {
+                entries.forEach(e => {
+                    if (e.isIntersecting) {
+                        document.querySelectorAll('.skill-bar').forEach(bar => {
+                            bar.style.width = bar.dataset.pct + '%';
+                        });
+                        skillObs.disconnect();
+                    }
+                });
+            }, { threshold: 0.2 });
+            skillObs.observe(document.getElementById('skills'));
+        }
+
+        // Lightbox
+        function openLightbox(e, src, title) {
+            const lb = document.getElementById('lightbox');
+            const img = document.getElementById('lbImg');
+            if (src) { img.src = src; } else { img.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300"><rect fill="%231A1A24" width="400" height="300" rx="16"/><text x="200" y="140" text-anchor="middle" fill="%239090A8" font-size="48">🏆</text><text x="200" y="190" text-anchor="middle" fill="%239090A8" font-size="18">' + encodeURIComponent(title) + '</text></svg>'; }
+            lb.classList.add('active');
+            if(e) e.stopPropagation();
+        }
+        function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); }
+
+        // Nav
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('open');
+        }
+        function closeMenu() {
+            document.getElementById('navLinks').classList.remove('open');
+        }
+
+        // Contact form
+        function sendMessage() {
+            const n = document.getElementById('cfName').value.trim();
+            const e = document.getElementById('cfEmail').value.trim();
+            const s = document.getElementById('cfSubject').value.trim();
+            const m = document.getElementById('cfMsg').value.trim();
+            if (!n || !e || !m) { alert('Iltimos, barcha maydonlarni to\'ldiring!'); return; }
+            const mailto = `mailto:${currentPortfolioData.email}?subject=${encodeURIComponent(s || 'Portfolio orqali xabar')}&body=${encodeURIComponent('Ism: ' + n + '\nEmail: ' + e + '\n\n' + m)}`;
+            window.location.href = mailto;
+        }
+
+        // ===== AUTH MODAL FUNCTIONS =====
+        function openAuthModal() {
+            document.getElementById('authModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAuthModal() {
+            document.getElementById('authModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function closeAuthModalOutside(e) {
+            if (e.target.id === 'authModal') closeAuthModal();
+        }
+
+        function switchAuthMode(mode) {
+            const isLogin = mode === 'login';
+            document.getElementById('tabLogin').classList.toggle('active', isLogin);
+            document.getElementById('tabRegister').classList.toggle('active', !isLogin);
+            document.getElementById('loginForm').classList.toggle('hidden', !isLogin);
+            document.getElementById('registerForm').classList.toggle('hidden', isLogin);
+        }
+
+        function updateAuthUI() {
+            const user = JSON.parse(localStorage.getItem('portfolio_user'));
+            const authContainer = document.getElementById('authBtnContainer');
+            const profileContainer = document.getElementById('userProfileContainer');
+            const avatarDiv = document.getElementById('userAvatar');
+            const editFirstName = document.getElementById('editFirstName');
+            const editLastName = document.getElementById('editLastName');
+
+            if (user) {
+                authContainer.classList.add('hidden');
+                profileContainer.classList.remove('hidden');
+                
+                if (user.avatar) {
+                    avatarDiv.innerHTML = `<img src="${user.avatar}" alt="Avatar">`;
+                    avatarDiv.classList.add('has-img');
+                    document.getElementById('removeAvatarBtn').classList.remove('hidden');
+                } else {
+                    avatarDiv.innerHTML = getInitials(user.name);
+                    avatarDiv.classList.remove('has-img');
+                    document.getElementById('removeAvatarBtn').classList.add('hidden');
+                }
+
+                const names = (user.name || "").split(' ');
+                if(editFirstName) editFirstName.value = names[0] || '';
+                if(editLastName) editLastName.value = names.slice(1).join(' ') || '';
+            } else {
+                if(authContainer) authContainer.classList.remove('hidden');
+                if(profileContainer) profileContainer.classList.add('hidden');
+            }
+        }
+
+        function getInitials(name) {
+            if (!name) return "??";
+            const words = name.trim().split(/\s+/);
+            if (words.length >= 2) {
+                return (words[0][0] + words[1][0]).toUpperCase();
+            }
+            return words[0].substring(0, 2).toUpperCase();
+        }
+
+        function toggleUserMenu() {
+            document.getElementById('userDropdown').classList.toggle('active');
+        }
+
+        // Menyu tashqarisiga bosilganda yopish
+        window.addEventListener('click', (e) => {
+            if (!e.target.closest('.user-menu-wrapper')) {
+                const drop = document.getElementById('userDropdown');
+                if(drop) drop.classList.remove('active');
+            }
+        });
+
+        function toggleDropdownSection(sectionId) {
+            const allSections = document.querySelectorAll('.dropdown-section');
+            const section = document.getElementById(sectionId);
+
+            allSections.forEach(s => {
+                if (s.id !== sectionId && !s.classList.contains('hidden-section')) {
+                    s.classList.add('hidden-section');
+                    const prevHeader = s.previousElementSibling;
+                    if (prevHeader && prevHeader.querySelector('i')) {
+                        prevHeader.querySelector('i').style.transform = 'rotate(0deg)';
+                    }
+                }
+            });
+
+            if(section) {
+                section.classList.toggle('hidden-section');
+                const clickedHeader = section.previousElementSibling;
+                if(clickedHeader) {
+                    const clickedIcon = clickedHeader.querySelector('i');
+                    if (clickedIcon) {
+                        clickedIcon.style.transform = section.classList.contains('hidden-section') ? 'rotate(0deg)' : 'rotate(-180deg)'; // Rotate up when open
+                    }
+                }
+            } else { console.warn(`Section with ID ${sectionId} not found.`); }
+        }
+
+        function handleAvatarUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const user = JSON.parse(localStorage.getItem('portfolio_user')) || {name: "User"};
+                    user.avatar = e.target.result;
+                    localStorage.setItem('portfolio_user', JSON.stringify(user));
+                    updateAuthUI();
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function removeAvatar() {
+            const user = JSON.parse(localStorage.getItem('portfolio_user'));
+            if (user && user.avatar) {
+                delete user.avatar;
+                localStorage.setItem('portfolio_user', JSON.stringify(user));
+                updateAuthUI();
+            }
+        }
+
+        function saveNameChanges() {
+            const first = document.getElementById('editFirstName').value.trim();
+            const last = document.getElementById('editLastName').value.trim();
+            const user = JSON.parse(localStorage.getItem('portfolio_user')) || {name: "User"};
+            user.name = `${first} ${last}`.trim() || "User";
+            localStorage.setItem('portfolio_user', JSON.stringify(user));
+            updateAuthUI();
+        }
+
+        function setTheme(theme) {
+            document.documentElement.setAttribute('data-theme', theme);
+            localStorage.setItem('portfolio_theme', theme);
+            
+            if (theme === 'system') {
+                const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+            }
+        }
+
+        // Sahifa yuklanganda mavzuni tekshirish
+        const savedTheme = localStorage.getItem('portfolio_theme') || 'dark';
+        setTheme(savedTheme);
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const id = document.getElementById('loginIdentifier').value;
+            const pass = document.getElementById('loginPassword').value;
+
+            if (id === 'admin' && pass === '12345678') {
+                localStorage.setItem('is_admin', 'true');
+                window.location.href = 'admin.html';
+                return;
+            }
+
+            const name = id.includes('@') ? id.split('@')[0] : id;
+            localStorage.setItem('portfolio_user', JSON.stringify({ name }));
+            updateAuthUI();
+            closeAuthModal();
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('portfolio_user');
+            localStorage.removeItem('is_admin');
+            updateAuthUI();
+        }
+
+        // Sahifa yuklanganda sessiyani tekshirish
+        window.addEventListener('load', () => {
+            updateAuthUI();
+            renderPortfolio();
+        });
+
+        // ===== TYPING GAME =====
+        const sentences = [
+            "Frontend development is the art of creating beautiful user interfaces.",
+            "JavaScript is the language of the web and powers modern applications.",
+            "CSS makes websites look stunning and responsive on all devices.",
+            "TailwindCSS utility classes speed up the development workflow greatly.",
+            "Clean code is the foundation of every successful software project.",
+            "Practice every day to improve your typing speed and accuracy.",
+            "Web development combines creativity and technical skills perfectly.",
+        ];
+
+        let gameState = { active: false, timer: null, timeLeft: 60, wordIndex: 0, charIndex: 0, errors: 0, totalTyped: 0, startTime: null };
+        let currentSentence = '';
+        let pressedKeys = new Set();
+
+        const keyboard = [
+            ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', '⌫ wide'],
+            ['Tab wider', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'],
+            ['Caps wider', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", 'Enter wider'],
+            ['Shift wider', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', `↑ wide`],
+            ['Ctrl wide', 'Alt wide', 'widest', ' ', 'Alt wide', 'Ctrl wide']
+        ];
+        const kbEl = document.getElementById('keyboard');
+        const rows = [
+            ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
+            ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'],
+            ['Caps', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", 'Enter'],
+            ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '↑'],
+            ['Ctrl', 'Alt', ' ', 'Space', 'Alt', 'Ctrl']
+        ];
+        const displayRows = [
+            ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', '⌫'],
+            ['⇥', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\\'],
+            ['⇪', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', "'", '↵'],
+            ['⇧', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', '⇧'],
+            ['Ctrl', 'Alt', '', 'Space', 'Alt', 'Ctrl']
+        ];
+        const wideKeys = new Set(['Backspace', 'Tab', 'Caps', 'Enter', 'Shift', '↑', 'Ctrl', 'Alt', 'Space', ' ', '⌫', '⇥', '⇪', '↵', '⇧']);
+        const widestKeys = new Set([' ', 'Space', '', 'widest']);
+        rows.forEach((row, ri) => {
+            const div = document.createElement('div'); div.className = 'kb-row';
+            row.forEach((k, ki) => {
+                const span = document.createElement('span');
+                const d = displayRows[ri][ki] || k;
+                if (widestKeys.has(k)) { span.className = 'kb-key widest'; }
+                else if (wideKeys.has(k)) { span.className = 'kb-key wider'; }
+                else { span.className = 'kb-key'; }
+                span.textContent = d;
+                span.dataset.key = k.toLowerCase();
+                div.appendChild(span);
+            });
+            kbEl.appendChild(div);
+        });
+
+        function flashKey(char) {
+            const key = char.toLowerCase();
+            document.querySelectorAll('.kb-key').forEach(el => {
+                if (el.dataset.key === key || (key === ' ' && el.dataset.key === ' ')) {
+                    el.classList.add('active');
+                    setTimeout(() => el.classList.remove('active'), 120);
+                }
+            });
+        }
+
+        function renderText() {
+            const el = document.getElementById('gameText');
+            el.innerHTML = '';
+            for (let i = 0; i < currentSentence.length; i++) {
+                const s = document.createElement('span');
+                s.textContent = currentSentence[i];
+                if (i < gameState.charIndex) { s.className = gameState.errors > 0 && i >= gameState.charIndex - gameState.errors ? 'wrong' : 'correct'; }
+                else if (i === gameState.charIndex) { s.className = 'current'; }
+                else { s.className = 'pending'; }
+                el.appendChild(s);
+            }
+        }
+
+        function initGame() {
+            currentSentence = sentences[Math.floor(Math.random() * sentences.length)];
+            gameState = { active: false, timer: null, timeLeft: 60, charIndex: 0, errors: 0, totalTyped: 0, startTime: null };
+            document.getElementById('gameInput').value = '';
+            document.getElementById('wpmVal').textContent = '0';
+            document.getElementById('accVal').textContent = '100%';
+            document.getElementById('timeVal').textContent = '60';
+            document.getElementById('gameResult').classList.remove('show');
+            renderText();
+        }
+
+        function startTimer() {
+            gameState.startTime = Date.now();
+            gameState.active = true;
+            gameState.timer = setInterval(() => {
+                gameState.timeLeft--;
+                document.getElementById('timeVal').textContent = gameState.timeLeft;
+                const elapsed = (Date.now() - gameState.startTime) / 60000;
+                const wpm = Math.round((gameState.totalTyped / 5) / elapsed) || 0;
+                document.getElementById('wpmVal').textContent = wpm;
+                if (gameState.timeLeft <= 0) { endGame(); }
+            }, 1000);
+        }
+
+        function endGame() {
+            clearInterval(gameState.timer);
+            gameState.active = false;
+            document.getElementById('gameInput').disabled = true;
+            const elapsed = (Date.now() - gameState.startTime) / 60000;
+            const wpm = Math.round((gameState.totalTyped / 5) / Math.max(elapsed, 0.01));
+            const acc = gameState.totalTyped > 0 ? Math.round(((gameState.totalTyped - gameState.errors) / gameState.totalTyped) * 100) : 100;
+            document.getElementById('finalWpm').textContent = wpm + ' WPM';
+            document.getElementById('finalAcc').textContent = 'Aniqlik: ' + acc + '%  |  Xatolar: ' + gameState.errors;
+            document.getElementById('gameResult').classList.add('show');
+        }
+
+        function resetGame() {
+            clearInterval(gameState.timer);
+            document.getElementById('gameInput').disabled = false;
+            document.getElementById('gameInput').value = '';
+            document.getElementById('gameInput').focus();
+            initGame();
+        }
+
+        document.getElementById('gameInput').addEventListener('input', function (e) {
+            if (!gameState.active) { startTimer(); }
+            if (!gameState.active && gameState.timeLeft <= 0) return;
+            const val = this.value;
+            if (!val.length) { gameState.charIndex = 0; renderText(); return; }
+            const lastChar = val[val.length - 1];
+            flashKey(lastChar);
+            if (gameState.charIndex < currentSentence.length) {
+                const expected = currentSentence[gameState.charIndex];
+                gameState.totalTyped++;
+                if (lastChar === expected) { gameState.charIndex++; }
+                else { gameState.errors++; }
+                // Check complete
+                if (gameState.charIndex >= currentSentence.length) {
+                    currentSentence = sentences[Math.floor(Math.random() * sentences.length)];
+                    gameState.charIndex = 0;
+                    this.value = '';
+                }
+                renderText();
+            }
+        });
+
+        document.addEventListener('keydown', e => {
+            const key = e.key.toLowerCase();
+            document.querySelectorAll('.kb-key').forEach(el => {
+                if (el.dataset.key === key || (key === ' ' && el.dataset.key === ' ')) {
+                    el.classList.add('active');
+                }
+            });
+        });
+        document.addEventListener('keyup', e => {
+            const key = e.key.toLowerCase();
+            document.querySelectorAll('.kb-key').forEach(el => {
+                if (el.dataset.key === key || (key === ' ' && el.dataset.key === ' ')) {
+                    el.classList.remove('active');
+                }
+            });
+        });
+
+        initGame();
+
+        // Smooth nav highlight
+        window.addEventListener('scroll', () => {
+            const sections = ['home', 'about', 'certificates', 'projects', 'typing-section', 'skills', 'contact'];
+            const scrollY = window.scrollY + 100;
+            sections.forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) return;
+                const top = el.offsetTop, h = el.offsetHeight;
+                if (scrollY >= top && scrollY < top + h) {
+                    document.querySelectorAll('.nav-links a').forEach(a => {
+                        a.style.color = a.getAttribute('href') === '#' + id ? 'var(--text)' : 'var(--muted)';
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

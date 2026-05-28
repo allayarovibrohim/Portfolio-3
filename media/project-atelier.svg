@@ -1,0 +1,27 @@
+<svg width="1200" height="840" viewBox="0 0 1200 840" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="840" rx="48" fill="#09090D"/>
+  <rect width="1200" height="840" rx="48" fill="url(#bg)"/>
+  <rect x="772" y="86" width="318" height="668" rx="38" fill="rgba(255,255,255,0.06)" stroke="rgba(255,255,255,0.08)"/>
+  <text x="110" y="156" fill="#F3F0EB" font-family="Arial, sans-serif" font-size="36" letter-spacing="4">ATELIER NOIR</text>
+  <text x="110" y="246" fill="#FFFFFF" font-family="Georgia, serif" font-size="108" font-weight="700">Midnight</text>
+  <text x="110" y="340" fill="#FFFFFF" font-family="Georgia, serif" font-size="108" font-weight="700">Silhouette</text>
+  <text x="114" y="396" fill="#B9B5B0" font-family="Arial, sans-serif" font-size="28">editorial commerce / couture pacing / monochrome campaign mood</text>
+  <rect x="114" y="482" width="156" height="48" rx="24" fill="#F2EEE8"/>
+  <text x="156" y="514" fill="#0C0C11" font-family="Arial, sans-serif" font-size="22">Enter show</text>
+  <path d="M922 170C876 202 856 262 862 340C868 426 840 544 812 620H1036C1008 544 980 426 986 340C992 262 972 202 922 170Z" fill="url(#dress)"/>
+  <circle cx="922" cy="136" r="34" fill="#F1D7C3"/>
+  <rect x="814" y="504" width="216" height="20" rx="10" fill="rgba(255,255,255,0.12)"/>
+  <rect x="814" y="544" width="178" height="16" rx="8" fill="rgba(255,255,255,0.08)"/>
+  <rect x="814" y="580" width="152" height="16" rx="8" fill="rgba(255,255,255,0.08)"/>
+  <defs>
+    <linearGradient id="bg" x1="42" y1="58" x2="1144" y2="802" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#17171E"/>
+      <stop offset="1" stop-color="#08080C"/>
+    </linearGradient>
+    <linearGradient id="dress" x1="922" y1="170" x2="922" y2="620" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EDE5DD"/>
+      <stop offset="0.55" stop-color="#9C8C80"/>
+      <stop offset="1" stop-color="#372D2A"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,25 @@
+<svg width="1200" height="840" viewBox="0 0 1200 840" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="840" rx="48" fill="#07101C"/>
+  <rect width="1200" height="840" rx="48" fill="url(#bg)"/>
+  <rect x="82" y="84" width="1036" height="672" rx="34" fill="#0E1726"/>
+  <rect x="82" y="84" width="1036" height="64" rx="34" fill="#141F31"/>
+  <circle cx="126" cy="116" r="10" fill="#FF8A7A"/>
+  <circle cx="156" cy="116" r="10" fill="#FFD478"/>
+  <circle cx="186" cy="116" r="10" fill="#73F2FF"/>
+  <text x="128" y="222" fill="#73F2FF" font-family="Consolas, monospace" font-size="28">const profile = {'{'}</text>
+  <text x="168" y="270" fill="#B9D7FF" font-family="Consolas, monospace" font-size="30">name: "Ibrohim",</text>
+  <text x="168" y="318" fill="#B9D7FF" font-family="Consolas, monospace" font-size="30">location: "Khiva, Uzbekistan",</text>
+  <text x="168" y="366" fill="#B9D7FF" font-family="Consolas, monospace" font-size="30">skills: ["HTML", "CSS"],</text>
+  <text x="168" y="414" fill="#B9D7FF" font-family="Consolas, monospace" font-size="30">goal: "Grow in frontend",</text>
+  <text x="128" y="464" fill="#73F2FF" font-family="Consolas, monospace" font-size="28">{'}'};</text>
+  <rect x="784" y="220" width="246" height="164" rx="24" fill="#172338"/>
+  <rect x="784" y="418" width="246" height="164" rx="24" fill="#172338"/>
+  <text x="804" y="282" fill="#F2F7FF" font-family="Arial, sans-serif" font-size="34" font-weight="700">Dev Portfolio</text>
+  <text x="804" y="324" fill="#A4B2C8" font-family="Arial, sans-serif" font-size="22">terminal style / code panels / dark UI</text>
+  <defs>
+    <linearGradient id="bg" x1="72" y1="58" x2="1118" y2="786" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0C1628"/>
+      <stop offset="1" stop-color="#050912"/>
+    </linearGradient>
+  </defs>
+</svg>

@@ -1,0 +1,19 @@
+<svg width="1200" height="840" viewBox="0 0 1200 840" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="840" rx="48" fill="#F7EFE4"/>
+  <rect width="1200" height="840" rx="48" fill="url(#bg)"/>
+  <text x="92" y="150" fill="#32261D" font-family="Georgia, serif" font-size="42" letter-spacing="6">JOURNAL PROFILE</text>
+  <text x="94" y="262" fill="#201812" font-family="Georgia, serif" font-size="126" font-weight="700">Ibrohim</text>
+  <text x="102" y="338" fill="#6C5A4B" font-family="Arial, sans-serif" font-size="28">A young student building his path in technology</text>
+  <rect x="92" y="394" width="344" height="344" rx="30" fill="#DFC2A6"/>
+  <rect x="470" y="394" width="278" height="168" rx="24" fill="#E7D3BE"/>
+  <rect x="470" y="578" width="278" height="160" rx="24" fill="#E7D3BE"/>
+  <rect x="782" y="208" width="328" height="530" rx="30" fill="#EADBCB"/>
+  <text x="816" y="286" fill="#2B2018" font-family="Arial, sans-serif" font-size="34" font-weight="700">Editorial Portfolio</text>
+  <text x="816" y="336" fill="#6C5A4B" font-family="Arial, sans-serif" font-size="24">warm print feel / story blocks / profile narrative</text>
+  <defs>
+    <linearGradient id="bg" x1="84" y1="52" x2="1112" y2="792" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF7EF"/>
+      <stop offset="1" stop-color="#F0E0CC"/>
+    </linearGradient>
+  </defs>
+</svg>

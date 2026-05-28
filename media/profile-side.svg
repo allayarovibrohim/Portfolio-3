@@ -1,0 +1,19 @@
+<svg width="960" height="1200" viewBox="0 0 960 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="960" height="1200" rx="56" fill="#11101A"/>
+  <rect width="960" height="1200" rx="56" fill="url(#bg)"/>
+  <circle cx="326" cy="290" r="170" fill="url(#glow)"/>
+  <path d="M388 210C492 210 600 296 600 444V666C600 792 526 892 398 934C356 948 324 942 304 926C392 918 448 850 448 754V592C448 546 418 524 364 514C306 502 268 470 268 416C268 322 320 210 388 210Z" fill="#F2D0B4"/>
+  <path d="M356 232C420 174 524 188 592 250C548 258 500 302 478 354C458 402 448 456 448 506C342 494 278 436 278 344C278 298 306 264 356 232Z" fill="#171824"/>
+  <rect x="128" y="984" width="704" height="104" rx="28" fill="rgba(255,255,255,0.06)"/>
+  <text x="178" y="1048" fill="#F6F7FB" font-family="Arial, sans-serif" font-size="36" font-weight="700">Portrait Layer / swap this with your own image</text>
+  <defs>
+    <linearGradient id="bg" x1="96" y1="54" x2="862" y2="1132" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1B1320"/>
+      <stop offset="1" stop-color="#08080D"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(326 290) rotate(90) scale(170)">
+      <stop stop-color="#FFB86B"/>
+      <stop offset="1" stop-color="#FFB86B" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

@@ -1,0 +1,24 @@
+<svg width="1200" height="840" viewBox="0 0 1200 840" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="840" rx="48" fill="#0D1224"/>
+  <rect width="1200" height="840" rx="48" fill="url(#bg)"/>
+  <rect x="112" y="584" width="976" height="42" rx="18" fill="#C98559"/>
+  <rect x="532" y="268" width="302" height="188" rx="24" fill="#EEF2F7"/>
+  <rect x="560" y="294" width="246" height="132" rx="16" fill="#0E1320"/>
+  <rect x="204" y="488" width="204" height="124" rx="28" fill="#36A48B"/>
+  <circle cx="336" cy="366" r="78" fill="#F4D5C1"/>
+  <path d="M286 376C294 314 336 278 394 278C438 278 472 306 490 346C450 350 418 366 386 402C364 428 350 454 344 486H290C274 446 278 422 286 376Z" fill="#182033"/>
+  <rect x="430" y="410" width="188" height="36" rx="18" fill="#3CB79D"/>
+  <rect x="456" y="446" width="198" height="28" rx="14" fill="#3CB79D"/>
+  <rect x="170" y="192" width="120" height="80" rx="18" fill="rgba(255,255,255,0.1)"/>
+  <rect x="172" y="288" width="140" height="86" rx="18" fill="rgba(255,255,255,0.1)"/>
+  <text x="196" y="244" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="28">CSS</text>
+  <text x="206" y="342" fill="#FFFFFF" font-family="Arial, sans-serif" font-size="28">HTML</text>
+  <text x="882" y="196" fill="#FFD8B1" font-family="Arial, sans-serif" font-size="42" font-weight="700">Creative workstation</text>
+  <text x="882" y="248" fill="#B9C6DC" font-family="Arial, sans-serif" font-size="24">Use this card for desk shots, process photos, or setup visuals.</text>
+  <defs>
+    <linearGradient id="bg" x1="92" y1="64" x2="1118" y2="802" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111B32"/>
+      <stop offset="1" stop-color="#090D18"/>
+    </linearGradient>
+  </defs>
+</svg>

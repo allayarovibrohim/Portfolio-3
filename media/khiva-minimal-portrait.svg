@@ -1,0 +1,29 @@
+<svg width="640" height="640" viewBox="0 0 640 640" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="88" x2="540" y2="560" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8F1E9" />
+      <stop offset="1" stop-color="#E0D0C1" />
+    </linearGradient>
+    <linearGradient id="portrait" x1="320" y1="146" x2="320" y2="492" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F2E2D4" />
+      <stop offset="1" stop-color="#B98863" />
+    </linearGradient>
+    <linearGradient id="shirt" x1="320" y1="364" x2="320" y2="534" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C8976F" />
+      <stop offset="1" stop-color="#8A5E41" />
+    </linearGradient>
+  </defs>
+  <rect width="640" height="640" rx="320" fill="url(#bg)" />
+  <circle cx="320" cy="320" r="248" fill="#F7F0E8" fill-opacity="0.72" />
+  <circle cx="320" cy="320" r="230" stroke="#B48D6E" stroke-opacity="0.18" stroke-width="2" />
+  <circle cx="320" cy="214" r="84" fill="url(#portrait)" />
+  <path d="M192 526C210 434 266 382 320 382C374 382 430 434 448 526H192Z" fill="url(#shirt)" />
+  <path d="M232 526C244 456 282 422 320 422C358 422 396 456 408 526H232Z" fill="#F0E1D5" fill-opacity="0.72" />
+  <path d="M254 176C274 138 312 122 320 122C328 122 366 138 386 176C360 160 346 154 320 154C294 154 280 160 254 176Z" fill="#7E553B" />
+  <circle cx="296" cy="214" r="8" fill="#2A1C15" />
+  <circle cx="344" cy="214" r="8" fill="#2A1C15" />
+  <path d="M320 236C308 236 298 244 298 254H342C342 244 332 236 320 236Z" fill="#D29C8E" />
+  <path d="M270 560H370" stroke="#B48D6E" stroke-opacity="0.28" stroke-width="2" stroke-linecap="round" />
+  <path d="M320 298V336" stroke="#B48D6E" stroke-opacity="0.22" stroke-width="2" stroke-linecap="round" />
+  <text x="320" y="590" text-anchor="middle" fill="#7A5D49" fill-opacity="0.82" font-family="Georgia, 'Times New Roman', serif" font-size="28" letter-spacing="8">YOUR PHOTO</text>
+</svg>

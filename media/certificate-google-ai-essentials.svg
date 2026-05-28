@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="80" y1="54" x2="1100" y2="742" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0c1830" />
+      <stop offset="1" stop-color="#090d18" />
+    </linearGradient>
+    <linearGradient id="line" x1="110" y1="80" x2="1070" y2="712" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#73f2ff" />
+      <stop offset="1" stop-color="#b498ff" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)" />
+  <circle cx="974" cy="136" r="138" fill="#73f2ff" fill-opacity=".14" />
+  <circle cx="206" cy="666" r="178" fill="#b498ff" fill-opacity=".12" />
+  <rect x="42" y="42" width="1116" height="716" rx="42" fill="#0e1528" fill-opacity=".82" stroke="url(#line)" stroke-opacity=".38" stroke-width="2" />
+  <rect x="86" y="94" width="1028" height="612" rx="28" fill="#ffffff" fill-opacity=".04" stroke="#ffffff" stroke-opacity=".12" />
+  <text x="110" y="208" fill="#f4f7ff" font-family="Segoe UI, Arial, sans-serif" font-size="26" letter-spacing="7">CERTIFICATE</text>
+  <text x="110" y="320" fill="#ffffff" font-family="Georgia, Times New Roman, serif" font-size="62">Google AI</text>
+  <text x="110" y="394" fill="#ffffff" font-family="Georgia, Times New Roman, serif" font-size="62">Essentials</text>
+  <text x="110" y="472" fill="#c8d2ea" font-family="Segoe UI, Arial, sans-serif" font-size="30">Google</text>
+  <text x="110" y="520" fill="#97a4c2" font-family="Segoe UI, Arial, sans-serif" font-size="22" letter-spacing="3">ISSUED VIA COURSERA</text>
+  <g transform="translate(836 186)">
+    <rect width="228" height="228" rx="44" fill="#ffffff" fill-opacity=".05" stroke="#ffffff" stroke-opacity=".14" />
+    <circle cx="82" cy="82" r="24" fill="#73f2ff" />
+    <circle cx="146" cy="82" r="24" fill="#ff8abf" />
+    <circle cx="82" cy="146" r="24" fill="#ffbc73" />
+    <circle cx="146" cy="146" r="24" fill="#8ee887" />
+  </g>
+  <rect x="110" y="572" width="356" height="70" rx="22" fill="#ffffff" fill-opacity=".06" stroke="#ffffff" stroke-opacity=".14" />
+  <text x="146" y="616" fill="#73f2ff" font-family="Segoe UI, Arial, sans-serif" font-size="24">AI basics and productivity</text>
+</svg>

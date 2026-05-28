@@ -1,0 +1,42 @@
+<svg width="256" height="256" viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="256" height="256" rx="64" fill="#F5F0E8"/>
+  <rect x="28" y="28" width="200" height="200" rx="52" fill="#111317"/>
+  <rect x="28" y="28" width="200" height="200" rx="52" stroke="rgba(255,255,255,0.08)" stroke-width="4"/>
+  <path
+    d="M92 76V146C92 171.405 112.595 192 138 192C163.405 192 184 171.405 184 146V132"
+    stroke="url(#mono)"
+    stroke-width="18"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  />
+  <path
+    d="M138 76V180"
+    stroke="url(#mono)"
+    stroke-width="18"
+    stroke-linecap="round"
+  />
+  <path
+    d="M138 92H182"
+    stroke="url(#mono)"
+    stroke-width="18"
+    stroke-linecap="round"
+  />
+  <path
+    d="M138 128H174"
+    stroke="url(#mono)"
+    stroke-width="18"
+    stroke-linecap="round"
+  />
+  <circle cx="84" cy="72" r="12" fill="url(#dot)"/>
+  <defs>
+    <linearGradient id="mono" x1="92" y1="76" x2="190" y2="190" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFF7EE"/>
+      <stop offset="0.52" stop-color="#FFD39E"/>
+      <stop offset="1" stop-color="#78EFFF"/>
+    </linearGradient>
+    <radialGradient id="dot" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(84 72) rotate(90) scale(12)">
+      <stop stop-color="#FFD39E"/>
+      <stop offset="1" stop-color="#FFD39E" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+</svg>

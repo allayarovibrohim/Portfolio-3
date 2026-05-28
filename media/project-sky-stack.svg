@@ -1,0 +1,44 @@
+<svg width="1200" height="900" viewBox="0 0 1200 900" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="140" y1="80" x2="1040" y2="820" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F2ECE6"/>
+      <stop offset="1" stop-color="#D5CEC7"/>
+    </linearGradient>
+    <linearGradient id="towerA" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#4D4E71"/>
+      <stop offset="1" stop-color="#36374E"/>
+    </linearGradient>
+    <linearGradient id="towerB" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F3A37A"/>
+      <stop offset="1" stop-color="#D77873"/>
+    </linearGradient>
+    <linearGradient id="towerC" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#8FD3FF"/>
+      <stop offset="1" stop-color="#7098F0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="900" rx="56" fill="url(#bg)"/>
+  <circle cx="972" cy="160" r="120" fill="#FFFFFF" fill-opacity="0.28"/>
+  <circle cx="212" cy="204" r="88" fill="#FFFFFF" fill-opacity="0.18"/>
+  <path d="M138 730C312 652 440 660 614 702C798 744 930 752 1070 692" stroke="#B9B1A9" stroke-width="12" stroke-linecap="round" stroke-opacity="0.38"/>
+
+  <g transform="translate(350 212)">
+    <path d="M260 420L430 338L602 420L432 500L260 420Z" fill="url(#towerA)"/>
+    <path d="M260 332L430 250L602 332L432 412L260 332Z" fill="url(#towerB)"/>
+    <path d="M260 244L430 162L602 244L432 324L260 244Z" fill="url(#towerC)"/>
+    <path d="M320 162L490 82L662 162L492 242L320 162Z" fill="url(#towerA)"/>
+    <path d="M520 82L690 6L862 82L692 160L520 82Z" fill="url(#towerB)"/>
+    <path d="M692 160V82L862 6V84L692 160Z" fill="#C06464"/>
+    <path d="M490 242V162L662 82V162L490 242Z" fill="#26273B" fill-opacity="0.28"/>
+    <path d="M430 500V338L602 420V580L430 500Z" fill="#252739" fill-opacity="0.35"/>
+  </g>
+
+  <rect x="100" y="98" width="236" height="64" rx="32" fill="#FFFFFF" fill-opacity="0.46"/>
+  <text x="218" y="140" text-anchor="middle" fill="#333344" font-size="28" font-family="Arial, Helvetica, sans-serif" font-weight="700">LUNEX LAB</text>
+
+  <text x="104" y="760" fill="#333344" font-size="82" font-family="Arial, Helvetica, sans-serif" font-weight="700">Sky Stack</text>
+  <text x="104" y="816" fill="#5E5F79" font-size="30" font-family="Arial, Helvetica, sans-serif">
+    Precision timing game with a clean 3D tower build loop.
+  </text>
+</svg>

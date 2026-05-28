@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Loyihalar</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <style>
+        body { 
+            --primary: #7C3AED;
+            --secondary: #06B6D4;
+            --muted: #9090A8;
+            --border: rgba(255, 255, 255, 0.1);
+            --grad: linear-gradient(135deg, #7C3AED, #06B6D4);
+            background: #0A0A0F; padding: 2rem 2rem 2rem 280px; min-height: 100vh; display: flex; align-items: flex-start; }
+        .admin-container { flex: 1; max-width: 1000px; background: #1A1A24; padding: 2.5rem; border-radius: 24px; border: 1px solid rgba(124, 58, 237, 0.2); }
+        .admin-header { margin-bottom: 2rem; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 1rem; }
+        .admin-section { margin-bottom: 3rem; background: rgba(255, 255, 255, 0.03); padding: 1.5rem; border-radius: 16px; }
+        .admin-section h3 { font-family: 'Syne', sans-serif; margin-bottom: 1.5rem; color: var(--secondary); display: flex; align-items: center; gap: 10px; }
+        
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .input-group { margin-bottom: 1rem; }
+        .input-group label { display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: 5px; }
+        .input-group input, .input-group textarea {
+            width: 100%;
+            background: #111118;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.8rem;
+            border-radius: 10px;
+            color: white;
+            outline: none;
+            font-family: 'DM Sans', sans-serif;
+        }
+        .input-group input:focus, .input-group textarea:focus {
+            border-color: var(--primary);
+        }
+
+        .btn-save { background: var(--grad); color: white; border: none; padding: 1rem 2rem; border-radius: 12px; cursor: pointer; font-weight: 600; width: 100%; margin-top: 1rem; }
+        .item-list { margin-top: 1rem; display: flex; flex-direction: column; gap: 10px; }
+        .list-item { background: #111118; padding: 10px 15px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255, 255, 255, 0.05); }
+        .btn-delete { color: #EF4444; background: none; border: none; cursor: pointer; font-size: 1.2rem; }
+        .btn-add { background: rgba(34,197,94,0.1); color: #22C55E; border: 1px dashed #22C55E; padding: 10px; border-radius: 10px; cursor: pointer; width: 100%; margin-top: 10px; }
+        nav { position: fixed; top: 0; left: 0; bottom: 0; right: auto; width: 260px; height: 100vh; padding: 3rem 1.5rem; display: flex; flex-direction: column; justify-content: flex-start; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(20px); border-right: 1px solid var(--border); border-bottom: none; z-index: 1000; }
+        .logo { margin-bottom: 3rem; }
+        .nav-links { flex-direction: column; gap: 1.5rem; width: 100%; text-align: left; }
+        .nav-links a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; border-radius: 12px; transition: 0.3s; color: var(--muted); text-decoration: none; border: 1px solid transparent; }
+        .nav-links a:hover, .nav-links a.active { background: rgba(124, 58, 237, 0.1); color: white; border-color: rgba(124, 58, 237, 0.3); }
+        .btn-logout,
+        .btn-clear { 
+            width: 100%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 8px; 
+            padding: 0.8rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s; 
+            background: transparent;
+            color: var(--muted);
+            border: 1px solid var(--border);
+        }
+        .btn-logout { margin-top: auto; }
+
+        .btn-logout:hover,
+        .btn-clear:hover { 
+            background: rgba(239, 68, 68, 0.1); 
+            color: #EF4444; 
+            border-color: #EF4444; 
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">ADMIN</div>
+        <ul class="nav-links">
+            <li><a href="admin.html"><i class="bi bi-person-badge"></i> Ma'lumotlar</a></li>
+            <li><a href="admin-projects.html" class="active"><i class="bi bi-kanban"></i> Loyihalar</a></li>
+            <li><a href="admin-certs.html"><i class="bi bi-patch-check"></i> Sertifikatlar</a></li>
+            <hr class="dropdown-hr" style="width: 100%; margin: 1rem 0; opacity: 0.1;">
+            <li><a href="index.html"><i class="bi bi-arrow-left-circle"></i> Saytga qaytish</a></li>
+        </ul>
+        <button class="btn-outline btn-logout" onclick="logoutAdmin()">Chiqish <i class="bi bi-box-arrow-right"></i></button>
+    </nav>
+    <div class="admin-container">
+        <div class="admin-header"><h2>Loyihalar Boshqaruvi</h2></div>
+        <div class="admin-section">
+            <div id="projectList" class="item-list"></div>
+            <button class="btn-add" onclick="addNewItem()">+ Yangi Loyiha Qo'shish</button>
+        </div>
+        <div class="admin-section">
+            <h3><i class="bi bi-plus-circle"></i> Loyiha Qo'shish / Tahrirlash</h3>
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>Nomi</label>
+                    <input type="text" id="projTitle" name="projTitle" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label>Tavsif</label>
+                    <textarea id="projDesc" name="projDesc" rows="3" autocomplete="off"></textarea>
+                </div>
+                <div class="input-group">
+                    <label>Teglar (vergul bilan ajrating)</label>
+                    <input type="text" id="projTags" name="projTags" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label>Havola (URL)</label>
+                    <input type="url" id="projLink" name="projLink" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label>Rasm manzili (URL)</label>
+                    <input type="url" id="projImg" name="projImg" autocomplete="off">
+                </div>
+                <div class="input-group">
+                    <label>Gradient (CSS, masalan: linear-gradient(135deg,#7C3AED33,#06B6D433))</label>
+                    <input type="text" id="projGrad" name="projGrad" autocomplete="off">
+                </div>
+            </div>
+            <button class="btn-save" onclick="saveProject()">Saqlash / Yangi Qo'shish</button>
+            <button class="btn-clear" style="margin-top:10px;" onclick="clearForm()">Formani Tozalash</button>
+        </div>
+        <button class="btn-save" onclick="saveAllChanges()">LOYIHALARNI SAQLASH</button>
+    </div>
+    <script>
+        if (localStorage.getItem('is_admin') !== 'true') window.location.href = 'index.html';
+        let currentData = JSON.parse(localStorage.getItem('portfolio_content')) || {};
+        // Ensure projects and stats arrays/objects exist
+        if (!currentData.projects) currentData.projects = [];
+        if (!currentData.stats) currentData.stats = {};
+
+        let currentProjectIndex = -1; // -1 yangi qo'shish, >=0 tahrirlash
+
+        function renderList() {
+            const container = document.getElementById('projectList');
+            container.innerHTML = '';
+            currentData.projects.forEach((item, index) => {
+                container.innerHTML += `<div class="list-item"><span>${item.title}</span><div style="display:flex; gap:10px;"><button class="btn-outline" style="padding:5px 10px; font-size:0.7rem;" onclick="editProject(${index})">Tahrirlash</button><button class="btn-delete" onclick="removeItem(${index})"><i class="bi bi-trash"></i></button></div></div>`;
+            });
+        }
+
+        function addNewItem() {
+            clearForm();
+        }
+
+        function removeItem(index) {
+            if (confirm("O'chirishni tasdiqlaysizmi?")) {
+                currentData.projects.splice(index, 1);
+                renderList();
+            }
+        }
+
+        function clearForm() {
+            document.getElementById('projTitle').value = '';
+            document.getElementById('projDesc').value = '';
+            document.getElementById('projTags').value = '';
+            document.getElementById('projLink').value = '';
+            document.getElementById('projImg').value = '';
+            document.getElementById('projGrad').value = '';
+            currentProjectIndex = -1;
+        }
+
+        function editProject(index) {
+            const item = currentData.projects[index];
+            document.getElementById('projTitle').value = item.title;
+            document.getElementById('projDesc').value = item.desc;
+            document.getElementById('projTags').value = item.tags.join(', ');
+            document.getElementById('projLink').value = item.link;
+            document.getElementById('projImg').value = item.img;
+            document.getElementById('projGrad').value = item.grad;
+            currentProjectIndex = index;
+        }
+
+        function saveProject() {
+            const title = document.getElementById('projTitle').value;
+            const desc = document.getElementById('projDesc').value;
+            const tags = document.getElementById('projTags').value.split(',').map(tag => tag.trim()).filter(tag => tag !== '');
+            const link = document.getElementById('projLink').value;
+            const img = document.getElementById('projImg').value;
+            const grad = document.getElementById('projGrad').value;
+
+            if (!title || !desc || !link) {
+                alert("Iltimos, loyiha nomi, tavsifi va havolasini kiriting.");
+                return;
+            }
+
+            const newItem = { title, desc, tags, link, img, grad };
+
+            if (currentProjectIndex === -1) { currentData.projects.push(newItem); }
+            else { currentData.projects[currentProjectIndex] = newItem; }
+            renderList();
+            clearForm();
+        }
+        function saveAllChanges() {
+            currentData.stats.projects = currentData.projects.length;
+            localStorage.setItem('portfolio_content', JSON.stringify(currentData));
+            alert('Loyihalar saqlandi!'); window.location.href = 'index.html';
+        }
+        function logoutAdmin() { localStorage.removeItem('is_admin'); window.location.href = 'index.html'; }
+        
+        renderList();
+    </script>
+</body>
+</html>
