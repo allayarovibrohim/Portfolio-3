@@ -160,17 +160,34 @@ export class AdminService {
   }
 
   async updateSetting(actorUserId: string, key: string, value: unknown, description?: string) {
-    // Ma'lumotlar butunligini tekshirish
+    // 1. Asosiy tekshiruv: null yoki undefined bo'lmasligi kerak
     if (value === undefined || value === null) {
       throw new Error(`Setting value for ${key} cannot be empty`);
     }
 
-    // Agar kelayotgan qiymat kutilmaganda bo'sh massiv yoki noto'g'ri formatda bo'lsa (destructive update'dan himoya)
-    if (Array.isArray(value) && value.length === 0 && (key.includes("projects") || key.includes("certificates"))) {
-      const existing = await this.repository.listSettings();
-      const currentSetting = existing.find(s => s.key === key);
-      if (currentSetting && (currentSetting.value as any[])?.length > 0) {
-        throw new Error(`Safety lock: Attempting to overwrite existing data with empty list for ${key}`);
+    // 2. Kuchaytirilgan xavfsizlik (Data Wipe Protection):
+    // Agar bazada ma'lumot bo'lsa-yu, yangi kelgan ma'lumot "bo'sh" bo'lsa, rad etamiz.
+    const existingSettings = await this.repository.listSettings();
+    const current = existingSettings.find(s => s.key === key);
+
+    if (current) {
+      const isEmptyValue = 
+        (Array.isArray(value) && value.length === 0) || 
+        (typeof value === 'number' && value === 0) || 
+        (typeof value === 'string' && value.trim() === '');
+      
+      const hadContent = 
+        (Array.isArray(current.value) && (current.value as any[]).length > 0) ||
+        (typeof current.value === 'number' && (current.value as number) > 0) ||
+        (typeof current.value === 'string' && (current.value as string).trim() !== '');
+
+      // Agar brauzerda ma'lumot yuklanmagan bo'lsa va foydalanuvchi "Saqlash"ni bossa, 
+      // bazadagi ma'lumotni o'chirib tashlashiga yo'l qo'ymaymiz.
+      if (isEmptyValue && hadContent) {
+        // Xatolik xabarini aniqroq qilamiz
+        const error = new Error(`Xavfsizlik: Ma'lumotlar yuklanmagan! ${key} bazadan o'chib ketishi oldi olindi.`);
+        (error as any).statusCode = 400;
+        throw error;
       }
     }
 

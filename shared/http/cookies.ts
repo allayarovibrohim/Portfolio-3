@@ -3,8 +3,8 @@ import { env } from "../../config/env";
 
 const cookieBase = {
   httpOnly: true,
-  secure: env.COOKIE_SECURE,
-  sameSite: env.COOKIE_SAME_SITE,
+  secure: true, // Cross-site cookie uchun har doim true bo'lishi shart
+  sameSite: "none" as const, // Cross-site (Netlify va API boshqa domen) uchun shart
   domain: env.COOKIE_DOMAIN,
   path: "/",
 } as const;

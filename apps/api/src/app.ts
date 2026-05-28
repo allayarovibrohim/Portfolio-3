@@ -45,17 +45,21 @@ export const buildApp = (container: ServiceContainer = buildContainer()) => {
   app.decorate("prisma", container.prisma);
   app.decorate("redis", container.redis);
 
+  // CORS sozlamalarini qat'iylashtirish
   app.register(fastifyCors, {
     origin: env.FRONTEND_ORIGIN,
     credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "x-api-key", "x-signature", "x-timestamp"],
   });
+
   app.register(fastifyCookie, {
     secret: env.JWT_ACCESS_SECRET,
     parseOptions: {
       path: "/",
       httpOnly: true,
       secure: true,
-      sameSite: "none", // Cross-site ishlashi uchun shart
+      sameSite: "none", // Cross-domain (Netlify <-> API) ishlashi uchun juda muhim
     },
   });
   app.register(fastifyHelmet, {
@@ -84,9 +88,9 @@ export const buildApp = (container: ServiceContainer = buildContainer()) => {
   app.register(fastifyCsrfProtection, {
     cookieOpts: {
       httpOnly: true,
-      // Cross-domain ishlashi uchun 'none' va secure true bo'lishi kerak
-      sameSite: env.NODE_ENV === "production" ? "none" : "lax",
-      secure: env.NODE_ENV === "production" ? true : env.COOKIE_SECURE,
+      // Barcha brauzerlarda ishlashi uchun 'none' va secure true
+      sameSite: "none",
+      secure: true,
       path: "/",
     },
   });
@@ -144,6 +148,11 @@ export const buildApp = (container: ServiceContainer = buildContainer()) => {
         if (request.url.startsWith(`${env.API_PREFIX}/v1/admin`)) {
           throw error;
         }
+      }
+    } else {
+      // Agar admin yo'liga kirmokchi bo'lsa-yu, token bo'lmasa, srazu 401 beramiz
+      if (request.url.startsWith(`${env.API_PREFIX}/v1/admin`)) {
+        throw new UnauthorizedError("Admin access requires authentication");
       }
     }
 
