@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel | Sertifikatlar</title>
+    <title>Admin Panel | Ko'nikmalar</title>
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -23,7 +23,7 @@
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
         .input-group { margin-bottom: 1rem; }
         .input-group label { display: block; font-size: 0.8rem; color: var(--muted); margin-bottom: 5px; }
-        .input-group input, .input-group textarea {
+        .input-group input {
             width: 100%;
             background: #111118;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -33,7 +33,7 @@
             outline: none;
             font-family: 'DM Sans', sans-serif;
         }
-        .input-group input:focus, .input-group textarea:focus {
+        .input-group input:focus {
             border-color: var(--primary);
         }
 
@@ -41,37 +41,14 @@
         .item-list { margin-top: 1rem; display: flex; flex-direction: column; gap: 10px; }
         .list-item { background: #111118; padding: 10px 15px; border-radius: 10px; display: flex; justify-content: space-between; align-items: center; border: 1px solid rgba(255, 255, 255, 0.05); }
         .btn-delete { color: #EF4444; background: none; border: none; cursor: pointer; font-size: 1.2rem; }
-        .btn-add { background: rgba(34,197,94,0.1); color: #22C55E; border: 1px dashed #22C55E; padding: 10px; border-radius: 10px; cursor: pointer; width: 100%; margin-top: 10px; }
         nav { position: fixed; top: 0; left: 0; bottom: 0; right: auto; width: 260px; height: 100vh; padding: 3rem 1.5rem; display: flex; flex-direction: column; justify-content: flex-start; background: rgba(10, 10, 15, 0.95); backdrop-filter: blur(20px); border-right: 1px solid var(--border); border-bottom: none; z-index: 1000; }
         .logo { margin-bottom: 3rem; }
         .nav-links { flex-direction: column; gap: 1.5rem; width: 100%; text-align: left; }
         .nav-links a { display: flex; align-items: center; gap: 12px; padding: 12px 15px; border-radius: 12px; transition: 0.3s; color: var(--muted); text-decoration: none; border: 1px solid transparent; }
         .nav-links a:hover, .nav-links a.active { background: rgba(124, 58, 237, 0.1); color: white; border-color: rgba(124, 58, 237, 0.3); }
-        .btn-logout,
-        .btn-clear { 
-            width: 100%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 8px; 
-            padding: 0.8rem;
-            border-radius: 12px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s; 
-            background: transparent;
-            color: var(--muted);
-            border: 1px solid var(--border);
-        }
+        .btn-logout, .btn-clear { width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 0.8rem; border-radius: 12px; font-weight: 600; cursor: pointer; transition: 0.3s; background: transparent; color: var(--muted); border: 1px solid var(--border); }
         .btn-logout { margin-top: auto; }
-
-        .btn-logout:hover,
-        .btn-clear:hover { 
-            background: rgba(239, 68, 68, 0.1); 
-            color: #EF4444; 
-            border-color: #EF4444; 
-            transform: translateY(-2px);
-        }
+        .btn-logout:hover, .btn-clear:hover { background: rgba(239, 68, 68, 0.1); color: #EF4444; border-color: #EF4444; transform: translateY(-2px); }
     </style>
 </head>
 <body>
@@ -80,117 +57,96 @@
         <ul class="nav-links">
             <li><a href="admin.html"><i class="bi bi-person-badge"></i> Ma'lumotlar</a></li>
             <li><a href="admin-projects.html"><i class="bi bi-kanban"></i> Loyihalar</a></li>
-            <li><a href="admin-skills.html"><i class="bi bi-cpu"></i> Ko'nikmalar</a></li>
-            <li><a href="admin-certs.html" class="active"><i class="bi bi-patch-check"></i> Sertifikatlar</a></li>
+            <li><a href="admin-skills.html" class="active"><i class="bi bi-cpu"></i> Ko'nikmalar</a></li>
+            <li><a href="admin-certs.html"><i class="bi bi-patch-check"></i> Sertifikatlar</a></li>
             <hr class="dropdown-hr" style="width: 100%; margin: 1rem 0; opacity: 0.1;">
             <li><a href="index.html"><i class="bi bi-arrow-left-circle"></i> Saytga qaytish</a></li>
         </ul>
         <button class="btn-outline btn-logout" onclick="logoutAdmin()">Chiqish <i class="bi bi-box-arrow-right"></i></button>
     </nav>
     <div class="admin-container">
-        <div class="admin-header"><h2>Sertifikatlar Boshqaruvi</h2></div>
+        <div class="admin-header"><h2>Ko'nikmalar Boshqaruvi</h2></div>
         <div class="admin-section">
-            <div id="certList" class="item-list"></div>
+            <div id="skillList" class="item-list"></div>
         </div>
         <div class="admin-section">
-            <h3><i class="bi bi-plus-circle"></i> Sertifikat Qo'shish / Tahrirlash</h3>
+            <h3><i class="bi bi-plus-circle"></i> Ko'nikma Qo'shish / Tahrirlash</h3>
             <div class="form-grid">
                 <div class="input-group">
-                    <label>Nomi</label>
-                    <input type="text" id="certTitle" name="certTitle" autocomplete="off">
+                    <label>Nomi (Masalan: HTML)</label>
+                    <input type="text" id="skillName" autocomplete="off">
                 </div>
                 <div class="input-group">
-                    <label>Platforma</label>
-                    <input type="text" id="certPlatform" name="certPlatform" autocomplete="off">
+                    <label>Foiz (%) (Masalan: 95)</label>
+                    <input type="number" id="skillPct" min="0" max="100" autocomplete="off">
                 </div>
                 <div class="input-group">
-                    <label>Sana (Yil)</label>
-                    <input type="text" id="certDate" name="certDate" autocomplete="off">
-                </div>
-                <div class="input-group">
-                    <label>Rasm manzili (URL)</label>
-                    <input type="url" id="certImg" name="certImg" autocomplete="off">
-                </div>
-                <div class="input-group">
-                    <label>Havola (URL)</label>
-                    <input type="url" id="certLink" name="certLink" autocomplete="off">
+                    <label>Rasm manzili (URL) / Ikonka</label>
+                    <input type="text" id="skillImg" placeholder="image/html.png" autocomplete="off">
                 </div>
             </div>
-            <button class="btn-save" onclick="saveCert()">Saqlash / Yangi Qo'shish</button>
+            <button class="btn-save" onclick="saveSkill()">Saqlash / Yangi Qo'shish</button>
             <button class="btn-clear" style="margin-top:10px;" onclick="clearForm()">Formani Tozalash</button>
         </div>
-        <button class="btn-save" onclick="saveAllChanges()">SERTIFIKATLARNI SAQLASH</button>
+        <button class="btn-save" onclick="saveAllChanges()">KO'NIKMALARNI SAQLASH</button>
     </div>
     <script>
         if (localStorage.getItem('is_admin') !== 'true') window.location.href = 'index.html';
         let currentData = JSON.parse(localStorage.getItem('portfolio_content')) || {};
-        // Ensure certificates and stats arrays/objects exist
-        if (!currentData.certificates) currentData.certificates = [];
-        if (!currentData.stats) currentData.stats = {};
+        if (!currentData.skills) currentData.skills = [];
 
-        let currentCertIndex = -1;
+        let currentSkillIndex = -1;
 
         function renderList() {
-            const container = document.getElementById('certList');
+            const container = document.getElementById('skillList');
             container.innerHTML = '';
-            currentData.certificates.forEach((item, index) => {
-                container.innerHTML += `<div class="list-item"><span>${item.title}</span><div style="display:flex; gap:10px;"><button class="btn-outline" style="padding:5px 10px; font-size:0.7rem;" onclick="editCert(${index})">Tahrirlash</button><button class="btn-delete" onclick="removeItem(${index})"><i class="bi bi-trash"></i></button></div></div>`;
+            currentData.skills.forEach((item, index) => {
+                container.innerHTML += `<div class="list-item"><span>${item.name} (${item.pct}%)</span><div style="display:flex; gap:10px;"><button class="btn-outline" style="padding:5px 10px; font-size:0.7rem;" onclick="editSkill(${index})">Tahrirlash</button><button class="btn-delete" onclick="removeItem(${index})"><i class="bi bi-trash"></i></button></div></div>`;
             });
-        }
-
-        function addNewItem() {
-            clearForm();
         }
 
         function removeItem(index) {
             if (confirm("O'chirishni tasdiqlaysizmi?")) {
-                currentData.certificates.splice(index, 1);
+                currentData.skills.splice(index, 1);
                 renderList();
             }
         }
 
         function clearForm() {
-            document.getElementById('certTitle').value = '';
-            document.getElementById('certPlatform').value = '';
-            document.getElementById('certDate').value = '';
-            document.getElementById('certImg').value = '';
-            document.getElementById('certLink').value = '';
-            currentCertIndex = -1;
+            document.getElementById('skillName').value = '';
+            document.getElementById('skillPct').value = '';
+            document.getElementById('skillImg').value = '';
+            currentSkillIndex = -1;
         }
 
-        function editCert(index) {
-            const item = currentData.certificates[index];
-            document.getElementById('certTitle').value = item.title;
-            document.getElementById('certPlatform').value = item.platform;
-            document.getElementById('certDate').value = item.date;
-            document.getElementById('certImg').value = item.img;
-            document.getElementById('certLink').value = item.link;
-            currentCertIndex = index;
+        function editSkill(index) {
+            const item = currentData.skills[index];
+            document.getElementById('skillName').value = item.name;
+            document.getElementById('skillPct').value = item.pct;
+            document.getElementById('skillImg').value = item.img || '';
+            currentSkillIndex = index;
         }
 
-        function saveCert() {
-            const title = document.getElementById('certTitle').value;
-            const platform = document.getElementById('certPlatform').value;
-            const date = document.getElementById('certDate').value;
-            const img = document.getElementById('certImg').value;
-            const link = document.getElementById('certLink').value;
+        function saveSkill() {
+            const name = document.getElementById('skillName').value;
+            const pct = parseInt(document.getElementById('skillPct').value);
+            const img = document.getElementById('skillImg').value;
 
-            if (!title || !platform || !date || !link) {
-                alert("Iltimos, sertifikat nomi, platformasi, sanasi va havolasini kiriting.");
+            if (!name || isNaN(pct)) {
+                alert("Iltimos, ko'nikma nomi va foizini kiriting.");
                 return;
             }
 
-            const newItem = { platform, title, date, img, link };
+            const newItem = { name, pct, img };
 
-            if (currentCertIndex === -1) { currentData.certificates.push(newItem); }
-            else { currentData.certificates[currentCertIndex] = newItem; }
+            if (currentSkillIndex === -1) { currentData.skills.push(newItem); }
+            else { currentData.skills[currentSkillIndex] = newItem; }
             renderList();
             clearForm();
         }
         function saveAllChanges() {
-            currentData.stats.certs = currentData.certificates.length;
             localStorage.setItem('portfolio_content', JSON.stringify(currentData));
-            alert('Sertifikatlar saqlandi!'); window.location.href = 'index.html';
+            alert('Ko\'nikmalar saqlandi!'); window.location.href = 'index.html';
         }
         function logoutAdmin() { localStorage.removeItem('is_admin'); window.location.href = 'index.html'; }
         renderList();
