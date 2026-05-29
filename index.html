@@ -33,20 +33,24 @@
             <div class="user-menu-wrapper">
                 <div class="user-avatar" id="userAvatar" onclick="toggleUserMenu()"></div>
                 <div class="user-dropdown" id="userDropdown">
-                    <div class="dropdown-header" onclick="toggleDropdownSection('profileEdit')">Profil <i class="bi bi-chevron-down"></i></div>
+                    <div class="dropdown-header" onclick="toggleDropdownSection('profileEdit')">Profil <i
+                            class="bi bi-chevron-down"></i></div>
                     <div class="dropdown-section profile-edit hidden-section" id="profileEdit">
                         <div class="section-inner">
                             <label class="avatar-upload">
                                 <i class="bi bi-camera"></i> Rasm yuklash
-                                <input type="file" id="avatarInput" hidden accept="image/*" onchange="handleAvatarUpload(event)">
+                                <input type="file" id="avatarInput" hidden accept="image/*"
+                                    onchange="handleAvatarUpload(event)">
                             </label>
-                            <button class="btn-remove-avatar hidden" id="removeAvatarBtn" onclick="removeAvatar()">Rasmni olib tashlash</button>
+                            <button class="btn-remove-avatar hidden" id="removeAvatarBtn"
+                                onclick="removeAvatar()">Rasmni olib tashlash</button>
                             <input type="text" id="editFirstName" placeholder="Ism" oninput="saveNameChanges()">
                             <input type="text" id="editLastName" placeholder="Familiya" oninput="saveNameChanges()">
                         </div>
                     </div>
-                    
-                    <div class="dropdown-header" onclick="toggleDropdownSection('themeSettings')">Settings <i class="bi bi-chevron-down"></i></div>
+
+                    <div class="dropdown-header" onclick="toggleDropdownSection('themeSettings')">Settings <i
+                            class="bi bi-chevron-down"></i></div>
                     <div class="dropdown-section themes hidden-section" id="themeSettings">
                         <div class="section-inner">
                             <button class="theme-btn" onclick="setTheme('light')">☀️ Light</button>
@@ -57,7 +61,7 @@
                     </div>
 
                     <hr class="dropdown-hr">
-                    
+
                     <button class="btn-logout-red" onclick="handleLogout()">Log out →</button>
                 </div>
             </div>
@@ -143,10 +147,16 @@
                         chiroyli veb saytlar yarataman.</p>
                     <p>HTML, CSS, TailwindCSS va Bootstrap kabi texnologiyalarda kuchli bilimga egaman. Har bir loyihaga
                         alohida yondashuv bilan qarayman.</p>
-                    <p>Hozirda maktabda o'qish bilan birga zamonaviy frontend texnologiyalarini chuqur o'rganib kelyapman. 
-                        Maqsadim — foydalanuvchilar uchun nafaqat chiroyli, balki real muammolarni hal qiladigan raqamli mahsulotlar yaratishdir. Doimiy izlanish va yangi bilimlar olishga ishtiyoqim baland.</p>
-                    <p style="background-color: #e0f2fe; padding: 15px; border-radius: 12px; font-style: italic; border-left: 5px solid #3b82f6; color: #1e40af; margin-top: 20px;">
-                        <i style="font-size: 30px;" class="bi bi-quote"></i> <br> <i>Men kelajakda dunyo miqyosidagi yirik loyihalarda qatnashadigan professional dasturchi bo'lishni va innovatsion raqamli yechimlar yaratishni maqsad qilganman.</i></p>
+                    <p>Hozirda maktabda o'qish bilan birga zamonaviy frontend texnologiyalarini chuqur o'rganib
+                        kelyapman.
+                        Maqsadim — foydalanuvchilar uchun nafaqat chiroyli, balki real muammolarni hal qiladigan raqamli
+                        mahsulotlar yaratishdir. Doimiy izlanish va yangi bilimlar olishga ishtiyoqim baland.</p>
+                    <p
+                        style="background-color: #e0f2fe; padding: 15px; border-radius: 12px; font-style: italic; border-left: 5px solid #3b82f6; color: #1e40af; margin-top: 20px;">
+                        <i style="font-size: 30px;" class="bi bi-quote"></i> <br> <i>Men kelajakda dunyo miqyosidagi
+                            yirik loyihalarda qatnashadigan professional dasturchi bo'lishni va innovatsion raqamli
+                            yechimlar yaratishni maqsad qilganman.</i>
+                    </p>
                     <div class="about-info">
                         <div class="info-item">
                             <span class="info-key">Ism</span>
@@ -267,14 +277,16 @@
                                 <span id="contactEmail">allayarovibrohim12@gmail.com</span>
                             </div>
                         </a>
-                        <a href="https://t.me/allayarovibrohim" target="_blank" rel="noopener noreferrer" class="contact-link">
+                        <a href="https://t.me/allayarovibrohim" target="_blank" rel="noopener noreferrer"
+                            class="contact-link">
                             <div class="cl-icon telegram"><i class="bi bi-telegram"></i></div>
                             <div class="cl-text">
                                 <small>Telegram</small>
                                 <span id="contactTelegram">allayarovibrohim</span>
                             </div>
                         </a>
-                        <a href="https://github.com/allayarovibrohim" target="_blank" rel="noopener noreferrer" class="contact-link">
+                        <a href="https://github.com/allayarovibrohim" target="_blank" rel="noopener noreferrer"
+                            class="contact-link">
                             <div class="cl-icon github"><i class="bi bi-github"></i></div>
                             <div class="cl-text">
                                 <small>GitHub</small>
@@ -324,10 +336,11 @@
     <div class="auth-modal-overlay" id="authModal" onclick="closeAuthModalOutside(event)">
         <div class="auth-modal-box">
             <button class="auth-close-btn" onclick="closeAuthModal()">&times;</button>
-            
+
             <div class="auth-tabs">
                 <button class="auth-tab active" id="tabLogin" onclick="switchAuthMode('login')">Kirish</button>
-                <button class="auth-tab" id="tabRegister" onclick="switchAuthMode('register')">Ro'yxatdan o'tish</button>
+                <button class="auth-tab" id="tabRegister" onclick="switchAuthMode('register')">Ro'yxatdan
+                    o'tish</button>
             </div>
 
             <!-- Login Form -->
@@ -362,7 +375,20 @@
         </div>
     </div>
 
+
+    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script>
+
+        const supabaseUrl = "https://veofchirokvabudukbgi.supabase.co/rest/v1/"
+        const supabaseKey = "sb_publishable_RoeYWIVVOduHB7cyAEHG8Q_6LplkMUb"
+
+        const supabase = window.supabase.createClient(
+            supabaseUrl,
+            supabaseKey
+        )
+
+        console.log(supabase)
+
         // ============ DEFAULT DATA — O'ZINGIZNING MA'LUMOTLARINGIZNI KIRITING ============
         const DATA = {
             name: "Ibrohim Allayarov",
@@ -438,7 +464,7 @@
             const inc = target / (dur / step);
             const t = setInterval(() => {
                 start = Math.min(start + inc, target);
-                if(el) el.textContent = Math.floor(start) + (suffix || '');
+                if (el) el.textContent = Math.floor(start) + (suffix || '');
                 if (start >= target) clearInterval(t);
             }, step);
         }
@@ -494,8 +520,8 @@
       <div class="proj-thumb-gradient" style="background:${p.grad}"></div>
       <div class="proj-thumb-content">
     ${p.img
-                    ? `<img src="${p.img}" alt="${p.title.replace(/"/g, '&quot;')}" class="project-image">`
-                    : `<div class="proj-thumb-icon">${p.emoji}</div>`}
+                        ? `<img src="${p.img}" alt="${p.title.replace(/"/g, '&quot;')}" class="project-image">`
+                        : `<div class="proj-thumb-icon">${p.emoji}</div>`}
 </div>
     </div>
     <div class="proj-body">
@@ -522,7 +548,7 @@
     </div>
     <div class="skill-bar-bg"><div class="skill-bar" data-pct="${s.pct}"></div></div>
   </div>`;
-        });
+            });
 
             const skillObs = new IntersectionObserver(entries => {
                 entries.forEach(e => {
@@ -543,7 +569,7 @@
             const img = document.getElementById('lbImg');
             if (src) { img.src = src; } else { img.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="400" height="300"><rect fill="%231A1A24" width="400" height="300" rx="16"/><text x="200" y="140" text-anchor="middle" fill="%239090A8" font-size="48">🏆</text><text x="200" y="190" text-anchor="middle" fill="%239090A8" font-size="18">' + encodeURIComponent(title) + '</text></svg>'; }
             lb.classList.add('active');
-            if(e) e.stopPropagation();
+            if (e) e.stopPropagation();
         }
         function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); }
 
@@ -600,7 +626,7 @@
             if (user) {
                 authContainer.classList.add('hidden');
                 profileContainer.classList.remove('hidden');
-                
+
                 if (user.avatar) {
                     avatarDiv.innerHTML = `<img src="${user.avatar}" alt="Avatar">`;
                     avatarDiv.classList.add('has-img');
@@ -612,11 +638,11 @@
                 }
 
                 const names = (user.name || "").split(' ');
-                if(editFirstName) editFirstName.value = names[0] || '';
-                if(editLastName) editLastName.value = names.slice(1).join(' ') || '';
+                if (editFirstName) editFirstName.value = names[0] || '';
+                if (editLastName) editLastName.value = names.slice(1).join(' ') || '';
             } else {
-                if(authContainer) authContainer.classList.remove('hidden');
-                if(profileContainer) profileContainer.classList.add('hidden');
+                if (authContainer) authContainer.classList.remove('hidden');
+                if (profileContainer) profileContainer.classList.add('hidden');
             }
         }
 
@@ -637,7 +663,7 @@
         window.addEventListener('click', (e) => {
             if (!e.target.closest('.user-menu-wrapper')) {
                 const drop = document.getElementById('userDropdown');
-                if(drop) drop.classList.remove('active');
+                if (drop) drop.classList.remove('active');
             }
         });
 
@@ -655,10 +681,10 @@
                 }
             });
 
-            if(section) {
+            if (section) {
                 section.classList.toggle('hidden-section');
                 const clickedHeader = section.previousElementSibling;
-                if(clickedHeader) {
+                if (clickedHeader) {
                     const clickedIcon = clickedHeader.querySelector('i');
                     if (clickedIcon) {
                         clickedIcon.style.transform = section.classList.contains('hidden-section') ? 'rotate(0deg)' : 'rotate(-180deg)'; // Rotate up when open
@@ -671,8 +697,8 @@
             const file = event.target.files[0];
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
-                    const user = JSON.parse(localStorage.getItem('portfolio_user')) || {name: "User"};
+                reader.onload = function (e) {
+                    const user = JSON.parse(localStorage.getItem('portfolio_user')) || { name: "User" };
                     user.avatar = e.target.result;
                     localStorage.setItem('portfolio_user', JSON.stringify(user));
                     updateAuthUI();
@@ -693,7 +719,7 @@
         function saveNameChanges() {
             const first = document.getElementById('editFirstName').value.trim();
             const last = document.getElementById('editLastName').value.trim();
-            const user = JSON.parse(localStorage.getItem('portfolio_user')) || {name: "User"};
+            const user = JSON.parse(localStorage.getItem('portfolio_user')) || { name: "User" };
             user.name = `${first} ${last}`.trim() || "User";
             localStorage.setItem('portfolio_user', JSON.stringify(user));
             updateAuthUI();
@@ -702,7 +728,7 @@
         function setTheme(theme) {
             document.documentElement.setAttribute('data-theme', theme);
             localStorage.setItem('portfolio_theme', theme);
-            
+
             if (theme === 'system') {
                 const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
                 document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
