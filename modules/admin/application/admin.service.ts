@@ -171,19 +171,29 @@ export class AdminService {
     const current = existingSettings.find(s => s.key === key);
 
     if (current) {
-      const isEmptyValue = 
-        (Array.isArray(value) && value.length === 0) || 
-        (typeof value === 'number' && value === 0) || 
-        (typeof value === 'string' && value.trim() === '');
-      
-      const hadContent = 
-        (Array.isArray(current.value) && (current.value as any[]).length > 0) ||
-        (typeof current.value === 'number' && (current.value as number) > 0) ||
-        (typeof current.value === 'string' && (current.value as string).trim() !== '');
+      // Qiymat haqiqatdan ham "bo'sh" yoki "nol" ekanligini tekshirish (resurs yuklanmagan holat uchun)
+      const isEffectivelyEmpty = (val: any) => {
+        if (val === null || val === undefined) return true;
+        if (Array.isArray(val)) return val.length === 0;
+        if (typeof val === 'string') return val.trim() === '' || val.trim() === '0';
+        if (typeof val === 'number') return val === 0;
+        if (typeof val === 'object') return Object.keys(val).length === 0;
+        return false;
+      };
+
+      // Bazada haqiqiy ma'lumot borligini tekshirish
+      const hasMeaningfulContent = (val: any) => {
+        if (val === null || val === undefined) return false;
+        if (Array.isArray(val)) return val.length > 0;
+        if (typeof val === 'string') return val.trim() !== '' && val.trim() !== '0';
+        if (typeof val === 'number') return val > 0;
+        if (typeof val === 'object') return Object.keys(val).length > 0;
+        return true;
+      };
 
       // Agar brauzerda ma'lumot yuklanmagan bo'lsa va foydalanuvchi "Saqlash"ni bossa, 
       // bazadagi ma'lumotni o'chirib tashlashiga yo'l qo'ymaymiz.
-      if (isEmptyValue && hadContent) {
+      if (isEffectivelyEmpty(value) && hasMeaningfulContent(current.value)) {
         // Xatolik xabarini aniqroq qilamiz
         const error = new Error(`Xavfsizlik: Ma'lumotlar yuklanmagan! ${key} bazadan o'chib ketishi oldi olindi.`);
         (error as any).statusCode = 400;

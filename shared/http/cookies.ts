@@ -5,7 +5,7 @@ const cookieBase = {
   httpOnly: true,
   secure: true, // Cross-site cookie uchun har doim true bo'lishi shart
   sameSite: "none" as const, // Cross-site (Netlify va API boshqa domen) uchun shart
-  domain: env.COOKIE_DOMAIN,
+  ...(env.COOKIE_DOMAIN ? { domain: env.COOKIE_DOMAIN } : {}),
   path: "/",
 } as const;
 
