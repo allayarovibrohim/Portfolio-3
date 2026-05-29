@@ -376,7 +376,7 @@
     </div>
 
 
-    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script>
 
         const supabaseUrl = "https://veofchirokvabudukbgi.supabase.co/rest/v1/"
@@ -387,7 +387,25 @@
             supabaseKey
         )
 
-        console.log(supabase)
+        async function loadProjects() {
+
+            const { data, error } = await supabase
+                .from("projects")
+                .select("*")
+
+            console.log(data)
+
+            if (error) {
+                console.log(error)
+                return
+            }
+
+            data.forEach(project => {
+                console.log(project.title)
+            })
+        }
+
+        loadProjects()
 
         // ============ DEFAULT DATA — O'ZINGIZNING MA'LUMOTLARINGIZNI KIRITING ============
         const DATA = {
