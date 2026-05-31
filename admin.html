@@ -282,10 +282,7 @@
                     <label>GitHub Username</label>
                     <input type="text" id="admGh" name="github" autocomplete="off">
                 </div>
-                <div class="input-group">
-                    <label>Ish tajribasi (yil)</label>
-                    <input type="number" id="admExp" name="experience" autocomplete="off">
-                </div>
+                 
                 <div class="input-group">
                     <label>Mijozlar soni</label>
                     <input type="number" id="admClients" name="clients" autocomplete="off">
@@ -300,44 +297,43 @@
         <button class="btn-save" onclick="saveAllChanges()">BARCHA O'ZGARISHLARNI SAQLASH</button>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script>
+        const supabaseUrl = "https://veofchirokvabudukbgi.supabase.co"
+        const supabaseKey = "sb_publishable_RoeYWIVVOduHB7cyAEHG8Q_6LplkMUb"
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
+
         // Xavfsizlik: Admin emas bo'lsa kirishni taqiqlash
         if (localStorage.getItem('is_admin') !== 'true') {
             window.location.href = 'index.html';
         }
 
-        let currentData = JSON.parse(localStorage.getItem('portfolio_content')) || {
-            name: "Ibrohim Allayarov",
-            email: "allayarovibrohim12@gmail.com",
-            telegram: "allayarovibrohim",
-            github: "allayarovibrohim",
-            about: "Men zamonaviy texnologiyalardan foydalanib veb saytlar yarataman.",
-            stats: { projects: 0, exp: 0, certs: 0, clients: 0 },
-            projects: [],
-            certificates: [],
-            skills: []
-        };
+        let currentData = {};
 
-        function initAdmin() {
+        async function initAdmin() {
+            const { data } = await supabase.from('portfolio').select('content').eq('id', 1).single();
+            currentData = data?.content || {};
+
             document.getElementById('admName').value = currentData.name;
             document.getElementById('admEmail').value = currentData.email;
             document.getElementById('admTg').value = currentData.telegram;
             document.getElementById('admGh').value = currentData.github;
             document.getElementById('admAbout').value = currentData.about || "";
-            document.getElementById('admExp').value = currentData.stats.exp || 0;
-            document.getElementById('admClients').value = currentData.stats.clients || 0;
+            if(document.getElementById('admExp')) document.getElementById('admExp').value = currentData.stats?.exp || 0;
+            document.getElementById('admClients').value = currentData.stats?.clients || 0;
         }
 
-        function saveAllChanges() {
+        async function saveAllChanges() {
             currentData.name = document.getElementById('admName').value;
             currentData.email = document.getElementById('admEmail').value;
             currentData.telegram = document.getElementById('admTg').value;
             currentData.github = document.getElementById('admGh').value;
             currentData.about = document.getElementById('admAbout').value;
-            currentData.stats.exp = parseInt(document.getElementById('admExp').value) || 0;
+            if(!currentData.stats) currentData.stats = {};
+            if(document.getElementById('admExp')) currentData.stats.exp = parseInt(document.getElementById('admExp').value) || 0;
             currentData.stats.clients = parseInt(document.getElementById('admClients').value) || 0;
 
-            localStorage.setItem('portfolio_content', JSON.stringify(currentData));
+            await supabase.from('portfolio').update({ content: currentData }).eq('id', 1);
             alert('Muvaffaqiyatli saqlandi! Sayt yangilandi.');
             window.location.href = 'index.html';
         }

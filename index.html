@@ -378,34 +378,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script>
-
-        const supabaseUrl = "https://veofchirokvabudukbgi.supabase.co/rest/v1/"
+        const supabaseUrl = "https://veofchirokvabudukbgi.supabase.co"
         const supabaseKey = "sb_publishable_RoeYWIVVOduHB7cyAEHG8Q_6LplkMUb"
-
-        const supabase = window.supabase.createClient(
-            supabaseUrl,
-            supabaseKey
-        )
-
-        async function loadProjects() {
-
-            const { data, error } = await supabase
-                .from("projects")
-                .select("*")
-
-            console.log(data)
-
-            if (error) {
-                console.log(error)
-                return
-            }
-
-            data.forEach(project => {
-                console.log(project.title)
-            })
-        }
-
-        loadProjects()
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
 
         // ============ DEFAULT DATA — O'ZINGIZNING MA'LUMOTLARINGIZNI KIRITING ============
         const DATA = {
@@ -447,9 +422,16 @@
 
         let currentPortfolioData = {}; // Scope xatosini tuzatish uchun global e'lon qilamiz
 
-        function renderPortfolio() {
-            // Load data from localStorage, merge with default DATA
-            const savedData = JSON.parse(localStorage.getItem('portfolio_content')) || {};
+        async function renderPortfolio() {
+            // Load data from Supabase instead of localStorage
+            let savedData = {};
+            try {
+                const { data, error } = await supabase.from('portfolio').select('content').eq('id', 1).single();
+                if (data && data.content) savedData = data.content;
+            } catch (err) {
+                console.error("Supabase-dan yuklashda xato:", err);
+            }
+
             currentPortfolioData = { ...DATA, ...savedData };
             // Ensure nested objects/arrays are also merged or initialized if missing
             currentPortfolioData.stats = { ...DATA.stats, ...(currentPortfolioData.stats || {}) };

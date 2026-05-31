@@ -187,13 +187,13 @@
             renderList();
             clearForm();
         }
-        function saveAllChanges() {
+        async function saveAllChanges() {
             currentData.stats.certs = currentData.certificates.length;
-            localStorage.setItem('portfolio_content', JSON.stringify(currentData));
+            await supabase.from('portfolio').update({ content: currentData }).eq('id', 1);
             alert('Sertifikatlar saqlandi!'); window.location.href = 'index.html';
         }
         function logoutAdmin() { localStorage.removeItem('is_admin'); window.location.href = 'index.html'; }
-        renderList();
+        initCerts();
     </script>
 </body>
 </html>

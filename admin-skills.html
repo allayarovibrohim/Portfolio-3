@@ -144,12 +144,12 @@
             renderList();
             clearForm();
         }
-        function saveAllChanges() {
-            localStorage.setItem('portfolio_content', JSON.stringify(currentData));
+        async function saveAllChanges() {
+            await supabase.from('portfolio').update({ content: currentData }).eq('id', 1);
             alert('Ko\'nikmalar saqlandi!'); window.location.href = 'index.html';
         }
         function logoutAdmin() { localStorage.removeItem('is_admin'); window.location.href = 'index.html'; }
-        renderList();
+        initSkills();
     </script>
 </body>
 </html>
