@@ -312,14 +312,13 @@
 
         async function initAdmin() {
             const { data } = await supabase.from('portfolio').select('content').eq('id', 1).single();
-            currentData = data?.content || {};
+            currentData = data?.content || { stats: {} };
 
-            document.getElementById('admName').value = currentData.name;
-            document.getElementById('admEmail').value = currentData.email;
-            document.getElementById('admTg').value = currentData.telegram;
-            document.getElementById('admGh').value = currentData.github;
+            document.getElementById('admName').value = currentData.name || "";
+            document.getElementById('admEmail').value = currentData.email || "";
+            document.getElementById('admTg').value = currentData.telegram || "";
+            document.getElementById('admGh').value = currentData.github || "";
             document.getElementById('admAbout').value = currentData.about || "";
-            if(document.getElementById('admExp')) document.getElementById('admExp').value = currentData.stats?.exp || 0;
             document.getElementById('admClients').value = currentData.stats?.clients || 0;
         }
 

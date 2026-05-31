@@ -125,14 +125,23 @@
         </div>
         <button class="btn-save" onclick="saveAllChanges()">LOYIHALARNI SAQLASH</button>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script>
-        if (localStorage.getItem('is_admin') !== 'true') window.location.href = 'index.html';
-        let currentData = JSON.parse(localStorage.getItem('portfolio_content')) || {};
-        // Ensure projects and stats arrays/objects exist
-        if (!currentData.projects) currentData.projects = [];
-        if (!currentData.stats) currentData.stats = {};
+        const supabaseUrl = "https://veofchirokvabudukbgi.supabase.co"
+        const supabaseKey = "sb_publishable_RoeYWIVVOduHB7cyAEHG8Q_6LplkMUb"
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
 
-        let currentProjectIndex = -1; // -1 yangi qo'shish, >=0 tahrirlash
+        if (localStorage.getItem('is_admin') !== 'true') window.location.href = 'index.html';
+
+        let currentData = {};
+        let currentProjectIndex = -1;
+
+        async function initProjects() {
+            const { data } = await supabase.from('portfolio').select('content').eq('id', 1).single();
+            currentData = data?.content || { projects: [], stats: {} };
+            if (!currentData.projects) currentData.projects = [];
+            renderList();
+        }
 
         function renderList() {
             const container = document.getElementById('projectList');
