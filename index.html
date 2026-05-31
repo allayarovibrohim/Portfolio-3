@@ -26,9 +26,6 @@
             <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
             <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
         </ul>
-        <div class="nav-auth-btns">
-            <button class="btn-auth-trigger" onclick="openAuthModal()" style="background:var(--grad); border:none; color:white; padding:8px 20px; border-radius:10px; cursor:pointer; font-weight:600;">Kirish</button>
-        </div>
         <button class="nav-toggle" id="navToggle" aria-label="Menu" onclick="toggleMenu()">
             <span></span><span></span><span></span>
         </button>
@@ -295,29 +292,7 @@
         <img id="lbImg" src="" alt="Certificate">
     </div>
 
-    <!-- AUTH MODAL -->
-    <div class="auth-modal-overlay" id="authModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); z-index:2000; align-items:center; justify-content:center;">
-        <div class="auth-modal-box" style="background:#1A1A24; padding:30px; border-radius:20px; width:90%; max-width:400px; border:1px solid var(--border);">
-            <h3 style="margin-bottom:20px; font-family:'Syne';">Admin Kirish</h3>
-            <div class="form-group" style="margin-bottom:15px;">
-                <label style="display:block; font-size:0.8rem; color:var(--muted); margin-bottom:5px;">Login</label>
-                <input type="text" id="admLogin" style="width:100%; padding:10px; background:#0A0A0F; border:1px solid var(--border); border-radius:8px; color:white;">
-            </div>
-            <div class="form-group" style="margin-bottom:20px;">
-                <label style="display:block; font-size:0.8rem; color:var(--muted); margin-bottom:5px;">Parol</label>
-                <input type="password" id="admPass" style="width:100%; padding:10px; background:#0A0A0F; border:1px solid var(--border); border-radius:8px; color:white;">
-            </div>
-            <button onclick="handleLogin()" style="width:100%; padding:12px; background:var(--grad); border:none; color:white; border-radius:10px; font-weight:600; cursor:pointer;">Kirish →</button>
-            <button onclick="closeAuthModal()" style="width:100%; margin-top:10px; background:transparent; border:none; color:var(--muted); cursor:pointer;">Yopish</button>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
     <script>
-        const supabaseUrl = "https://veofchirokvabudukbgi.supabase.co"
-        const supabaseKey = "sb_publishable_RoeYWIVVOduHB7cyAEHG8Q_6LplkMUb"
-        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey)
-
         // ============ DEFAULT DATA — O'ZINGIZNING MA'LUMOTLARINGIZNI KIRITING ============
         const DATA = {
             name: "Ibrohim Allayarov",
@@ -356,18 +331,9 @@
         };
         // ====================================================================
 
-        let currentPortfolioData = DATA; // Dastlabki ma'lumotlar bilan boshlash
+        let currentPortfolioData = DATA;
 
-        async function renderPortfolio() {
-            // Serverdan ma'lumotni yuklash
-            const { data, error } = await supabase.from('portfolio').select('content').eq('id', 1).single();
-            
-            if (data && data.content) {
-                currentPortfolioData = data.content;
-            } else {
-                currentPortfolioData = DATA;
-            }
-
+        function renderPortfolio() {
             document.getElementById('heroName').textContent = currentPortfolioData.name;
             document.getElementById('aboutName').textContent = currentPortfolioData.name;
             document.getElementById('aboutEmail').textContent = currentPortfolioData.email;

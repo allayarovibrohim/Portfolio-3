@@ -13,8 +13,6 @@ import { AuthRepository } from "../../../modules/auth/infrastructure/auth.reposi
 import { AuthService } from "../../../modules/auth/application/auth.service";
 import { UserRepository } from "../../../modules/users/infrastructure/user.repository";
 import { UserService } from "../../../modules/users/application/user.service";
-import { AdminRepository } from "../../../modules/admin/infrastructure/admin.repository";
-import { AdminService } from "../../../modules/admin/application/admin.service";
 
 export const buildContainer = () => {
   const queueService = new QueueService();
@@ -32,15 +30,6 @@ export const buildContainer = () => {
   const userRepository = new UserRepository(prisma);
   const userService = new UserService(userRepository, auditService, queueService);
 
-  const adminRepository = new AdminRepository(prisma);
-  const adminService = new AdminService(
-    adminRepository,
-    auditService,
-    notificationService,
-    queueService,
-    realtimeService,
-  );
-
   return {
     prisma,
     redis,
@@ -57,8 +46,6 @@ export const buildContainer = () => {
     authService,
     userRepository,
     userService,
-    adminRepository,
-    adminService,
   };
 };
 

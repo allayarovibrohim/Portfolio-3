@@ -21,7 +21,6 @@ import { registerAuthRoutes } from "../../../modules/auth/presentation/auth.rout
 import { registerUserRoutes } from "../../../modules/users/presentation/user.routes";
 import { registerFileRoutes } from "../../../modules/files/presentation/file.routes";
 import { registerNotificationRoutes } from "../../../modules/notifications/presentation/notification.routes";
-import { registerAdminRoutes } from "../../../modules/admin/presentation/admin.routes";
 import { clearAuthCookies } from "../../../shared/http/cookies";
 import { parseApiKey, verifySignedRequest } from "../../../shared/security/api-signing";
 import { flattenRolePermissions } from "../../../shared/security/rbac";
@@ -145,15 +144,8 @@ export const buildApp = (container: ServiceContainer = buildContainer()) => {
         };
       } catch (error) {
         clearAuthCookies(reply);
-        if (request.url.startsWith(`${env.API_PREFIX}/v1/admin`)) {
-          throw error;
-        }
       }
     } else {
-      // Agar admin yo'liga kirmokchi bo'lsa-yu, token bo'lmasa, srazu 401 beramiz
-      if (request.url.startsWith(`${env.API_PREFIX}/v1/admin`)) {
-        throw new UnauthorizedError("Admin access requires authentication");
-      }
     }
 
     const apiKeyHeader = request.headers["x-api-key"];
@@ -288,7 +280,6 @@ export const buildApp = (container: ServiceContainer = buildContainer()) => {
     await registerUserRoutes(api, { userService: container.userService });
     await registerFileRoutes(api, { fileService: container.fileService });
     await registerNotificationRoutes(api, { notificationService: container.notificationService });
-    await registerAdminRoutes(api, { adminService: container.adminService });
   }, { prefix: env.API_PREFIX });
 
   return app;
