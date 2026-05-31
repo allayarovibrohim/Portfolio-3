@@ -640,6 +640,67 @@
             border: 1px solid rgba(245, 158, 11, 0.3);
         }
 
+        /* Login Page */
+        .login-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+        }
+
+        .login-page.active {
+            display: flex;
+        }
+
+        .login-container {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-box {
+            background: var(--card-light);
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            animation: slideUp 0.5s ease;
+        }
+
+        body.dark-mode .login-box {
+            background: var(--card-dark);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: var(--text-light);
+        }
+
+        body.dark-mode .login-header h1 {
+            color: #e2e8f0;
+        }
+
+        .login-header p {
+            color: var(--text-dark);
+            font-size: 14px;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .container {
@@ -679,7 +740,39 @@
     </style>
 </head>
 <body class="light-mode">
-    <div class="container">
+    <!-- Login Page -->
+    <div id="loginPage" class="login-page active">
+        <div class="login-container">
+            <div class="login-box">
+                <div class="login-header">
+                    <h1>⚙️ Admin Panel</h1>
+                    <p>Admin Control System</p>
+                </div>
+                <form id="loginForm" onsubmit="handleLogin(event)">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-input" id="loginEmail" placeholder="admin@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" class="form-input" id="loginPassword" placeholder="••••••••" required>
+                    </div>
+                    <div class="form-group" style="display: flex; align-items: center; gap: 10px;">
+                        <input type="checkbox" id="rememberMe" style="width: 18px; height: 18px; cursor: pointer;">
+                        <label for="rememberMe" style="margin: 0; cursor: pointer;">Remember me</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 20px;">
+                        Sign In
+                    </button>
+                </form>
+                <div style="text-align: center; margin-top: 15px; font-size: 12px; color: var(--text-dark);">
+                    <p>Demo credentials:<br><strong>admin@example.com / admin123</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="adminPanel" style="display: none;">
         <!-- Sidebar -->
         <aside class="sidebar">
             <div class="logo">
@@ -753,6 +846,10 @@
                     <button class="theme-toggle" id="themeToggle" title="Toggle theme">🌙</button>
                     <div style="width: 1px; height: 20px; background: var(--border);"></div>
                     <span id="userInfo" style="font-size: 14px; color: var(--text-dark);">Admin</span>
+                    <div style="width: 1px; height: 20px; background: var(--border);"></div>
+                    <button class="btn btn-secondary" style="padding: 8px 14px;" onclick="logout()">
+                        <span>🚪</span> Logout
+                    </button>
                 </div>
             </header>
 
@@ -1166,12 +1263,87 @@
         const API_BASE_URL = '/v1/admin';
         let currentUserId = null;
         let charts = {};
+        let authToken = localStorage.getItem('authToken');
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
-            setupEventListeners();
-            loadDashboard();
+            // Check authentication
+            if (authToken) {
+                showAdminPanel();
+                setupEventListeners();
+                loadDashboard();
+            } else {
+                showLoginPage();
+            }
         });
+
+        // Authentication
+        function showLoginPage() {
+            document.getElementById('loginPage').classList.add('active');
+            document.getElementById('adminPanel').style.display = 'none';
+        }
+
+        function showAdminPanel() {
+            document.getElementById('loginPage').classList.remove('active');
+            document.getElementById('adminPanel').style.display = 'grid';
+        }
+
+        async function handleLogin(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const rememberMe = document.getElementById('rememberMe').checked;
+
+            const loginBtn = e.target.querySelector('button');
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Signing in...';
+
+            try {
+                // Здесь должен быть реальный API вызов к /v1/auth/login
+                // Для демо используем localStorage
+                
+                // Проверка демо учетных данных
+                if (email === 'admin@example.com' && password === 'admin123') {
+                    // Генерируем демо токен
+                    authToken = 'demo_token_' + Date.now();
+                    localStorage.setItem('authToken', authToken);
+                    localStorage.setItem('userEmail', email);
+                    
+                    if (rememberMe) {
+                        localStorage.setItem('rememberEmail', email);
+                    }
+
+                    showAdminPanel();
+                    setupEventListeners();
+                    loadDashboard();
+                    
+                    // Обновляем информацию о пользователе
+                    document.getElementById('userInfo').textContent = email;
+                    
+                    showAlert('Successfully signed in!', 'success');
+                } else {
+                    showAlert('Invalid email or password', 'danger');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showAlert('Login failed', 'danger');
+            } finally {
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Sign In';
+            }
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                authToken = null;
+                localStorage.removeItem('authToken');
+                localStorage.removeItem('userEmail');
+                document.getElementById('loginForm').reset();
+                showLoginPage();
+                showAlert('You have been logged out', 'success');
+            }
+        }
 
         // Event Listeners
         function setupEventListeners() {
@@ -1292,6 +1464,19 @@
             document.getElementById('themeToggle').textContent = '☀️';
         }
 
+        // Load remembered email
+        const rememberedEmail = localStorage.getItem('rememberEmail');
+        if (rememberedEmail) {
+            document.getElementById('loginEmail').value = rememberedEmail;
+            document.getElementById('rememberMe').checked = true;
+        }
+
+        // Update user info if logged in
+        const userEmail = localStorage.getItem('userEmail');
+        if (userEmail) {
+            document.getElementById('userInfo').textContent = userEmail;
+        }
+
         // API Calls
         async function apiCall(endpoint, method = 'GET', data = null) {
             try {
@@ -1302,6 +1487,11 @@
                     }
                 };
 
+                // Add auth token if available
+                if (authToken) {
+                    config.headers['Authorization'] = `Bearer ${authToken}`;
+                }
+
                 if (data) {
                     config.data = data;
                 }
@@ -1310,6 +1500,13 @@
                 return response.data.data || response.data;
             } catch (error) {
                 console.error('API Error:', error);
+                
+                // Check if unauthorized
+                if (error.response?.status === 401) {
+                    logout();
+                    return null;
+                }
+                
                 showAlert('Error loading data', 'danger');
                 return null;
             }
