@@ -5,7 +5,7 @@ export const registerAuditRoutes = async (
   app: FastifyInstance,
   dependencies: { auditService: { list?: (...args: never[]) => Promise<unknown> } },
 ) => {
-  app.get("/v1/admin/audit-logs", {
+  app.get("/v1/audit/logs", {
     preHandler: async (request) => {
       assertPermission(request.currentUser?.permissions || [], ["audit.read"]);
     },

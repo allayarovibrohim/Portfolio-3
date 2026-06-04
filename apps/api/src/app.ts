@@ -109,7 +109,6 @@ export const buildApp = (container: ServiceContainer = buildContainer()) => {
           { name: "users" },
           { name: "files" },
           { name: "notifications" },
-          { name: "admin" },
         ],
       },
     });

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <title>Typing Test Game</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background: #0f172a; color: white; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; font-family: 'DM Sans', sans-serif; }
+        .container { max-width: 800px; width: 90%; background: #1e293b; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        .game-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+        .game-stats { display: flex; gap: 1.5rem; }
+        .game-stat { text-align: center; }
+        .game-stat-val { font-size: 1.5rem; font-weight: bold; color: #3b82f6; }
+        .game-text-area { background: #0f172a; padding: 1.5rem; border-radius: 12px; font-size: 1.25rem; line-height: 1.6; margin-bottom: 1.5rem; min-height: 100px; position: relative; }
+        .game-input { width: 100%; padding: 1rem; background: #334155; border: 2px solid #475569; border-radius: 10px; color: white; font-size: 1.1rem; outline: none; }
+        .game-input:focus { border-color: #3b82f6; }
+        .correct { color: #22c55e; }
+        .wrong { color: #ef4444; text-decoration: underline; }
+        .current { border-bottom: 3px solid #3b82f6; }
+        .pending { color: #64748b; }
+        .keyboard { margin-top: 2rem; display: flex; flex-direction: column; gap: 5px; }
+        .kb-row { display: flex; justify-content: center; gap: 5px; }
+        .kb-key { background: #334155; padding: 10px; min-width: 35px; border-radius: 6px; text-align: center; font-size: 0.8rem; transition: 0.1s; }
+        .kb-key.active { background: #3b82f6; transform: translateY(2px); }
+        .wider { min-width: 60px; }
+        .widest { flex-grow: 1; max-width: 300px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="game-header">
+            <div>
+                <h2 style="margin:0">⌨️ Typing Test</h2>
+                <p style="color:#94a3b8; margin:5px 0 0">Quyidagi matnni tez yozing</p>
+            </div>
+            <div class="game-stats">
+                <div class="game-stat"><div class="game-stat-val" id="wpmVal">0</div><div>WPM</div></div>
+                <div class="game-stat"><div class="game-stat-val" id="accVal">100%</div><div>ANIQLIK</div></div>
+                <div class="game-stat"><div class="game-stat-val" id="timeVal">60</div><div>VAQT</div></div>
+            </div>
+        </div>
+        <div class="game-text-area" id="gameText"></div>
+        <input class="game-input" id="gameInput" placeholder="Yozishni boshlang..." autocomplete="off">
+        <div class="keyboard" id="keyboard"></div>
+        <div style="margin-top: 20px; text-align: center;">
+            <button onclick="location.href='index.html'" style="background:transparent; color:#94a3b8; border:1px solid #475569; padding:8px 16px; border-radius:8px; cursor:pointer">Bosh sahifaga qaytish</button>
+        </div>
+    </div>
+
+    <script>
+        const sentences = [
+            "Frontend development is the art of creating beautiful user interfaces.",
+            "JavaScript is the language of the web and powers modern applications.",
+            "CSS makes websites look stunning and responsive on all devices.",
+            "TailwindCSS utility classes speed up the development workflow greatly.",
+            "Clean code is the foundation of every successful software project.",
+            "Practice every day to improve your typing speed and accuracy."
+        ];
+
+        let gameState = { active: false, timer: null, timeLeft: 60, charIndex: 0, errors: 0, totalTyped: 0, startTime: null };
+        let currentSentence = '';
+
+        const rows = [
+            ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
+            ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'],
+            ['Caps', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", 'Enter'],
+            ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '↑'],
+            ['Space']
+        ];
+
+        function initKeyboard() {
+            const kbEl = document.getElementById('keyboard');
+            rows.forEach(row => {
+                const div = document.createElement('div'); div.className = 'kb-row';
+                row.forEach(key => {
+                    const span = document.createElement('span');
+                    span.className = 'kb-key' + (['Backspace', 'Tab', 'Caps', 'Enter', 'Shift', 'Space'].includes(key) ? ' wider' : '');
+                    if(key === 'Space') span.className += ' widest';
+                    span.textContent = key === 'Space' ? ' ' : key;
+                    span.dataset.key = key.toLowerCase();
+                    div.appendChild(span);
+                });
+                kbEl.appendChild(div);
+            });
+        }
+
+        function renderText() {
+            const el = document.getElementById('gameText');
+            el.innerHTML = '';
+            currentSentence.split('').forEach((char, i) => {
+                const s = document.createElement('span');
+                s.textContent = char;
+                if (i < gameState.charIndex) s.className = 'correct';
+                else if (i === gameState.charIndex) s.className = 'current';
+                else s.className = 'pending';
+                el.appendChild(s);
+            });
+        }
+
+        function initGame() {
+            currentSentence = sentences[Math.floor(Math.random() * sentences.length)];
+            gameState = { active: false, timer: null, timeLeft: 60, charIndex: 0, errors: 0, totalTyped: 0, startTime: null };
+            document.getElementById('gameInput').value = '';
+            document.getElementById('wpmVal').textContent = '0';
+            document.getElementById('accVal').textContent = '100%';
+            document.getElementById('timeVal').textContent = '60';
+            renderText();
+        }
+
+        function startTimer() {
+            gameState.startTime = Date.now();
+            gameState.active = true;
+            gameState.timer = setInterval(() => {
+                gameState.timeLeft--;
+                document.getElementById('timeVal').textContent = gameState.timeLeft;
+                const elapsed = (Date.now() - gameState.startTime) / 60000;
+                const wpm = Math.round((gameState.totalTyped / 5) / elapsed) || 0;
+                document.getElementById('wpmVal').textContent = wpm;
+                if (gameState.timeLeft <= 0) endGame();
+            }, 1000);
+        }
+
+        function endGame() {
+            clearInterval(gameState.timer);
+            gameState.active = false;
+            document.getElementById('gameInput').disabled = true;
+            alert(`O'yin tugadi! \nWPM: ${document.getElementById('wpmVal').textContent}\nAniqlik: ${document.getElementById('accVal').textContent}`);
+            location.reload();
+        }
+
+        document.getElementById('gameInput').addEventListener('input', function(e) {
+            if (!gameState.active && gameState.timeLeft > 0) startTimer();
+            
+            const val = this.value;
+            const expected = currentSentence[gameState.charIndex];
+            const inputChar = val[val.length - 1];
+
+            if (inputChar === expected) {
+                gameState.charIndex++;
+                gameState.totalTyped++;
+            } else {
+                gameState.errors++;
+                gameState.totalTyped++;
+            }
+
+            const acc = Math.round(((gameState.totalTyped - gameState.errors) / gameState.totalTyped) * 100);
+            document.getElementById('accVal').textContent = acc + '%';
+
+            if (gameState.charIndex >= currentSentence.length) {
+                currentSentence = sentences[Math.floor(Math.random() * sentences.length)];
+                gameState.charIndex = 0;
+                this.value = '';
+            }
+            renderText();
+        });
+
+        // Visual Keyboard feedback
+        document.addEventListener('keydown', e => {
+            const key = e.key.toLowerCase();
+            document.querySelectorAll('.kb-key').forEach(el => {
+                if (el.dataset.key === key || (e.code === 'Space' && el.dataset.key === 'space')) {
+                    el.classList.add('active');
+                }
+            });
+        });
+
+        document.addEventListener('keyup', e => {
+            const key = e.key.toLowerCase();
+            document.querySelectorAll('.kb-key').forEach(el => {
+                if (el.dataset.key === key || (e.code === 'Space' && el.dataset.key === 'space')) {
+                    el.classList.remove('active');
+                }
+            });
+        });
+
+        initKeyboard();
+        initGame();
+    </script>
+</body>
+</html>

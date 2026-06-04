@@ -10,30 +10,113 @@
         href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    
+    <!-- Lenis Smooth Scroll Library -->
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const lenis = new Lenis({
+                duration: 1.5, // Scroll davomiyligi (qancha katta bo'lsa, shuncha "sirpanchiq" bo'ladi)
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Silliq to'xtash formulasi
+                orientation: 'vertical',
+                gestureOrientation: 'vertical',
+                smoothWheel: true,
+                wheelMultiplier: 1.1, // Silliqlik kuchi
+                infinite: false,
+            });
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+
+            // AOS bilan bog'lash
+            lenis.on('scroll', () => {
+                if (window.AOS) AOS.refresh();
+            });
+        });
+    </script>
+
+    <style>
+        /* Lightbox styling for smooth certificate viewing */
+        #lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: zoom-out;
+        }
+
+        #lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #lbImg {
+            max-width: 90%;
+            max-height: 85%;
+            border-radius: 4px;
+            transform: scale(0.9);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        #lightbox.active #lbImg {
+            transform: scale(1);
+        }
+
+        .lb-close {
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            color: white;
+            font-size: 75px;
+            font-weight: 200;
+            cursor: pointer;
+            z-index: 10001;
+            /* Ensure it's above the image */
+            transition: all 0.3s ease;
+            line-height: 1;
+            user-select: none;
+        }
+
+        .lb-close:hover {
+            color: var(--primary);
+            transform: scale(1.1);
+            background: none;
+            /* Remove background on hover too */
+        }
+    </style>
 </head>
 
 <body>
 
     <!-- NAVBAR -->
     <nav>
-        <div class="logo">DEV</div>
+        <div class="logo">IBROHIM</div>
         <ul class="nav-links" id="navLinks">
             <li><a href="#home" onclick="closeMenu()">Home</a></li>
             <li><a href="#about" onclick="closeMenu()">About</a></li>
-            <li><a href="#certificates" onclick="closeMenu()">Certificate</a></li>
             <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
             <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+            <li><a href="#certificates" onclick="closeMenu()">Certificate</a></li>
             <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
         </ul>
-        <a href="admin.html" class="btn btn-primary" style="margin-left:16px; padding:0.5rem 0.9rem; font-size:0.9rem; border-radius:8px;">Kirish</a>
-        <button class="nav-toggle" id="navToggle" aria-label="Menu" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
-        </button>
     </nav>
 
     <!-- HERO -->
-    <section id="home">
+    <section id="home" class="hero" data-aos="fade-up">
         <div class="hero-bg">
             <div class="orb orb1"></div>
             <div class="orb orb2"></div>
@@ -59,7 +142,7 @@
     </section>
 
     <!-- ABOUT -->
-    <section id="about">
+    <section id="about" data-aos="fade-up">
         <div class="container">
             <div class="section-label">01 — About</div>
             <h2 class="section-title">Men <span>haqimda</span></h2>
@@ -69,7 +152,7 @@
 
                     <div class="about-img-frame">
                         <div class="about-img-inner">
-                            <img src="image/profile.jpg" alt="">
+                            <img src="image/profile.jpg" alt="" class="about-img">
                         </div>
                     </div>
 
@@ -141,22 +224,10 @@
         </div>
     </section>
 
-    <!-- CERTIFICATES -->
-    <section id="certificates">
-        <div class="container">
-            <div class="section-label">02 — Certificates</div>
-            <h2 class="section-title">Mening <span>Sertifikatlarim</span></h2>
-            <div class="divider"></div>
-            <div class="certs-grid" id="certsGrid">
-                <!-- 5 certificate cards -->
-            </div>
-        </div>
-    </section>
-
     <!-- PROJECTS -->
-    <section id="projects">
+    <section id="projects" data-aos="fade-up">
         <div class="container">
-            <div class="section-label">03 — Projects</div>
+            <div class="section-label">02 — Projects</div>
             <h2 class="section-title">Mening <span>Loyihalarim</span></h2>
             <div class="divider"></div>
             <div class="projects-grid" id="projectsGrid">
@@ -165,65 +236,32 @@
         </div>
     </section>
 
-    <!-- TYPING GAME -->
-    <section id="typing-section" style="padding:4rem 2rem">
-        <div class="container">
-            <div class="section-label">04 — Mini Game</div>
-            <h2 class="section-title">Yozish <span>Tezligi</span></h2>
-            <div class="divider"></div>
-            <div id="typing-game">
-                <div class="game-header">
-                    <div>
-                        <div style="font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:600">⌨️ Stamina Typing
-                            Test</div>
-                        <div style="font-size:0.8rem;color:var(--muted);margin-top:2px">Quyidagi matnni imkon qadar tez
-                            yozing</div>
-                    </div>
-                    <div class="game-stats">
-                        <div class="game-stat">
-                            <div class="game-stat-val" id="wpmVal">0</div>
-                            <div class="game-stat-label">WPM</div>
-                        </div>
-                        <div class="game-stat">
-                            <div class="game-stat-val" id="accVal">100%</div>
-                            <div class="game-stat-label">Aniqlik</div>
-                        </div>
-                        <div class="game-stat">
-                            <div class="game-stat-val" id="timeVal">60</div>
-                            <div class="game-stat-label">Vaqt</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="game-text-area" id="gameText"></div>
-                <input class="game-input" id="gameInput" placeholder="Bu yerga yozishni boshlang..." autocomplete="off"
-                    autocorrect="off" autocapitalize="off" spellcheck="false">
-                <div class="game-result" id="gameResult">
-                    <div style="font-size:0.9rem;color:var(--muted);margin-bottom:0.5rem">Yakuniy natija</div>
-                    <div class="result-wpm" id="finalWpm">0 WPM</div>
-                    <div style="font-size:0.9rem;color:var(--muted);margin-top:0.5rem" id="finalAcc"></div>
-                    <button onclick="resetGame()"
-                        style="margin-top:1rem;padding:0.6rem 1.5rem;border-radius:10px;background:var(--grad);border:none;color:#fff;cursor:pointer;font-size:0.9rem;font-family:'DM Sans',sans-serif">Qayta
-                        urinish ↺</button>
-                </div>
-                <div class="keyboard" id="keyboard"></div>
-            </div>
-        </div>
-    </section>
-
     <!-- SKILLS -->
-    <section id="skills" style="background:var(--bg2)">
+    <section id="skills" data-aos="fade-up" style="background:var(--bg2)">
         <div class="container">
-            <div class="section-label">05 — Skills</div>
+            <div class="section-label">03 — Skills</div>
             <h2 class="section-title">Mening <span>Ko'nikmalarim</span></h2>
             <div class="divider"></div>
             <div class="skills-grid" id="skillsGrid"></div>
         </div>
     </section>
 
-    <!-- CONTACT -->
-    <section id="contact">
+    <!-- CERTIFICATES -->
+    <section id="certificates" data-aos="fade-up">
         <div class="container">
-            <div class="section-label">06 — Contact</div>
+            <div class="section-label">04 — Certificates</div>
+            <h2 class="section-title">Mening <span>Sertifikatlarim</span></h2>
+            <div class="divider"></div>
+            <div class="certs-grid" id="certsGrid">
+                <!-- 5 certificate cards -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" data-aos="fade-up">
+        <div class="container">
+            <div class="section-label">05 — Contact</div>
             <h2 class="section-title">Bog'<span>lanish</span></h2>
             <div class="divider"></div>
             <div class="contact-grid">
@@ -231,7 +269,7 @@
                     <h3>Gaplashaylik! 💬</h3>
                     <p>Yangi loyiha, hamkorlik yoki shunchaki salom aytmoqchimisiz? Xabar yuboring!</p>
                     <div class="contact-links">
-                        <a href="mailto:email@example.com" class="contact-link">
+                        <a href="mailto:email@example.com" class="contact-link" data-aos="fade-down-right">
                             <div class="cl-icon email"><i class="bi bi-envelope-fill"></i></div>
                             <div class="cl-text">
                                 <small>Email</small>
@@ -239,7 +277,7 @@
                             </div>
                         </a>
                         <a href="https://t.me/allayarovibrohim" target="_blank" rel="noopener noreferrer"
-                            class="contact-link">
+                            class="contact-link"  data-aos="fade-down-right">
                             <div class="cl-icon telegram"><i class="bi bi-telegram"></i></div>
                             <div class="cl-text">
                                 <small>Telegram</small>
@@ -247,7 +285,7 @@
                             </div>
                         </a>
                         <a href="https://github.com/allayarovibrohim" target="_blank" rel="noopener noreferrer"
-                            class="contact-link">
+                            class="contact-link"  data-aos="fade-down-right">
                             <div class="cl-icon github"><i class="bi bi-github"></i></div>
                             <div class="cl-text">
                                 <small>GitHub</small>
@@ -256,7 +294,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="contact-form">
+                <div class="contact-form" data-aos="fade-down-left">
                     <div class="form-row">
                         <div class="form-group">
                             <label>Ism</label>
@@ -287,10 +325,24 @@
         <p>© 2025 — Barcha huquqlar himoyalangan</p>
     </footer>
 
-    <!-- LIGHTBOX -->
-    <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-        <button class="lb-close" onclick="closeLightbox()">✕</button>
-        <img id="lbImg" src="" alt="Certificate">
+    <!-- Lightbox for viewing certificates -->
+    <div id="lightbox" onclick="closeLightbox()">
+        <span class="lb-close" onclick="closeLightbox()">&times;</span>
+        <img id="lbImg" src="" alt="Certificate Large View">
+    </div>
+
+    <!-- Modal for skill details -->
+    <div id="skillModal" class="skill-modal-overlay" onclick="closeSkillModal()">
+        <div class="skill-modal-box" onclick="event.stopPropagation()">
+            <button class="sm-close" onclick="closeSkillModal()">&times;</button>
+            <div id="smIcon" style="margin-bottom: 1.5rem; display: flex; justify-content: center;"></div>
+            <h3 id="smTitle" class="sm-title"></h3>
+            <p id="smDesc" class="sm-desc"></p>
+            <div class="skill-bar-bg" style="margin-top: 2rem;">
+                <div id="smBar" class="skill-bar"></div>
+            </div>
+            <div id="smPct" class="sm-pct"></div>
+        </div>
     </div>
 
     <script>
@@ -301,7 +353,7 @@
             city: "Khiva, Khorezm, Uzbekistan",
             telegram: "allayarovibrohim",
             github: "allayarovibrohim",
-            stats: { projects: 4, exp: 1, certs: 5, clients: 3 },
+            stats: { projects: 8, exp: 1, certs: 5, clients: 3 },
 
             // Sertifikatlaringiz — img: certificate rasmini qo'ying, link: Coursera/boshqa havolasi
             certificates: [
@@ -316,18 +368,22 @@
             projects: [
                 { title: "Mind Bridge", desc: "Shaxsiylashtirilgan terapiya orqali o'zgarishlarni kuchaytirish", tags: ["HTML", "CSS", "JS"], link: "https://mindbridge-website.lovable.app", img: "image/mindbridge.png", grad: "linear-gradient(135deg,#7C3AED33,#06B6D433)" },
                 { title: "Lingua Bridge", desc: "Yangi tilni o'zlashtiring. Kelajagingizni o'zgartiring.", tags: ["TailwindCSS", "JS"], link: "https://wordways-bridge.lovable.app", img: "image/linguabridge.png", grad: "linear-gradient(135deg,#F59E0B33,#EF444433)" },
-                { title: "Typing WPM Test", desc: "Yozish tezligini o'lchaydigan o'yin. WPM, xato va klaviatura ko'rsatiladi.", tags: ["JS", "Game"], link: "#typing-section", img: "image/typing.png", grad: "linear-gradient(135deg,#06B6D433,#7C3AED33)" },
                 { title: "Tetris", desc: "Internetdan topgan qiziqarli o'yin loyihasi.", tags: ["HTML", "CSS", "JS"], link: "tetris.html", img: "image/tetris.png", grad: "linear-gradient(135deg,#22C55E33,#06B6D433)" },
+                { title: "Typing Test", desc: "Yozish tezligi va aniqligini tekshirish uchun mini o'yin.", tags: ["JS", "HTML", "CSS"], link: "typing.html", img: "image/typing.png", grad: "linear-gradient(135deg,#6366F133,#10B98133)" },
+                { title: "Spider Clock", desc: "Interaktiv o'rgimchak shaklidagi soat loyihasi (SVG va GSAP).", tags: ["SVG", "GSAP", "JS"], link: "index2.html", img: "image/clock.png", grad: "linear-gradient(135deg,#3B82F633,#8B5CF633)" },
+                { title: "Birthday Calculation", desc: "Tug'ilgan kuningizni hisoblaydigan oddiy veb-ilova.", tags: ["HTML", "CSS", "JS"], link: "https://birthday-calculation.lovable.app/", img: "image/birthday-calculation.png", grad: "linear-gradient(135deg,#FF7F5033,#FFD70033)" },
+                { title: "Animated Cards", desc: "Sayohat yo'nalishlari uchun interaktiv animatsion kartalar loyihasi.", tags: ["GSAP", "JS", "CSS"], link: "index3.html", img: "image/animated-cards.png", grad: "linear-gradient(135deg,#EC489933,#8B5CF633)" },
+                { title: "Flower Animation", desc: "Canvas yordamida yaratilgan gullar animatsiyasi.", tags: ["Canvas", "JS"], link: "index4.html", img: "image/flower-animation.jpg", grad: "linear-gradient(135deg,#FF00E433,#00F5FF33)" },
             ],
 
             // Ko'nikmalaringiz (Skills)
             skills: [
-                { name: "HTML", pct: 98, img: "image/html.png" },
-                { name: "CSS", pct: 87, img: "image/css.png" },
-                { name: "TailwindCSS", pct: 80, img: "image/tailwindcss.png" },
-                { name: "Bootstrap", pct: 85, img: "image/bootstrap.png" },
-                { name: "JavaScript", pct: 60, img: "image/js.png" }, // Adjusted JS percentage
-                { name: "GitHub", pct: 70, img: "image/github.png" }, // Adjusted GitHub percentage
+                { name: "HTML", pct: 98, img: "image/html.png", desc: "HTML (HyperText Markup Language) — veb-sahifalarning asosiy tuzilmasini yaratish uchun ishlatiladigan standart belgilash tili. U sahifadagi matn, rasm va boshqa elementlarning joylashuvini belgilaydi." },
+                { name: "CSS", pct: 87, img: "image/css.png", desc: "CSS (Cascading Style Sheets) — HTML elementlarining tashqi ko'rinishini (rangi, shrifti, o'lchami, joylashuvi va h.k.) bezash va boshqarish uchun ishlatiladigan tildir." },
+                { name: "Bootstrap", pct: 85, img: "image/bootstrap.png", desc: "Bootstrap — tezkor va moslashuvchan (responsive) veb-sahifalar yaratish uchun mo'ljallangan eng ommabop CSS freymvorkidir. U tayyor dizayn komponentlarini taqdim etadi." },
+                { name: "TailwindCSS", pct: 80, img: "image/tailwindcss.png", desc: "Tailwind CSS — 'utility-first' yondashuvidagi CSS freymvorki bo'lib, u to'g'ridan-to'g'ri HTML sinflari orqali noyob va moslashuvchan dizaynlarni tez yaratish imkonini beradi." },
+                { name: "GitHub", pct: 70, img: "image/github.png", desc: "GitHub — Git versiyalarni boshqarish tizimi asosidagi bulutli platforma. U dasturiy ta'minot loyihalarini saqlash, boshqarish va hamkorlikda ishlash uchun xizmat qiladi." },
+                { name: "JavaScript", pct: 7, img: "image/js.png", desc: "JavaScript — veb-sahifalarga dinamiklik va interaktivlik beruvchi dasturlash tili. U animatsiyalar yaratish, foydalanuvchi harakatlariga javob berish va ma'lumotlarni qayta ishlash uchun ishlatiladi." },
             ]
         };
         // ====================================================================
@@ -434,10 +490,10 @@
         function renderSkills() {
             const skillsGrid = document.getElementById('skillsGrid');
             skillsGrid.innerHTML = '';
-            currentPortfolioData.skills.forEach(s => {
+            currentPortfolioData.skills.forEach((s, i) => {
                 skillsGrid.innerHTML += `
-  <div class="skill-card">
-    <div class="skill-icon">${s.img ? `<img src="${s.img}" alt="${s.name}" class="skill-image">` : s.icon}</div>
+  <div class="skill-card" data-aos="flip-left" data-aos-duration="700" data-aos-offset="120" data-aos-once="false" onclick="openSkillModal(${i})" style="cursor:pointer">
+    <div class="skill-icon">${s.img ? `<img src="${s.img}" alt="${s.name}" class="skill-image">` : (s.icon || '🚀')}</div>
     <div class="skill-top">
       <span class="skill-name">${s.name}</span>
       <span class="skill-pct">${s.pct}%</span>
@@ -457,6 +513,9 @@
                 });
             }, { threshold: 0.2 });
             skillObs.observe(document.getElementById('skills'));
+            if (window.AOS) {
+                AOS.refresh();
+            }
         }
 
         // Lightbox
@@ -468,6 +527,24 @@
             if (e) e.stopPropagation();
         }
         function closeLightbox() { document.getElementById('lightbox').classList.remove('active'); }
+
+        // Skill Modal
+        function openSkillModal(index) {
+            const s = currentPortfolioData.skills[index];
+            const modal = document.getElementById('skillModal');
+            document.getElementById('smTitle').textContent = s.name;
+            document.getElementById('smDesc').textContent = s.desc || "Ma'lumot mavjud emas.";
+            document.getElementById('smIcon').innerHTML = s.img ? `<img src="${s.img}" alt="${s.name}" class="skill-image" style="width:60px; height:60px">` : '🚀';
+            document.getElementById('smPct').textContent = s.pct + '%';
+            document.getElementById('smBar').style.width = s.pct + '%';
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeSkillModal() { 
+            document.getElementById('skillModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
 
         // Nav
         function toggleMenu() {
@@ -487,191 +564,12 @@
             const mailto = `mailto:${currentPortfolioData.email}?subject=${encodeURIComponent(s || 'Portfolio orqali xabar')}&body=${encodeURIComponent('Ism: ' + n + '\nEmail: ' + e + '\n\n' + m)}`;
             window.location.href = mailto;
         }
-
-        function setTheme(theme) {
-            document.documentElement.setAttribute('data-theme', theme);
-            localStorage.setItem('portfolio_theme', theme);
-
-            if (theme === 'system') {
-                const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-            }
-        }
-
-        // Sahifa yuklanganda mavzuni tekshirish
-        const savedTheme = localStorage.getItem('portfolio_theme') || 'dark';
-        setTheme(savedTheme);
-
-        // Sahifa yuklanganda sessiyani tekshirish
-        window.addEventListener('load', () => {
-            renderPortfolio();
-        });
-
-        // ===== TYPING GAME =====
-        const sentences = [
-            "Frontend development is the art of creating beautiful user interfaces.",
-            "JavaScript is the language of the web and powers modern applications.",
-            "CSS makes websites look stunning and responsive on all devices.",
-            "TailwindCSS utility classes speed up the development workflow greatly.",
-            "Clean code is the foundation of every successful software project.",
-            "Practice every day to improve your typing speed and accuracy.",
-            "Web development combines creativity and technical skills perfectly.",
-        ];
-
-        let gameState = { active: false, timer: null, timeLeft: 60, wordIndex: 0, charIndex: 0, errors: 0, totalTyped: 0, startTime: null };
-        let currentSentence = '';
-        let pressedKeys = new Set();
-
-        const keyboard = [
-            ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', '⌫ wide'],
-            ['Tab wider', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'],
-            ['Caps wider', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", 'Enter wider'],
-            ['Shift wider', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', `↑ wide`],
-            ['Ctrl wide', 'Alt wide', 'widest', ' ', 'Alt wide', 'Ctrl wide']
-        ];
-        const kbEl = document.getElementById('keyboard');
-        const rows = [
-            ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', 'Backspace'],
-            ['Tab', 'q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p', '[', ']', '\\'],
-            ['Caps', 'a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', ';', "'", 'Enter'],
-            ['Shift', 'z', 'x', 'c', 'v', 'b', 'n', 'm', ',', '.', '/', '↑'],
-            ['Ctrl', 'Alt', ' ', 'Space', 'Alt', 'Ctrl']
-        ];
-        const displayRows = [
-            ['`', '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', '⌫'],
-            ['⇥', 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', '[', ']', '\\'],
-            ['⇪', 'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', "'", '↵'],
-            ['⇧', 'Z', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/', '⇧'],
-            ['Ctrl', 'Alt', '', 'Space', 'Alt', 'Ctrl']
-        ];
-        const wideKeys = new Set(['Backspace', 'Tab', 'Caps', 'Enter', 'Shift', '↑', 'Ctrl', 'Alt', 'Space', ' ', '⌫', '⇥', '⇪', '↵', '⇧']);
-        const widestKeys = new Set([' ', 'Space', '', 'widest']);
-        rows.forEach((row, ri) => {
-            const div = document.createElement('div'); div.className = 'kb-row';
-            row.forEach((k, ki) => {
-                const span = document.createElement('span');
-                const d = displayRows[ri][ki] || k;
-                if (widestKeys.has(k)) { span.className = 'kb-key widest'; }
-                else if (wideKeys.has(k)) { span.className = 'kb-key wider'; }
-                else { span.className = 'kb-key'; }
-                span.textContent = d;
-                span.dataset.key = k.toLowerCase();
-                div.appendChild(span);
-            });
-            kbEl.appendChild(div);
-        });
-
-        function flashKey(char) {
-            const key = char.toLowerCase();
-            document.querySelectorAll('.kb-key').forEach(el => {
-                if (el.dataset.key === key || (key === ' ' && el.dataset.key === ' ')) {
-                    el.classList.add('active');
-                    setTimeout(() => el.classList.remove('active'), 120);
-                }
-            });
-        }
-
-        function renderText() {
-            const el = document.getElementById('gameText');
-            el.innerHTML = '';
-            for (let i = 0; i < currentSentence.length; i++) {
-                const s = document.createElement('span');
-                s.textContent = currentSentence[i];
-                if (i < gameState.charIndex) { s.className = gameState.errors > 0 && i >= gameState.charIndex - gameState.errors ? 'wrong' : 'correct'; }
-                else if (i === gameState.charIndex) { s.className = 'current'; }
-                else { s.className = 'pending'; }
-                el.appendChild(s);
-            }
-        }
-
-        function initGame() {
-            currentSentence = sentences[Math.floor(Math.random() * sentences.length)];
-            gameState = { active: false, timer: null, timeLeft: 60, charIndex: 0, errors: 0, totalTyped: 0, startTime: null };
-            document.getElementById('gameInput').value = '';
-            document.getElementById('wpmVal').textContent = '0';
-            document.getElementById('accVal').textContent = '100%';
-            document.getElementById('timeVal').textContent = '60';
-            document.getElementById('gameResult').classList.remove('show');
-            renderText();
-        }
-
-        function startTimer() {
-            gameState.startTime = Date.now();
-            gameState.active = true;
-            gameState.timer = setInterval(() => {
-                gameState.timeLeft--;
-                document.getElementById('timeVal').textContent = gameState.timeLeft;
-                const elapsed = (Date.now() - gameState.startTime) / 60000;
-                const wpm = Math.round((gameState.totalTyped / 5) / elapsed) || 0;
-                document.getElementById('wpmVal').textContent = wpm;
-                if (gameState.timeLeft <= 0) { endGame(); }
-            }, 1000);
-        }
-
-        function endGame() {
-            clearInterval(gameState.timer);
-            gameState.active = false;
-            document.getElementById('gameInput').disabled = true;
-            const elapsed = (Date.now() - gameState.startTime) / 60000;
-            const wpm = Math.round((gameState.totalTyped / 5) / Math.max(elapsed, 0.01));
-            const acc = gameState.totalTyped > 0 ? Math.round(((gameState.totalTyped - gameState.errors) / gameState.totalTyped) * 100) : 100;
-            document.getElementById('finalWpm').textContent = wpm + ' WPM';
-            document.getElementById('finalAcc').textContent = 'Aniqlik: ' + acc + '%  |  Xatolar: ' + gameState.errors;
-            document.getElementById('gameResult').classList.add('show');
-        }
-
-        function resetGame() {
-            clearInterval(gameState.timer);
-            document.getElementById('gameInput').disabled = false;
-            document.getElementById('gameInput').value = '';
-            document.getElementById('gameInput').focus();
-            initGame();
-        }
-
-        document.getElementById('gameInput').addEventListener('input', function (e) {
-            if (!gameState.active) { startTimer(); }
-            if (!gameState.active && gameState.timeLeft <= 0) return;
-            const val = this.value;
-            if (!val.length) { gameState.charIndex = 0; renderText(); return; }
-            const lastChar = val[val.length - 1];
-            flashKey(lastChar);
-            if (gameState.charIndex < currentSentence.length) {
-                const expected = currentSentence[gameState.charIndex];
-                gameState.totalTyped++;
-                if (lastChar === expected) { gameState.charIndex++; }
-                else { gameState.errors++; }
-                // Check complete
-                if (gameState.charIndex >= currentSentence.length) {
-                    currentSentence = sentences[Math.floor(Math.random() * sentences.length)];
-                    gameState.charIndex = 0;
-                    this.value = '';
-                }
-                renderText();
-            }
-        });
-
-        document.addEventListener('keydown', e => {
-            const key = e.key.toLowerCase();
-            document.querySelectorAll('.kb-key').forEach(el => {
-                if (el.dataset.key === key || (key === ' ' && el.dataset.key === ' ')) {
-                    el.classList.add('active');
-                }
-            });
-        });
-        document.addEventListener('keyup', e => {
-            const key = e.key.toLowerCase();
-            document.querySelectorAll('.kb-key').forEach(el => {
-                if (el.dataset.key === key || (key === ' ' && el.dataset.key === ' ')) {
-                    el.classList.remove('active');
-                }
-            });
-        });
-
-        initGame();
-
+        
+        window.addEventListener('load', renderPortfolio);
+        
         // Smooth nav highlight
         window.addEventListener('scroll', () => {
-            const sections = ['home', 'about', 'certificates', 'projects', 'typing-section', 'skills', 'contact'];
+            const sections = ['home', 'about', 'projects', 'skills', 'certificates', 'contact'];
             const scrollY = window.scrollY + 100;
             sections.forEach(id => {
                 const el = document.getElementById(id);
@@ -685,6 +583,176 @@
             });
         });
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            once: false,
+            duration: 900,
+            easing: 'ease-out-cubic',
+            offset: 120,
+            delay: 50,
+            mirror: false,
+            anchorPlacement: 'top-bottom'
+        });
+    </script>
+    <script>
+        // ====== Client-side user system (demo) ======
+        const loginBtn = document.getElementById('loginBtn');
+        const loginModal = document.getElementById('loginModal');
+        const loginForm = document.getElementById('userLoginForm');
+        const registerForm = document.getElementById('registerForm');
+        const tabLogin = document.getElementById('tabLogin');
+        const tabRegister = document.getElementById('tabRegister');
+
+        // Ensure users storage exists and seed demo ordinary user
+        function getUsers() {
+            try { return JSON.parse(localStorage.getItem('users') || '[]'); } catch { return []; }
+        }
+        function saveUsers(users) { localStorage.setItem('users', JSON.stringify(users)); }
+        (function seed() {
+            const users = getUsers();
+            if (!users.find(u => u.email === 'allayarovibrohim12@gmail.com')) {
+                users.push({ email: 'allayarovibrohim12@gmail.com', password: '12345678', firstName: 'Allayarov', lastName: 'Ibrohim', role: 'user' });
+                saveUsers(users);
+            }
+        })();
+
+        function openLoginModal() { if (loginModal) { loginModal.style.display = 'flex'; document.getElementById('userEmail').focus(); } }
+        function closeLoginModal() { if (loginModal) loginModal.style.display = 'none'; }
+
+        function showLoginTab(e) {
+            if (e) { e.preventDefault(); }
+            document.getElementById('modalTitle').textContent = 'Kirish';
+            loginForm.style.display = '';
+            loginForm.style.opacity = '1';
+            registerForm.style.display = 'none';
+            registerForm.style.opacity = '0';
+            tabLogin.style.color = 'var(--primary)';
+            tabLogin.style.borderBottomColor = 'var(--primary)';
+            tabRegister.style.color = 'var(--muted)';
+            tabRegister.style.borderBottomColor = 'transparent';
+        }
+        function showRegisterTab(e) {
+            if (e) { e.preventDefault(); }
+            document.getElementById('modalTitle').textContent = 'Ro\'yxatdan o\'tish';
+            loginForm.style.display = 'none';
+            loginForm.style.opacity = '0';
+            registerForm.style.display = '';
+            registerForm.style.opacity = '1';
+            tabRegister.style.color = 'var(--primary)';
+            tabRegister.style.borderBottomColor = 'var(--primary)';
+            tabLogin.style.color = 'var(--muted)';
+            tabLogin.style.borderBottomColor = 'transparent';
+        }
+
+        if (loginBtn) loginBtn.addEventListener('click', openLoginModal);
+        if (tabLogin) tabLogin.addEventListener('click', showLoginTab);
+        if (tabRegister) tabRegister.addEventListener('click', showRegisterTab);
+
+        // handle login submit
+        loginForm.addEventListener('submit', e => {
+            e.preventDefault();
+            const email = document.getElementById('userEmail').value.trim();
+            const pass = document.getElementById('userPassword').value.trim();
+
+            const users = getUsers();
+            const found = users.find(u => u.email === email && u.password === pass);
+            if (found) {
+                const user = { name: (found.firstName ? found.firstName + (found.lastName ? ' ' + found.lastName : '') : 'Foydalanuvchi'), email: found.email, role: found.role || 'user' };
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                closeLoginModal();
+                updateNavForUser();
+                // go to profile page
+                location.href = 'profile.html';
+            } else {
+                alert("Noto'g'ri email yoki parol.");
+            }
+        });
+
+        // handle registration
+        registerForm.addEventListener('submit', e => {
+            e.preventDefault();
+            const first = document.getElementById('regFirst').value.trim();
+            const last = document.getElementById('regLast').value.trim();
+            const email = document.getElementById('regEmail').value.trim();
+            const pass = document.getElementById('regPassword').value.trim();
+            if (!first || !last || !email || !pass) { alert('Iltimos, barcha maydonlarni to`ldiring.'); return; }
+            const users = getUsers();
+            if (users.find(u => u.email === email)) { alert('Bu email allaqachon ro`yxatdan o`tgan.'); return; }
+            users.push({ firstName: first, lastName: last, email, password: pass, role: 'user' });
+            saveUsers(users);
+            // auto-login newly registered user
+            localStorage.setItem('currentUser', JSON.stringify({ name: first + ' ' + last, email, role: 'user' }));
+            closeLoginModal();
+            updateNavForUser();
+            location.href = 'profile.html';
+        });
+
+        // update navbar to show profile circle when user logged in
+        function getInitials(name) {
+            if (!name) return '';
+            const parts = name.trim().split(/\s+/);
+            return (parts[0] ? parts[0][0] : '') + (parts[1] ? parts[1][0] : '');
+        }
+
+        function createProfileCircle(user) {
+            const nav = document.querySelector('nav');
+            // remove existing login button if any
+            const existing = document.getElementById('loginBtn');
+            if (existing) existing.remove();
+            // remove existing profile if present
+            const old = document.getElementById('profileCircle'); if (old) old.remove();
+
+            const btn = document.createElement('button');
+            btn.id = 'profileCircle';
+            btn.title = user.name || 'Profil';
+            btn.style.width = '40px'; btn.style.height = '40px'; btn.style.borderRadius = '999px'; btn.style.border = 'none'; btn.style.display = 'inline-flex'; btn.style.alignItems = 'center'; btn.style.justifyContent = 'center'; btn.style.marginLeft = '12px'; btn.style.cursor = 'pointer';
+            btn.style.background = 'linear-gradient(135deg,#7C3AED,#06B6D4)'; btn.style.color = '#fff'; btn.style.fontWeight = '700'; btn.style.fontFamily = 'DM Sans, sans-serif';
+            btn.textContent = getInitials(user.name).toUpperCase();
+            btn.addEventListener('click', () => { location.href = 'profile.html'; });
+            nav.insertBefore(btn, document.getElementById('navToggle'));
+        }
+
+        function updateNavForUser() {
+            const raw = localStorage.getItem('currentUser');
+            if (!raw) return; const user = JSON.parse(raw);
+            createProfileCircle(user);
+        }
+
+        // on load: if user present, show profile circle
+        window.addEventListener('load', () => {
+            // initial tab
+            showLoginTab();
+            const users = getUsers();
+            // ensure demo admin exists? admin is not stored as user in users array
+            const current = localStorage.getItem('currentUser');
+            if (current) updateNavForUser();
+        });
+
+        // close modal on ESC
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLoginModal(); });
+    </script>
+
+    <!-- Custom Cursor Script -->
+    <script>
+        const cursor = document.getElementById('cursor');
+        
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        // Hover effektlari uchun
+        const interactiveElements = 'a, button, .proj-card, .cert-card, .skill-card, .cv-btn, input, textarea';
+        document.querySelectorAll(interactiveElements).forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        document.addEventListener('mousedown', () => cursor.style.transform = 'translate(-50%, -50%) scale(0.8)');
+        document.addEventListener('mouseup', () => cursor.style.transform = 'translate(-50%, -50%) scale(1)');
+    </script>
+
 </body>
 
 </html>
