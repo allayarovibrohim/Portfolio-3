@@ -7,6 +7,31 @@
     <title data-key="cv-document-title">CV Document</title>
     <link rel="icon" href="image/5988705.png" type="image/png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script>
+        window.addEventListener('DOMContentLoaded', () => {
+            const lenis = new Lenis({
+                duration: 1.5, // Scroll davomiyligi (qancha katta bo'lsa, shuncha "sirpanchiq" bo'ladi)
+                easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Silliq to'xtash formulasi
+                orientation: 'vertical',
+                gestureOrientation: 'vertical',
+                smoothWheel: true,
+                wheelMultiplier: 1.1, // Silliqlik kuchi
+                infinite: false,
+            });
+
+            function raf(time) {
+                lenis.raf(time);
+                requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+
+            // AOS bilan bog'lash
+            lenis.on('scroll', () => {
+                if (window.AOS) AOS.refresh();
+            });
+        });
+    </script>
     <style>
         * {
             box-sizing: border-box;
